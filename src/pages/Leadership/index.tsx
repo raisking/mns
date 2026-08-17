@@ -12,7 +12,7 @@ export default function Leadership() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Quick nav */}
         <div className="flex flex-wrap gap-3 justify-center mb-12">
-          <Link to="/leadership/president" className="px-5 py-2.5 bg-crimson text-white text-sm font-semibold rounded-lg hover:bg-crimson-dark transition-colors">
+          <Link to="/leadership/president" className="px-5 py-2.5 bg-indigo text-white text-sm font-semibold rounded-lg hover:bg-indigo-dark transition-colors">
             President
           </Link>
           <span className="px-5 py-2.5 bg-ink text-white text-sm font-semibold rounded-lg cursor-default">

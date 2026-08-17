@@ -164,7 +164,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <Link
               to="/donate"
-              className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-crimson hover:bg-crimson-dark rounded-lg transition-colors shadow-sm"
+              className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-indigo hover:bg-indigo-dark rounded-lg transition-colors shadow-sm"
             >
               Donate
             </Link>
@@ -249,7 +249,7 @@ export default function Header() {
             <div className="pt-3 border-t border-gray-100">
               <Link
                 to="/donate"
-                className="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-crimson hover:bg-crimson-dark rounded-lg transition-colors"
+                className="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-indigo hover:bg-indigo-dark rounded-lg transition-colors"
                 onClick={closeMobile}
               >
                 Donate

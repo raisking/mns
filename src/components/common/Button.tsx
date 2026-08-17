@@ -16,12 +16,17 @@ interface ButtonProps {
   fullWidth?: boolean;
 }
 
+// Indigo (the flag's border color) carries the primary action — red reads as
+// "stop/danger" in UI convention, which fights a Donate/Submit/Contact button.
+// Crimson (the flag's field) stays the accent throughout the rest of the
+// site — headings, the emblem, section markers — so the flag identity isn't
+// lost, it's just no longer doing double duty as "the button color".
 const variantClasses: Record<Variant, string> = {
-  primary: 'bg-crimson hover:bg-crimson-dark text-white shadow-sm',
-  secondary: 'bg-indigo hover:bg-indigo-dark text-white shadow-sm',
+  primary: 'bg-indigo hover:bg-indigo-dark text-white shadow-sm',
+  secondary: 'bg-crimson hover:bg-crimson-dark text-white shadow-sm',
   accent: 'bg-marigold hover:bg-marigold-light text-ink shadow-sm',
-  outline: 'border-2 border-crimson text-crimson hover:bg-crimson hover:text-white',
-  ghost: 'text-crimson hover:bg-crimson/10',
+  outline: 'border-2 border-indigo text-indigo hover:bg-indigo hover:text-white',
+  ghost: 'text-indigo hover:bg-indigo/10',
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -42,7 +47,7 @@ export default function Button({
   className = '',
   fullWidth = false,
 }: ButtonProps) {
-  const base = `inline-flex items-center justify-center font-body font-semibold rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson focus-visible:ring-offset-2 ${variantClasses[variant]} ${sizeClasses[size]} ${fullWidth ? 'w-full' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`;
+  const base = `inline-flex items-center justify-center font-body font-semibold rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 ${variantClasses[variant]} ${sizeClasses[size]} ${fullWidth ? 'w-full' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`;
 
   if (to) return <Link to={to} className={base}>{children}</Link>;
   if (href) return <a href={href} className={base} target="_blank" rel="noopener noreferrer">{children}</a>;
