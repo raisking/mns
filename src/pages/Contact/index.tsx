@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { organization, socialLinks } from '../../config/organization';
+import PageHero from '../../components/common/PageHero';
 
 interface FormData {
   name: string;
@@ -32,14 +33,7 @@ export default function Contact() {
 
   return (
     <>
-      <div className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            We'd love to hear from you. Reach out with questions, ideas, or to get involved.
-          </p>
-        </div>
-      </div>
+      <PageHero title="Contact Us" subtitle="We'd love to hear from you. Reach out with questions, ideas, or to get involved." />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 gap-12">
@@ -63,23 +57,23 @@ export default function Contact() {
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">
-                      Full Name <span className="text-[#C41E3A]">*</span>
+                      Full Name <span className="text-crimson">*</span>
                     </label>
                     <input
                       id="name" name="name" type="text" required
                       value={form.name} onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C41E3A] focus:border-transparent transition"
+                      className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-crimson focus:border-transparent transition"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
-                      Email Address <span className="text-[#C41E3A]">*</span>
+                      Email Address <span className="text-crimson">*</span>
                     </label>
                     <input
                       id="email" name="email" type="email" required
                       value={form.email} onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C41E3A] focus:border-transparent transition"
+                      className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-crimson focus:border-transparent transition"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -92,19 +86,19 @@ export default function Contact() {
                   <input
                     id="phone" name="phone" type="tel"
                     value={form.phone} onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C41E3A] focus:border-transparent transition"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-crimson focus:border-transparent transition"
                     placeholder="+1 (555) 000-0000"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1.5">
-                    Subject <span className="text-[#C41E3A]">*</span>
+                    Subject <span className="text-crimson">*</span>
                   </label>
                   <select
                     id="subject" name="subject" required
                     value={form.subject} onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C41E3A] focus:border-transparent transition bg-white"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-crimson focus:border-transparent transition bg-white"
                   >
                     <option value="">Select a subject</option>
                     <option value="general">General Inquiry</option>
@@ -119,12 +113,12 @@ export default function Contact() {
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1.5">
-                    Message <span className="text-[#C41E3A]">*</span>
+                    Message <span className="text-crimson">*</span>
                   </label>
                   <textarea
                     id="message" name="message" required rows={5}
                     value={form.message} onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C41E3A] focus:border-transparent transition resize-none"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-crimson focus:border-transparent transition resize-none"
                     placeholder="How can we help you?"
                   />
                 </div>
@@ -132,7 +126,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-3.5 bg-[#C41E3A] hover:bg-[#a01830] disabled:opacity-60 text-white font-bold rounded-xl transition-colors"
+                  className="w-full py-3.5 bg-crimson hover:bg-crimson-dark disabled:opacity-60 text-white font-bold rounded-xl transition-colors"
                 >
                   {submitting ? 'Sending…' : 'Send Message'}
                 </button>
@@ -146,7 +140,7 @@ export default function Contact() {
             <div className="space-y-6 mb-8">
               <div className="flex gap-4">
                 <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <svg className="w-6 h-6 text-[#C41E3A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-6 h-6 text-crimson" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -160,13 +154,13 @@ export default function Contact() {
               {organization.email && (
                 <div className="flex gap-4">
                   <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-[#C41E3A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-6 h-6 text-crimson" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">Email</p>
-                    <a href={`mailto:${organization.email}`} className="text-[#C41E3A] hover:underline text-sm">{organization.email}</a>
+                    <a href={`mailto:${organization.email}`} className="text-crimson hover:underline text-sm">{organization.email}</a>
                   </div>
                 </div>
               )}
@@ -179,10 +173,10 @@ export default function Contact() {
                   <p className="font-semibold text-gray-900 mb-2">Follow Us</p>
                   <div className="flex gap-3">
                     {socialLinks.facebook && (
-                      <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-sm text-[#C41E3A] hover:underline font-medium">Facebook</a>
+                      <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-sm text-crimson hover:underline font-medium">Facebook</a>
                     )}
                     {socialLinks.youtube && (
-                      <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="text-sm text-[#C41E3A] hover:underline font-medium">YouTube</a>
+                      <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="text-sm text-crimson hover:underline font-medium">YouTube</a>
                     )}
                   </div>
                 </div>
@@ -198,7 +192,7 @@ export default function Contact() {
                   href="https://maps.google.com/?q=Marietta+Georgia"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-[#C41E3A] hover:underline mt-1 inline-block"
+                  className="text-xs text-crimson hover:underline mt-1 inline-block"
                 >
                   View on Google Maps →
                 </a>

@@ -12,7 +12,7 @@ export default function AlbumCard({ album }: AlbumCardProps) {
 
   return (
     <Link to={`/gallery/${album.slug}`} className="group block">
-      <article className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+      <article className="card-lift bg-white rounded-2xl overflow-hidden">
         <div className="relative h-52 overflow-hidden bg-gray-100">
           {album.coverPhoto ? (
             <img
@@ -32,12 +32,12 @@ export default function AlbumCard({ album }: AlbumCardProps) {
           </div>
         </div>
         <div className="p-4">
-          <h3 className="font-bold text-gray-900 text-base line-clamp-1 group-hover:text-[#C41E3A] transition-colors">
+          <h3 className="text-base text-ink line-clamp-1 group-hover:text-crimson transition-colors">
             {album.title}
           </h3>
-          {date && <p className="text-sm text-gray-500 mt-1">{date}</p>}
+          {date && <p className="text-sm text-ink-soft/80 mt-1">{date}</p>}
           {album.description && (
-            <p className="text-sm text-gray-600 mt-1.5 line-clamp-2">{album.description}</p>
+            <p className="text-sm text-ink-soft mt-1.5 line-clamp-2">{album.description}</p>
           )}
         </div>
       </article>

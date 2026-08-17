@@ -15,7 +15,7 @@ function renderContent(content: string) {
     <p key={i} className={line.trim() === '' ? 'h-3' : 'mb-1 last:mb-0'}>
       {line.split(/(#\S+)/g).map((part, j) =>
         part.startsWith('#') ? (
-          <span key={j} className="text-[#C41E3A] font-semibold">{part}</span>
+          <span key={j} className="text-crimson font-semibold">{part}</span>
         ) : (
           <span key={j}>{part}</span>
         )
@@ -34,10 +34,10 @@ export default function PostCard({ post }: PostCardProps) {
     .toUpperCase();
 
   return (
-    <article className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-5">
+    <article className="card-lift bg-white rounded-2xl p-5">
       <div className="flex items-start gap-3 mb-3">
         <div className="relative flex-shrink-0">
-          <div className="w-11 h-11 rounded-full bg-[#C41E3A] flex items-center justify-center text-white font-bold text-sm">
+          <div className="w-11 h-11 rounded-full bg-crimson flex items-center justify-center text-white font-display font-bold text-sm">
             {initials}
           </div>
           <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-white flex items-center justify-center shadow">
@@ -47,26 +47,26 @@ export default function PostCard({ post }: PostCardProps) {
           </div>
         </div>
         <div className="min-w-0">
-          <p className="font-bold text-gray-900 text-sm leading-tight">
+          <p className="font-semibold text-ink text-sm leading-tight">
             {post.author}
             {post.context && (
-              <span className="font-normal text-gray-500"> {post.context}</span>
+              <span className="font-normal text-ink-soft"> {post.context}</span>
             )}
           </p>
-          <p className="text-xs text-gray-400 mt-0.5">{formatDate(post.date)}</p>
+          <p className="text-xs text-ink-soft/70 mt-0.5">{formatDate(post.date)}</p>
         </div>
       </div>
 
-      <div className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">
+      <div className="text-ink-soft text-sm leading-relaxed whitespace-pre-line">
         {renderContent(post.content)}
       </div>
 
       {post.reply && (
-        <div className="mt-4 pl-4 border-l-2 border-gray-100">
+        <div className="mt-4 pl-4 border-l-2 border-paper-deep">
           <p className="text-sm">
-            <span className="font-semibold text-gray-900">{post.reply.author}</span>{' '}
-            <span className="text-gray-500 mx-1">·</span>
-            <span className="text-gray-600">{post.reply.text}</span>
+            <span className="font-semibold text-ink">{post.reply.author}</span>{' '}
+            <span className="text-ink-soft/60 mx-1">·</span>
+            <span className="text-ink-soft">{post.reply.text}</span>
           </p>
         </div>
       )}

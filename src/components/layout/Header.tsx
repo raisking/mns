@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { organization } from '../../config/organization';
+import Emblem from '../common/Emblem';
 
 interface NavItem {
   label: string;
@@ -75,12 +76,10 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3" onClick={closeMobile}>
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#C41E3A] flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-sm flex-shrink-0">
-              MNS
-            </div>
+            <Emblem className="w-10 h-10 md:w-12 md:h-12" />
             <div className="hidden sm:block leading-tight">
-              <p className="font-bold text-gray-900 text-base md:text-lg leading-none">{organization.name}</p>
-              <p className="text-xs text-gray-500 mt-0.5">Marietta, Georgia</p>
+              <p className="font-display font-bold text-ink text-base md:text-lg leading-none">{organization.name}</p>
+              <p className="text-xs text-ink-soft mt-0.5">Marietta, Georgia</p>
             </div>
           </Link>
 
@@ -95,7 +94,7 @@ export default function Header() {
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <button
-                    className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-[#C41E3A] rounded-md transition-colors"
+                    className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-crimson rounded-md transition-colors"
                     onClick={() => toggleDropdown(item.label)}
                     aria-expanded={openDropdown === item.label}
                     aria-haspopup="true"
@@ -121,7 +120,7 @@ export default function Header() {
                             to={child.to}
                             className={({ isActive }) =>
                               `block px-4 py-2.5 text-sm transition-colors ${
-                                isActive ? 'text-[#C41E3A] bg-red-50 font-medium' : 'text-gray-700 hover:bg-gray-50 hover:text-[#C41E3A]'
+                                isActive ? 'text-crimson bg-crimson/5 font-medium' : 'text-gray-700 hover:bg-gray-50 hover:text-crimson'
                               }`
                             }
                             onClick={() => setOpenDropdown(null)}
@@ -140,7 +139,7 @@ export default function Header() {
                   end={item.to === '/'}
                   className={({ isActive }) =>
                     `px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                      isActive ? 'text-[#C41E3A] font-semibold' : 'text-gray-700 hover:text-[#C41E3A]'
+                      isActive ? 'text-crimson font-semibold' : 'text-gray-700 hover:text-crimson'
                     }`
                   }
                 >
@@ -154,14 +153,14 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <Link
               to="/donate"
-              className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-[#C41E3A] hover:bg-[#a01830] rounded-lg transition-colors shadow-sm"
+              className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-crimson hover:bg-crimson-dark rounded-lg transition-colors shadow-sm"
             >
               Donate
             </Link>
 
             {/* Hamburger */}
             <button
-              className="lg:hidden p-2 rounded-md text-gray-700 hover:text-[#C41E3A] hover:bg-gray-100 transition-colors"
+              className="lg:hidden p-2 rounded-md text-gray-700 hover:text-crimson hover:bg-gray-100 transition-colors"
               onClick={() => setMobileOpen(prev => !prev)}
               aria-label="Toggle navigation menu"
               aria-expanded={mobileOpen}
@@ -179,6 +178,7 @@ export default function Header() {
           </div>
         </div>
       </div>
+      <div className="dhaka-strip" aria-hidden="true" />
 
       {/* Mobile Menu */}
       {mobileOpen && (
@@ -188,7 +188,7 @@ export default function Header() {
               item.children ? (
                 <div key={item.label}>
                   <button
-                    className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium text-gray-700 hover:text-[#C41E3A] rounded-md hover:bg-gray-50 transition-colors"
+                    className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium text-gray-700 hover:text-crimson rounded-md hover:bg-gray-50 transition-colors"
                     onClick={() => toggleDropdown(item.label)}
                     aria-expanded={openDropdown === item.label}
                   >
@@ -201,14 +201,14 @@ export default function Header() {
                     </svg>
                   </button>
                   {openDropdown === item.label && (
-                    <div className="ml-4 mt-1 space-y-1 border-l-2 border-[#C41E3A] pl-4">
+                    <div className="ml-4 mt-1 space-y-1 border-l-2 border-crimson pl-4">
                       {item.children.map(child => (
                         <NavLink
                           key={child.to}
                           to={child.to}
                           className={({ isActive }) =>
                             `block px-3 py-2 text-sm rounded-md transition-colors ${
-                              isActive ? 'text-[#C41E3A] font-medium bg-red-50' : 'text-gray-600 hover:text-[#C41E3A] hover:bg-gray-50'
+                              isActive ? 'text-crimson font-medium bg-crimson/5' : 'text-gray-600 hover:text-crimson hover:bg-gray-50'
                             }`
                           }
                           onClick={closeMobile}
@@ -226,7 +226,7 @@ export default function Header() {
                   end={item.to === '/'}
                   className={({ isActive }) =>
                     `block px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${
-                      isActive ? 'text-[#C41E3A] font-semibold bg-red-50' : 'text-gray-700 hover:text-[#C41E3A] hover:bg-gray-50'
+                      isActive ? 'text-crimson font-semibold bg-crimson/5' : 'text-gray-700 hover:text-crimson hover:bg-gray-50'
                     }`
                   }
                   onClick={closeMobile}
@@ -238,7 +238,7 @@ export default function Header() {
             <div className="pt-3 border-t border-gray-100">
               <Link
                 to="/donate"
-                className="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-[#C41E3A] hover:bg-[#a01830] rounded-lg transition-colors"
+                className="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-crimson hover:bg-crimson-dark rounded-lg transition-colors"
                 onClick={closeMobile}
               >
                 Donate

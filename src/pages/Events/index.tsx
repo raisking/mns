@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { mockEvents } from '../../data/mockData';
 import EventCard from '../../components/events/EventCard';
 import EmptyState from '../../components/common/EmptyState';
+import PageHero from '../../components/common/PageHero';
 
 type Tab = 'upcoming' | 'past';
 
@@ -14,26 +15,19 @@ export default function Events() {
 
   return (
     <>
-      <div className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Events</h1>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Upcoming celebrations, programs, and community gatherings.
-          </p>
-        </div>
-      </div>
+      <PageHero title="Events" subtitle="Upcoming celebrations, programs, and community gatherings." />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Tabs */}
-        <div className="flex gap-2 p-1 bg-gray-100 rounded-xl max-w-xs mx-auto mb-12">
+        <div className="flex gap-2 p-1 bg-paper-deep rounded-xl max-w-xs mx-auto mb-12">
           {(['upcoming', 'past'] as Tab[]).map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`flex-1 py-2.5 text-sm font-semibold rounded-lg capitalize transition-all ${
                 activeTab === tab
-                  ? 'bg-white text-gray-900 shadow-sm'
-                  : 'text-gray-500 hover:text-gray-700'
+                  ? 'bg-white text-ink shadow-sm'
+                  : 'text-ink-soft hover:text-ink'
               }`}
             >
               {tab === 'upcoming' ? 'Upcoming' : 'Past'} Events

@@ -23,7 +23,7 @@ export default function Donate() {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-[#C41E3A] to-[#a01830] text-white py-16 md:py-24">
+      <div className="bg-gradient-to-br from-crimson to-crimson-dark text-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="text-4xl mb-3 block" role="img" aria-label="Heart">❤️</span>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Support Our Community</h1>
@@ -54,7 +54,7 @@ export default function Donate() {
                   <div
                     className={`px-3 py-2.5 rounded-lg border-2 text-sm font-medium text-center transition-all ${
                       selectedCategory === cat.id
-                        ? 'border-[#C41E3A] bg-red-50 text-[#C41E3A]'
+                        ? 'border-crimson bg-red-50 text-crimson'
                         : 'border-gray-200 text-gray-600 hover:border-gray-300'
                     }`}
                   >
@@ -81,7 +81,7 @@ export default function Donate() {
                   <div
                     className={`py-3 rounded-lg border-2 text-sm font-bold text-center transition-all ${
                       selectedAmount === amount && !customAmount
-                        ? 'border-[#C41E3A] bg-red-50 text-[#C41E3A]'
+                        ? 'border-crimson bg-red-50 text-crimson'
                         : 'border-gray-200 text-gray-700 hover:border-gray-300'
                     }`}
                   >
@@ -103,7 +103,7 @@ export default function Donate() {
                   placeholder="Enter amount"
                   value={customAmount}
                   onChange={e => { setCustomAmount(e.target.value); setSelectedAmount(null); }}
-                  className="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#C41E3A] transition-colors"
+                  className="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-crimson transition-colors"
                 />
               </div>
             </div>
@@ -117,7 +117,7 @@ export default function Donate() {
             </div>
             <div className="text-right">
               <p className="text-xs text-gray-500">Amount</p>
-              <p className="font-bold text-xl text-[#C41E3A]">
+              <p className="font-bold text-xl text-crimson">
                 ${customAmount || selectedAmount || '—'}
               </p>
             </div>
@@ -125,7 +125,7 @@ export default function Donate() {
 
           <button
             onClick={handleDonate}
-            className="w-full py-4 bg-[#C41E3A] hover:bg-[#a01830] text-white font-bold text-base rounded-xl transition-colors shadow-md hover:shadow-lg"
+            className="w-full py-4 bg-crimson hover:bg-crimson-dark text-white font-bold text-base rounded-xl transition-colors shadow-md hover:shadow-lg"
           >
             Donate Now →
           </button>

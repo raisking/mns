@@ -1,4 +1,5 @@
 import SectionHeader from '../../components/common/SectionHeader';
+import PageHero from '../../components/common/PageHero';
 
 const objectives = [
   { icon: '🪔', title: 'Preserve Culture & Traditions', description: 'Preserve and promote Nepali culture, traditions, customs, and values for current and future generations in the Marietta community.' },
@@ -16,14 +17,7 @@ const objectives = [
 export default function Objectives() {
   return (
     <>
-      <div className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Objectives</h1>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            The guiding principles and goals that shape everything we do as a community.
-          </p>
-        </div>
-      </div>
+      <PageHero title="Our Objectives" subtitle="The guiding principles and goals that shape everything we do as a community." />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <SectionHeader
@@ -42,7 +36,7 @@ export default function Objectives() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-bold text-[#C41E3A] bg-red-50 px-2 py-0.5 rounded-full">
+                    <span className="text-xs font-bold text-crimson bg-red-50 px-2 py-0.5 rounded-full">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   </div>

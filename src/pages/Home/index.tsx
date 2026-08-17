@@ -11,9 +11,10 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero */}
+      {/* Hero — bottom edge cut into the shallow twin-pennant notch that is
+          this site's signature shape, echoing Nepal's flag silhouette. */}
       <section
-        className="relative min-h-[85vh] flex items-center justify-center text-white overflow-hidden"
+        className="pennant-edge relative min-h-[85vh] flex items-center justify-center text-white overflow-hidden"
         aria-label="Hero section"
       >
         <div
@@ -22,29 +23,37 @@ export default function Home() {
           role="img"
           aria-label="Community celebration"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/40 to-ink/85" />
+        {/* Extra vignette behind the text block, so headline contrast holds
+            regardless of what's underneath in the photo. */}
+        <div
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse 60% 55% at 50% 45%, rgba(36,23,18,0.55), transparent 70%)' }}
+          aria-hidden="true"
+        />
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-[#C41E3A]/90 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
-            🇳🇵 Marietta, Georgia
+          <div className="inline-flex items-center gap-2 bg-ink/60 backdrop-blur-sm text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-marigold flex-shrink-0" aria-hidden="true" />
+            स्वागत छ · Welcome to Marietta, Georgia
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 drop-shadow-lg">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight mb-6 drop-shadow-lg">
             Welcome to<br />
-            <span className="text-[#f87171]">{organization.name}</span>
+            <span className="text-marigold">{organization.name}</span>
           </h1>
-          <p className="text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg sm:text-xl text-white/85 max-w-2xl mx-auto mb-10 leading-relaxed">
             {organization.tagline}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button to="/about" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900">
+            <Button to="/about" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-ink">
               Explore Our Community
             </Button>
-            <Button to="/donate" size="lg">
+            <Button to="/donate" size="lg" variant="accent">
               Donate
             </Button>
           </div>
         </div>
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
           <svg className="w-6 h-6 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
@@ -56,24 +65,25 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-sm font-semibold text-[#C41E3A] uppercase tracking-wider mb-3">Who We Are</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-3">Who We Are</p>
+              <h2 className="text-3xl md:text-4xl text-ink mb-6">
                 A Home Away From Home for the Nepali Community
               </h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-4">
+              <p className="text-ink-soft text-lg leading-relaxed mb-4">
                 Marietta Nepali Samaj is a nonprofit community organization dedicated to uniting Nepali families, students, and professionals in the Marietta, Georgia area.
               </p>
-              <p className="text-gray-600 leading-relaxed mb-8">
+              <p className="text-ink-soft leading-relaxed mb-8">
                 We celebrate our rich cultural heritage through festivals, educational programs, and community service. Whether you are a longtime resident or newly arrived, MNS is your community.
               </p>
               <Button to="/about" variant="primary">Learn More About Us</Button>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              {objectives.map((obj) => (
-                <div key={obj.title} className="bg-gray-50 rounded-2xl p-5 hover:shadow-md transition-shadow">
+              {objectives.map((obj, i) => (
+                <div key={obj.title} className="card-lift bg-paper-deep rounded-2xl p-5 relative overflow-hidden">
+                  <span className={`absolute top-0 left-0 right-0 h-1 ${i % 2 === 0 ? 'bg-crimson' : 'bg-indigo'}`} aria-hidden="true" />
                   <span className="text-3xl mb-3 block" role="img" aria-label={obj.title}>{obj.icon}</span>
-                  <h3 className="font-bold text-gray-900 mb-1">{obj.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{obj.description}</p>
+                  <h3 className="text-ink mb-1">{obj.title}</h3>
+                  <p className="text-sm text-ink-soft leading-relaxed">{obj.description}</p>
                 </div>
               ))}
             </div>
@@ -82,7 +92,7 @@ export default function Home() {
       </section>
 
       {/* Upcoming Events */}
-      <section className="py-16 md:py-20 bg-gray-50">
+      <section className="py-16 md:py-20 bg-paper-deep">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Upcoming Events"
@@ -95,7 +105,7 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-ink-soft">
               <p>No upcoming events are currently scheduled. Please check back soon.</p>
             </div>
           )}
@@ -117,21 +127,21 @@ export default function Home() {
                   loading="lazy"
                   className="w-full h-80 object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="bg-white/95 rounded-xl p-3 shadow">
-                    <p className="text-sm font-bold text-gray-900">🎓 Nepali Language & Culture</p>
-                    <p className="text-xs text-gray-600 mt-0.5">Teaching the next generation their heritage</p>
+                    <p className="text-sm font-bold text-ink">🎓 Nepali Language & Culture</p>
+                    <p className="text-xs text-ink-soft mt-0.5">Teaching the next generation their heritage</p>
                   </div>
                 </div>
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <p className="text-sm font-semibold text-[#C41E3A] uppercase tracking-wider mb-3">Nepali School</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-3">Nepali School</p>
+              <h2 className="text-3xl md:text-4xl text-ink mb-6">
                 Preserving Language & Culture for Future Generations
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">
+              <p className="text-ink-soft leading-relaxed mb-6">
                 Our Nepali School provides Nepali language education, cultural programs, and community values to children in the Marietta area. We believe that our children are the future of our culture.
               </p>
               <ul className="space-y-3 mb-8">
@@ -142,8 +152,8 @@ export default function Home() {
                   'Cultural dance and music',
                   'Community service and volunteering',
                 ].map(item => (
-                  <li key={item} className="flex items-center gap-3 text-gray-700">
-                    <svg className="w-5 h-5 text-[#C41E3A] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <li key={item} className="flex items-center gap-3 text-ink-soft">
+                    <svg className="w-5 h-5 text-crimson flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     {item}
@@ -156,24 +166,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sponsor & Advertise CTA */}
-      <section className="py-14 md:py-16 bg-[#C41E3A] text-white">
+      {/* Sponsor & Advertise CTA — indigo, the flag's border color, giving
+          this CTA its own identity apart from the crimson donation CTA. */}
+      <section className="py-14 md:py-16 bg-indigo text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-5">Sponsor & Advertise With Us</h2>
-          <p className="text-red-50 leading-relaxed max-w-2xl mx-auto mb-2">
+          <h2 className="text-2xl md:text-3xl mb-5">Sponsor & Advertise With Us</h2>
+          <p className="text-white/80 leading-relaxed max-w-2xl mx-auto mb-2">
             Showcase your name or business to the Marietta Nepali community while supporting the programs that bring us together.
           </p>
-          <p className="text-red-50 leading-relaxed max-w-2xl mx-auto mb-8">
+          <p className="text-white/80 leading-relaxed max-w-2xl mx-auto mb-8">
             Flexible sponsorship packages are available on a quarterly, semi-annual, or annual basis. Contact us to learn more about visibility and rates.
           </p>
-          <Button to="/contact" variant="outline" className="border-white text-white hover:bg-white hover:text-[#C41E3A]">
+          <Button to="/contact" variant="outline" className="border-white text-white hover:bg-white hover:text-indigo">
             Contact Us
           </Button>
         </div>
       </section>
 
       {/* Posts */}
-      <section className="py-16 md:py-20 bg-gray-50">
+      <section className="py-16 md:py-20 bg-paper-deep">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Latest Posts"
@@ -193,7 +204,7 @@ export default function Home() {
       </section>
 
       {/* Gallery Preview */}
-      <section className="py-16 md:py-20 bg-gray-900">
+      <section className="py-16 md:py-20 bg-ink">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Community Gallery"
@@ -205,7 +216,7 @@ export default function Home() {
               <Link
                 key={i}
                 to="/gallery"
-                className="group relative aspect-square overflow-hidden rounded-xl bg-gray-800"
+                className="group relative aspect-square overflow-hidden rounded-xl bg-white/5"
                 aria-label={`View gallery photo ${i + 1}`}
               >
                 <img
@@ -223,7 +234,7 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center">
-            <Button to="/gallery" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900">
+            <Button to="/gallery" variant="outline" className="border-white text-white hover:bg-white hover:text-ink">
               View All Albums
             </Button>
           </div>
@@ -231,18 +242,18 @@ export default function Home() {
       </section>
 
       {/* Donation CTA */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-[#C41E3A] to-[#a01830] text-white">
+      <section className="py-16 md:py-20 bg-gradient-to-br from-crimson to-crimson-dark text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="text-4xl mb-4 block" role="img" aria-label="Heart">❤️</span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Support Our Community</h2>
-          <p className="text-lg text-red-100 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <h2 className="text-3xl md:text-4xl mb-4">Support Our Community</h2>
+          <p className="text-lg text-white/85 mb-10 max-w-2xl mx-auto leading-relaxed">
             Your generosity helps us continue our cultural programs, educational initiatives, and community events. Every contribution makes a difference.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button to="/donate" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-[#C41E3A]">
+            <Button to="/donate" size="lg" variant="accent">
               Donate Now
             </Button>
-            <Button to="/donate?purpose=school" size="lg" className="bg-white text-[#C41E3A] hover:bg-red-50">
+            <Button to="/donate?purpose=school" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-crimson">
               Support Nepali School
             </Button>
           </div>

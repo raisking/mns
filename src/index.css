@@ -1,18 +1,75 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --color-brand-red: #C41E3A;
-    --color-brand-red-light: #E8293F;
-    --color-brand-blue: #1E40AF;
-    --color-brand-blue-light: #3B82F6;
-  }
+@theme {
+  /* Palette drawn from Nepal's flag and festival materials — not arbitrary. */
+  --color-crimson: #c8102e;      /* the flag's field */
+  --color-crimson-dark: #970e23; /* hover/pressed */
+  --color-indigo: #003893;       /* the flag's border — previously unused here */
+  --color-indigo-dark: #00265f;
+  --color-marigold: #e7a33e;     /* tika & garland gold — dark-surface accent only */
+  --color-marigold-light: #f2c374;
+  --color-ink: #241712;          /* warm near-black body text */
+  --color-ink-soft: #5c4a3d;     /* secondary text */
+  --color-paper: #fbf6ec;        /* handmade lokta-paper cream */
+  --color-paper-deep: #f1e4c9;   /* deeper cream for section banding */
 
+  --font-display: "Baloo 2", "Noto Sans Devanagari", sans-serif;
+  --font-body: "IBM Plex Sans Devanagari", "Noto Sans", sans-serif;
+}
+
+@layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-white text-gray-800 antialiased;
+    @apply bg-paper text-ink antialiased font-body;
   }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-bold;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/*
+ * Signature shape: Nepal's flag is the world's only non-rectangular
+ * national flag — two stacked pennants. This shallow double-peak notch
+ * echoes that silhouette at the hero's lower edge. Used once, deliberately,
+ * as this site's one structural flourish.
+ */
+.pennant-edge {
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 75% 100%, 50% 88%, 25% 100%, 0 92%);
+}
+
+/* Card hover lift with a crimson-tinted shadow instead of generic gray. */
+.card-lift {
+  box-shadow: 0 1px 2px rgba(36, 23, 18, 0.07);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+.card-lift:hover {
+  box-shadow: 0 18px 32px -14px rgba(200, 16, 46, 0.3);
+}
+
+/*
+ * Thin woven accent strip referencing Dhaka fabric — the geometric weave
+ * used in the Nepali topi and shawls. A quiet divider, not a background.
+ */
+.dhaka-strip {
+  height: 6px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-crimson) 0 6px,
+    var(--color-marigold) 6px 9px,
+    var(--color-indigo) 9px 15px,
+    var(--color-marigold) 15px 18px
+  );
 }

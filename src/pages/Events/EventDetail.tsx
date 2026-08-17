@@ -45,7 +45,7 @@ export default function EventDetail() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {!event.coverImage && (
           <>
-            <Link to="/events" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-[#C41E3A] mb-4 transition-colors">
+            <Link to="/events" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-crimson mb-4 transition-colors">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
@@ -63,10 +63,10 @@ export default function EventDetail() {
             </div>
 
             {event.donationUrl && (
-              <div className="bg-gradient-to-r from-[#C41E3A] to-[#a01830] rounded-2xl p-6 text-white text-center">
+              <div className="bg-gradient-to-r from-crimson to-crimson-dark rounded-2xl p-6 text-white text-center">
                 <h3 className="font-bold text-lg mb-2">Support This Event</h3>
                 <p className="text-red-100 text-sm mb-4">Help us make this event a success with your generous contribution.</p>
-                <Button href={event.donationUrl} variant="outline" className="border-white text-white hover:bg-white hover:text-[#C41E3A]">
+                <Button href={event.donationUrl} variant="outline" className="border-white text-white hover:bg-white hover:text-crimson">
                   Donate for This Event
                 </Button>
               </div>
@@ -79,7 +79,7 @@ export default function EventDetail() {
 
               <div className="flex gap-3">
                 <div className="w-9 h-9 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-[#C41E3A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-crimson" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
@@ -92,7 +92,7 @@ export default function EventDetail() {
               {event.startTime && (
                 <div className="flex gap-3">
                   <div className="w-9 h-9 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-[#C41E3A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-crimson" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
@@ -107,7 +107,7 @@ export default function EventDetail() {
 
               <div className="flex gap-3">
                 <div className="w-9 h-9 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-[#C41E3A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-crimson" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -121,7 +121,7 @@ export default function EventDetail() {
                       href={`https://maps.google.com/?q=${encodeURIComponent(event.address)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-[#C41E3A] hover:underline mt-1 inline-block"
+                      className="text-xs text-crimson hover:underline mt-1 inline-block"
                     >
                       View on Google Maps →
                     </a>

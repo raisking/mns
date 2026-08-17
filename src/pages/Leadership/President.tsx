@@ -1,22 +1,18 @@
 import { Link } from 'react-router-dom';
 import { president } from '../../data/mockData';
 import Button from '../../components/common/Button';
+import PageHero from '../../components/common/PageHero';
 
 export default function President() {
   return (
     <>
-      <div className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[#f87171] text-sm font-semibold uppercase tracking-wider mb-3">Leadership</p>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Message from the President</h1>
-        </div>
-      </div>
+      <PageHero eyebrow="Leadership" title="Message from the President" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex flex-wrap gap-3 mb-10">
-          <span className="px-5 py-2.5 bg-gray-900 text-white text-sm font-semibold rounded-lg cursor-default">President</span>
-          <Link to="/leadership" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-[#C41E3A] hover:text-[#C41E3A] transition-colors">Executive Committee</Link>
-          <Link to="/leadership/past-presidents" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-[#C41E3A] hover:text-[#C41E3A] transition-colors">Past Presidents</Link>
+          <span className="px-5 py-2.5 bg-ink text-white text-sm font-semibold rounded-lg cursor-default">President</span>
+          <Link to="/leadership" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-crimson hover:text-crimson transition-colors">Executive Committee</Link>
+          <Link to="/leadership/past-presidents" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-crimson hover:text-crimson transition-colors">Past Presidents</Link>
         </div>
 
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -29,8 +25,8 @@ export default function President() {
               />
             </div>
             <div className="p-8 md:p-12 flex flex-col justify-center">
-              <span className="text-sm font-semibold text-[#C41E3A] uppercase tracking-wider">{president.position}</span>
-              <h2 className="text-3xl font-bold text-gray-900 mt-2 mb-6">{president.name}</h2>
+              <span className="text-sm font-semibold text-crimson uppercase tracking-wider">{president.position}</span>
+              <h2 className="text-3xl mt-2 mb-6 text-ink">{president.name}</h2>
 
               <div className="prose prose-gray max-w-none">
                 <p className="text-gray-600 leading-relaxed mb-4">
