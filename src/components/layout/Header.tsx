@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { organization } from '../../config/organization';
 import Emblem from '../common/Emblem';
 
@@ -38,6 +38,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
+  const location = useLocation();
 
   const toggleDropdown = (label: string) => {
     setOpenDropdown(prev => (prev === label ? null : label));
@@ -46,6 +47,15 @@ export default function Header() {
   const closeMobile = () => {
     setMobileOpen(false);
     setOpenDropdown(null);
+  };
+
+  // Clicking Home/the logo while already on "/" doesn't trigger a route
+  // change, so the app-level scroll-to-top on navigation never fires.
+  // Scroll explicitly here so it always lands back at the top of the hero.
+  const goHome = () => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   // Close the open desktop dropdown on outside click or Escape, so it
@@ -75,7 +85,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3" onClick={closeMobile}>
+          <Link to="/" className="flex items-center gap-3" onClick={() => { closeMobile(); goHome(); }}>
             <Emblem className="w-10 h-10 md:w-12 md:h-12" />
             <div className="hidden sm:block leading-tight">
               <p className="font-display font-bold text-ink text-base md:text-lg leading-none">{organization.name}</p>
@@ -137,6 +147,7 @@ export default function Header() {
                   key={item.to}
                   to={item.to!}
                   end={item.to === '/'}
+                  onClick={item.to === '/' ? goHome : undefined}
                   className={({ isActive }) =>
                     `px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                       isActive ? 'text-crimson font-semibold' : 'text-gray-700 hover:text-crimson'
@@ -229,7 +240,7 @@ export default function Header() {
                       isActive ? 'text-crimson font-semibold bg-crimson/5' : 'text-gray-700 hover:text-crimson hover:bg-gray-50'
                     }`
                   }
-                  onClick={closeMobile}
+                  onClick={() => { closeMobile(); if (item.to === '/') goHome(); }}
                 >
                   {item.label}
                 </NavLink>
