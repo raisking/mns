@@ -58,6 +58,14 @@ export default function ShoutoutModal({ open, onClose, shoutouts, month }: Shout
     };
   }, [open, onClose]);
 
+  // Auto-dismiss after 10s if left untouched — a fresh 10s window each
+  // time it opens, cleared as soon as it's closed by any other means.
+  useEffect(() => {
+    if (!open) return;
+    const timer = setTimeout(onClose, 10_000);
+    return () => clearTimeout(timer);
+  }, [open, onClose]);
+
   if (!open) return null;
 
   return (

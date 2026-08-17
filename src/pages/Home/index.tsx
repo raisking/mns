@@ -8,23 +8,25 @@ import PostCard from '../../components/posts/PostCard';
 import Button from '../../components/common/Button';
 import ShoutoutModal from '../../components/common/ShoutoutModal';
 
-// Reappears once per calendar month rather than every visit — gated on the
-// real current month, independent of the mock "August 2026" label text.
-const SHOUTOUT_STORAGE_KEY = `mns-shoutout-seen-${new Date().getFullYear()}-${new Date().getMonth()}`;
+// sessionStorage (not localStorage): shows once for as long as this tab/
+// session stays open, but comes back on a fresh visit — new tab, browser
+// restart, or clearing site data/cache all reset it, since that's exactly
+// what clears sessionStorage too.
+const SHOUTOUT_STORAGE_KEY = 'mns-shoutout-seen';
 
 export default function Home() {
   const upcomingEvents = mockEvents.filter(e => e.status === 'published').slice(0, 3);
   const [shoutoutOpen, setShoutoutOpen] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem(SHOUTOUT_STORAGE_KEY)) {
+    if (!sessionStorage.getItem(SHOUTOUT_STORAGE_KEY)) {
       setShoutoutOpen(true);
     }
   }, []);
 
   const closeShoutout = () => {
     setShoutoutOpen(false);
-    localStorage.setItem(SHOUTOUT_STORAGE_KEY, '1');
+    sessionStorage.setItem(SHOUTOUT_STORAGE_KEY, '1');
   };
 
   return (
