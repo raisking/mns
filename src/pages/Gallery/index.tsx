@@ -1,0 +1,36 @@
+import { mockAlbums } from '../../data/mockData';
+import SectionHeader from '../../components/common/SectionHeader';
+import AlbumCard from '../../components/gallery/AlbumCard';
+import EmptyState from '../../components/common/EmptyState';
+
+export default function Gallery() {
+  const publicAlbums = mockAlbums.filter(a => a.status === 'public');
+
+  return (
+    <>
+      <div className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Community Gallery</h1>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            Browse our photo albums from events, school programs, and community celebrations.
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {publicAlbums.length === 0 ? (
+          <EmptyState icon="🖼️" title="No Albums Yet" message="Photo albums will appear here as they are added." />
+        ) : (
+          <>
+            <SectionHeader title="Photo Albums" subtitle={`${publicAlbums.length} albums`} />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {publicAlbums.map(album => (
+                <AlbumCard key={album.id} album={album} />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </>
+  );
+}

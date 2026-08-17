@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-brand-red: #C41E3A;
+    --color-brand-red-light: #E8293F;
+    --color-brand-blue: #1E40AF;
+    --color-brand-blue-light: #3B82F6;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-800 antialiased;
+  }
+}
