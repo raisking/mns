@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { organization, socialLinks } from '../../config/organization';
-import Emblem from '../common/Emblem';
+import logo from '../../assets/logo.png';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -12,9 +12,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <Emblem className="w-10 h-10" />
-              <span className="font-display font-bold text-white text-base leading-tight">{organization.name}</span>
+            {/* logo.png has an opaque light background (no alpha channel), so it
+                sits on a white plate here rather than directly on the dark footer. */}
+            <div className="inline-flex bg-white rounded-xl p-2 shadow-sm mb-4">
+              <img src={logo} alt="Marietta Nepali Samaj" className="h-14 w-auto rounded-md" />
             </div>
             <p className="text-sm text-white/60 leading-relaxed mb-4">
               Connecting the Nepali community in Marietta, Georgia. Preserving our culture, celebrating our heritage.

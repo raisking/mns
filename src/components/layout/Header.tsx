@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { organization } from '../../config/organization';
-import Emblem from '../common/Emblem';
+import logo from '../../assets/logo.png';
 
 interface NavItem {
   label: string;
@@ -85,12 +84,8 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3" onClick={() => { closeMobile(); goHome(); }}>
-            <Emblem className="w-10 h-10 md:w-12 md:h-12" />
-            <div className="hidden sm:block leading-tight">
-              <p className="font-display font-bold text-ink text-base md:text-lg leading-none">{organization.name}</p>
-              <p className="text-xs text-ink-soft mt-0.5">Marietta, Georgia</p>
-            </div>
+          <Link to="/" className="flex items-center flex-shrink-0" onClick={() => { closeMobile(); goHome(); }}>
+            <img src={logo} alt="Marietta Nepali Samaj" className="h-12 md:h-16 w-auto" />
           </Link>
 
           {/* Desktop Nav */}
