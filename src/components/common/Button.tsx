@@ -49,8 +49,8 @@ export default function Button({
 }: ButtonProps) {
   const base = `inline-flex items-center justify-center font-body font-semibold rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 ${variantClasses[variant]} ${sizeClasses[size]} ${fullWidth ? 'w-full' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`;
 
-  if (to) return <Link to={to} className={base}>{children}</Link>;
-  if (href) return <a href={href} className={base} target="_blank" rel="noopener noreferrer">{children}</a>;
+  if (to) return <Link to={to} className={base} onClick={onClick}>{children}</Link>;
+  if (href) return <a href={href} className={base} target="_blank" rel="noopener noreferrer" onClick={onClick}>{children}</a>;
   return (
     <button type={type} onClick={onClick} disabled={disabled} className={base}>
       {children}

@@ -1,16 +1,53 @@
 import { Link } from 'react-router-dom';
-import { mockEvents, mockPosts, galleryPreviewPhotos, objectives, heroImage, schoolImage } from '../../data/mockData';
+import { useEffect, useState } from 'react';
+import { mockEvents, mockPosts, galleryPreviewPhotos, objectives, heroImage, schoolImage, monthlyShoutouts, shoutoutMonth } from '../../data/mockData';
 import { organization, socialLinks } from '../../config/organization';
 import SectionHeader from '../../components/common/SectionHeader';
 import EventCard from '../../components/events/EventCard';
 import PostCard from '../../components/posts/PostCard';
 import Button from '../../components/common/Button';
+import ShoutoutModal from '../../components/common/ShoutoutModal';
+
+// Reappears once per calendar month rather than every visit — gated on the
+// real current month, independent of the mock "August 2026" label text.
+const SHOUTOUT_STORAGE_KEY = `mns-shoutout-seen-${new Date().getFullYear()}-${new Date().getMonth()}`;
 
 export default function Home() {
   const upcomingEvents = mockEvents.filter(e => e.status === 'published').slice(0, 3);
+  const [shoutoutOpen, setShoutoutOpen] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem(SHOUTOUT_STORAGE_KEY)) {
+      setShoutoutOpen(true);
+    }
+  }, []);
+
+  const closeShoutout = () => {
+    setShoutoutOpen(false);
+    localStorage.setItem(SHOUTOUT_STORAGE_KEY, '1');
+  };
 
   return (
     <>
+      <ShoutoutModal
+        open={shoutoutOpen}
+        onClose={closeShoutout}
+        shoutouts={monthlyShoutouts}
+        month={shoutoutMonth}
+      />
+
+      {/* Reopens the shoutout modal after it's been dismissed — a one-time
+          popup with no way back is a dead end. */}
+      {!shoutoutOpen && (
+        <button
+          onClick={() => setShoutoutOpen(true)}
+          className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 bg-crimson hover:bg-crimson-dark text-white text-sm font-semibold pl-3 pr-4 py-2.5 rounded-full shadow-lg transition-colors"
+        >
+          <span className="text-base" aria-hidden="true">🎉</span>
+          Shoutouts
+        </button>
+      )}
+
       {/* Hero — bottom edge cut into the shallow twin-pennant notch that is
           this site's signature shape, echoing Nepal's flag silhouette. */}
       <section

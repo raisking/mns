@@ -2,6 +2,7 @@ import type { Event } from '../types/Event';
 import type { Album } from '../types/Album';
 import type { LeadershipMember, PastPresident } from '../types/Leadership';
 import type { Post } from '../types/Post';
+import type { Shoutout } from '../types/Shoutout';
 import heroBanner from '../assets/nepali-school-banner.png';
 import dashain2026Img from '../assets/dashain2026.png';
 
@@ -14,6 +15,8 @@ const EVENT2_IMG = 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3
 const EVENT3_IMG = 'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=800&q=80';
 const DASHAIN_2026_IMG = dashain2026Img;
 const PERSON_IMG = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80';
+const PERSON_IMG2 = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80';
+const PERSON_IMG3 = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80';
 const GALLERY1 = 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80';
 const GALLERY2 = 'https://images.unsplash.com/photo-1601758174493-49e52f2e5e4d?w=600&q=80';
 const GALLERY3 = 'https://images.unsplash.com/photo-1513623935135-c896b59073c1?w=600&q=80';
@@ -203,5 +206,31 @@ export const objectives = [
     title: 'Service',
     titleNp: 'सेवा',
     description: 'Organize volunteer programs and provide community assistance to those in need.',
+  },
+];
+
+export const shoutoutMonth = 'August 2026';
+
+export const monthlyShoutouts: Shoutout[] = [
+  {
+    id: '1',
+    name: 'Sabina Koirala',
+    category: 'Member',
+    photo: PERSON_IMG,
+    highlight: "Organized this month's community potluck and personally welcomed three new families to MNS.",
+  },
+  {
+    id: '2',
+    name: 'Aarav Gurung',
+    category: 'Student',
+    photo: PERSON_IMG2,
+    highlight: "Perfect attendance at Nepali School this month — and always first to help younger students with their alphabet.",
+  },
+  {
+    id: '3',
+    name: 'Suman Rai',
+    category: 'Volunteer',
+    photo: PERSON_IMG3,
+    highlight: 'Showed up early and stayed late for setup and cleanup at every single event this month, rain or shine.',
   },
 ];

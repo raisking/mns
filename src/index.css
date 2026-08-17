@@ -73,3 +73,16 @@
     var(--color-marigold) 15px 18px
   );
 }
+
+/* Modal entrance — respects prefers-reduced-motion via the global
+   animation-duration override above. */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-fade-in { animation: fade-in 0.2s ease-out; }
+.animate-modal-in { animation: modal-in 0.25s ease-out; }
