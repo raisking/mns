@@ -15,6 +15,22 @@
 
   --font-display: "Baloo 2", "Noto Sans Devanagari", sans-serif;
   --font-body: "IBM Plex Sans Devanagari", "Noto Sans", sans-serif;
+  --font-nav: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Mona Sans — used for the header nav only (see --font-nav above), not
+   site-wide. Variable font served from the upstream GitHub repo via jsDelivr. */
+@font-face {
+  font-family: "Mona Sans";
+  src:
+    url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/variable/MonaSansVF%5Bwdth,wght,opsz,ital%5D.woff2")
+      format("woff2-variations"),
+    url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/variable/MonaSansVF%5Bwdth,wght,opsz,ital%5D.woff2")
+      format("woff2 supports variations");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
 }
 
 @layer base {

@@ -90,7 +90,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav ref={navRef} className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+          <nav ref={navRef} className="hidden lg:flex items-center gap-1 font-nav" aria-label="Main navigation">
             {navItems.map(item =>
               item.children ? (
                 <div
@@ -221,7 +221,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg" role="navigation" aria-label="Mobile navigation">
+        <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg font-nav" role="navigation" aria-label="Mobile navigation">
           <div className="px-4 py-3 space-y-1 max-h-[80vh] overflow-y-auto">
             {navItems.map(item =>
               item.children ? (
