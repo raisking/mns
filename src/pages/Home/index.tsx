@@ -65,7 +65,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-3">Who We Are</p>
+              <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-3">हाम्रो समुदाय · Who We Are</p>
               <h2 className="text-3xl md:text-4xl text-ink mb-6">
                 A Home Away From Home for the Nepali Community
               </h2>
@@ -82,7 +82,9 @@ export default function Home() {
                 <div key={obj.title} className="card-lift bg-paper-deep rounded-2xl p-5 relative overflow-hidden">
                   <span className={`absolute top-0 left-0 right-0 h-1 ${i % 2 === 0 ? 'bg-crimson' : 'bg-indigo'}`} aria-hidden="true" />
                   <span className="text-3xl mb-3 block" role="img" aria-label={obj.title}>{obj.icon}</span>
-                  <h3 className="text-ink mb-1">{obj.title}</h3>
+                  <h3 className="text-ink mb-1">
+                    {obj.title} <span className="text-ink-soft/60 font-normal">· {obj.titleNp}</span>
+                  </h3>
                   <p className="text-sm text-ink-soft leading-relaxed">{obj.description}</p>
                 </div>
               ))}
@@ -95,6 +97,7 @@ export default function Home() {
       <section className="py-16 md:py-20 bg-paper-deep">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
+            eyebrow="कार्यक्रमहरू"
             title="Upcoming Events"
             subtitle="Join us for our community celebrations, cultural programs, and activities."
           />
@@ -137,7 +140,7 @@ export default function Home() {
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-3">Nepali School</p>
+              <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-3">नेपाली पाठशाला · Nepali School</p>
               <h2 className="text-3xl md:text-4xl text-ink mb-6">
                 Preserving Language & Culture for Future Generations
               </h2>
@@ -170,6 +173,7 @@ export default function Home() {
           this CTA its own identity apart from the crimson donation CTA. */}
       <section className="py-14 md:py-16 bg-indigo text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सहयोग · Sponsorship</p>
           <h2 className="text-2xl md:text-3xl mb-5">Sponsor & Advertise With Us</h2>
           <p className="text-white/80 leading-relaxed max-w-2xl mx-auto mb-2">
             Showcase your name or business to the Marietta Nepali community while supporting the programs that bring us together.
@@ -187,6 +191,7 @@ export default function Home() {
       <section className="py-16 md:py-20 bg-paper-deep">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
+            eyebrow="अपडेटहरू"
             title="Latest Posts"
             subtitle="Updates and moments shared from our Facebook community."
           />
@@ -207,6 +212,7 @@ export default function Home() {
       <section className="py-16 md:py-20 bg-ink">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
+            eyebrow="सम्झनाहरू"
             title="Community Gallery"
             subtitle="Moments from our celebrations, programs, and community life."
             light
@@ -245,6 +251,7 @@ export default function Home() {
       <section className="py-16 md:py-20 bg-gradient-to-br from-crimson to-crimson-dark text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="text-4xl mb-4 block" role="img" aria-label="Heart">❤️</span>
+          <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">धन्यवाद · Thank You</p>
           <h2 className="text-3xl md:text-4xl mb-4">Support Our Community</h2>
           <p className="text-lg text-white/85 mb-10 max-w-2xl mx-auto leading-relaxed">
             Your generosity helps us continue our cultural programs, educational initiatives, and community events. Every contribution makes a difference.
