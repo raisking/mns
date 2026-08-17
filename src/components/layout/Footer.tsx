@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { organization, socialLinks } from '../../config/organization';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo-nepali.png';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
