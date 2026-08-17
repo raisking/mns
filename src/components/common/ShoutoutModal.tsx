@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import type { Shoutout } from '../../types/Shoutout';
-import Button from './Button';
 
 interface ShoutoutModalProps {
   open: boolean;
@@ -132,16 +131,6 @@ export default function ShoutoutModal({ open, onClose, shoutouts, month }: Shout
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="mt-6 pt-6 border-t border-gray-100 text-center">
-            <p className="text-sm text-ink-soft mb-4">
-              Know someone who deserves a shoutout next month?
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button to="/contact" variant="primary" onClick={onClose}>Nominate Someone</Button>
-              <Button variant="ghost" onClick={onClose}>Maybe Later</Button>
-            </div>
           </div>
         </div>
       </div>
