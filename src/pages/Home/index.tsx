@@ -60,6 +60,79 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Nepali School — MNS's most active program, given top billing right
+          after the hero instead of buried mid-page. */}
+      <section className="py-16 md:py-20 bg-paper-deep overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src={schoolImage}
+                  alt="Nepali School students learning"
+                  loading="lazy"
+                  className="w-full h-80 md:h-[26rem] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent" />
+                <div className="absolute top-4 left-4">
+                  <div className="inline-flex items-center gap-1.5 bg-marigold text-ink text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-full shadow-sm">
+                    ⭐ MNS's Most Active Program
+                  </div>
+                </div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-white/95 rounded-xl p-3 shadow">
+                    <p className="text-sm font-bold text-ink">🎓 Nepali Language & Culture</p>
+                    <p className="text-xs text-ink-soft mt-0.5">Teaching the next generation their heritage</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="order-1 md:order-2">
+              <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-3">नेपाली पाठशाला · Nepali School</p>
+              <h2 className="text-3xl md:text-4xl text-ink mb-4">
+                Where Our Community Shows Up Every Week
+              </h2>
+              <p className="text-ink-soft leading-relaxed mb-6">
+                Of everything MNS runs, the Nepali School is where our community gathers most. It's our most active program — a weekly gathering that teaches Nepali language, culture, and values to the next generation.
+              </p>
+
+              {/* Activity stats — evidence for "most active," not just the claim */}
+              <div className="grid grid-cols-3 gap-3 mb-8">
+                {[
+                  { value: 'Weekly', label: 'Every Sunday' },
+                  { value: '5–16', label: 'Ages Welcome' },
+                  { value: 'Free', label: 'For Families' },
+                ].map(stat => (
+                  <div key={stat.label} className="bg-white rounded-xl p-3 text-center shadow-sm">
+                    <p className="text-lg font-display font-bold text-crimson leading-none">{stat.value}</p>
+                    <p className="text-xs text-ink-soft mt-1">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              <ul className="space-y-3 mb-8">
+                {[
+                  'Nepali language reading and writing',
+                  'Cultural traditions and values',
+                  "Children's programs and activities",
+                ].map(item => (
+                  <li key={item} className="flex items-center gap-3 text-ink-soft">
+                    <svg className="w-5 h-5 text-crimson flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button to="/nepali-school" variant="primary">Learn About Our School</Button>
+                <Button to="/contact" variant="outline">Enroll Your Child</Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Preview */}
       <section className="py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -114,57 +187,6 @@ export default function Home() {
           )}
           <div className="text-center">
             <Button to="/events" variant="outline">View All Events</Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Nepali School */}
-      <section className="py-16 md:py-20 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1">
-              <div className="relative rounded-2xl overflow-hidden shadow-xl">
-                <img
-                  src={schoolImage}
-                  alt="Nepali School students learning"
-                  loading="lazy"
-                  className="w-full h-80 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="bg-white/95 rounded-xl p-3 shadow">
-                    <p className="text-sm font-bold text-ink">🎓 Nepali Language & Culture</p>
-                    <p className="text-xs text-ink-soft mt-0.5">Teaching the next generation their heritage</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="order-1 md:order-2">
-              <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-3">नेपाली पाठशाला · Nepali School</p>
-              <h2 className="text-3xl md:text-4xl text-ink mb-6">
-                Preserving Language & Culture for Future Generations
-              </h2>
-              <p className="text-ink-soft leading-relaxed mb-6">
-                Our Nepali School provides Nepali language education, cultural programs, and community values to children in the Marietta area. We believe that our children are the future of our culture.
-              </p>
-              <ul className="space-y-3 mb-8">
-                {[
-                  'Nepali language reading and writing',
-                  'Cultural traditions and values',
-                  "Children's programs and activities",
-                  'Cultural dance and music',
-                  'Community service and volunteering',
-                ].map(item => (
-                  <li key={item} className="flex items-center gap-3 text-ink-soft">
-                    <svg className="w-5 h-5 text-crimson flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Button to="/nepali-school" variant="primary">Learn About Our School</Button>
-            </div>
           </div>
         </div>
       </section>
