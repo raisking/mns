@@ -1,8 +1,24 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { forwardRef, useEffect, useImperativeHandle } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ContactForm from './ContactForm';
 import * as contactService from '../../services/contactService';
+import type { TurnstileWidgetHandle } from './TurnstileWidget';
+
+// The real widget loads Cloudflare's script and waits for a human to solve a
+// challenge — neither is meaningful in jsdom. Stand in with something that
+// verifies immediately, so these tests exercise ContactForm's own logic
+// (validation, submit states, error handling) rather than Turnstile itself.
+vi.mock('./TurnstileWidget', () => ({
+  default: forwardRef<TurnstileWidgetHandle, { onVerify: (token: string) => void }>(
+    function MockTurnstileWidget({ onVerify }, ref) {
+      useImperativeHandle(ref, () => ({ reset: () => {} }));
+      useEffect(() => { onVerify('test-turnstile-token'); }, [onVerify]);
+      return <div data-testid="mock-turnstile" />;
+    }
+  ),
+}));
 
 async function fillValidForm(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText(/full name/i), 'Sabina Koirala');

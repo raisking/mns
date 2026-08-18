@@ -4,5 +4,19 @@
       "Bash(npx tsc *)",
       "Bash(npx oxlint *)"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/remind-skill-update.py 2>/dev/null || true",
+            "statusMessage": "Checking if docs/SKILL.md needs an update..."
+          }
+        ]
+      }
+    ]
   }
 }
