@@ -1,7 +1,6 @@
 import type { Event } from '../types/Event';
 import type { Album } from '../types/Album';
 import type { LeadershipMember, PastPresident } from '../types/Leadership';
-import type { Post } from '../types/Post';
 import type { Shoutout } from '../types/Shoutout';
 import type { SchoolStaffMember } from '../types/SchoolStaff';
 import heroBanner from '../assets/nepali-school-banner.png';
@@ -152,37 +151,6 @@ export const pastPresidents: PastPresident[] = [
   { id: '3', name: 'Hira Tamang', photo: PERSON_IMG, term: '2018–2020', description: 'Founded key community partnerships.' },
   { id: '4', name: 'Gopal Acharya', photo: PERSON_IMG, term: '2016–2018' },
   { id: '5', name: 'Laxmi Devi KC', photo: PERSON_IMG, term: '2014–2016' },
-];
-
-export const mockPosts: Post[] = [
-  {
-    id: '1',
-    author: 'Nepali School - Marietta',
-    context: 'with Abina Ghimire and 2 others',
-    date: '2026-01-11',
-    content: 'जन्म दिनको धेरै धेरै शुभकामना रोजित शर्मा। तिम्रो जीवन सफल र सुखमय रहोस्!\n\n#Nepalischool #Marietta #Birthdaycelebration #bestwishes',
-    reply: { author: 'Abina Ghimire', text: 'Thank you 🙏' },
-  },
-  {
-    id: '2',
-    author: 'Nepali School - Marietta',
-    date: '2026-01-05',
-    content: 'Admission Open! Enroll now for Spring 2026 at Marietta Nepali School!',
-  },
-  {
-    id: '3',
-    author: 'Sri Wagle',
-    context: 'posted to Nepali School - Marietta',
-    date: '2026-01-01',
-    content: 'Happy Birthday!',
-  },
-  {
-    id: '4',
-    author: 'Sri Wagle',
-    context: 'is feeling happy with Nepali School - Marietta and 23 others',
-    date: '2025-12-30',
-    content: 'Kentucky, ZERO to 8848 is coming to your city on January 10th 2026.',
-  },
 ];
 
 export const objectives = [

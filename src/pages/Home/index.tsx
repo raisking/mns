@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { mockEvents, mockPosts, galleryPreviewPhotos, objectives, heroImage, schoolImage, monthlyShoutouts, shoutoutMonth } from '../../data/mockData';
-import { organization, socialLinks } from '../../config/organization';
+import { mockEvents, galleryPreviewPhotos, objectives, heroImage, schoolImage, monthlyShoutouts, shoutoutMonth } from '../../data/mockData';
+import { organization } from '../../config/organization';
 import SectionHeader from '../../components/common/SectionHeader';
 import EventCard from '../../components/events/EventCard';
-import PostCard from '../../components/posts/PostCard';
 import Button from '../../components/common/Button';
 import ShoutoutModal from '../../components/common/ShoutoutModal';
 
@@ -245,27 +244,6 @@ export default function Home() {
           <Button to="/contact" variant="outline" className="border-white text-white hover:bg-white hover:text-indigo">
             Contact Us
           </Button>
-        </div>
-      </section>
-
-      {/* Posts */}
-      <section className="py-16 md:py-20 bg-paper-deep">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            eyebrow="अपडेटहरू"
-            title="Latest Posts"
-            subtitle="Updates and moments shared from our Facebook community."
-          />
-          <div className="grid sm:grid-cols-2 gap-6 mb-10">
-            {mockPosts.map(post => (
-              <PostCard key={post.id} post={post} />
-            ))}
-          </div>
-          <div className="text-center">
-            <Button href={socialLinks.facebook} variant="outline">
-              Follow Us on Facebook
-            </Button>
-          </div>
         </div>
       </section>
 

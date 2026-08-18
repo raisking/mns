@@ -40,7 +40,6 @@ src/
     gallery/         AlbumCard
     layout/          Header, Footer, Layout, ScrollToTop
     leadership/      LeadershipCard
-    posts/           PostCard (Facebook-style community post cards)
   config/            organization.ts (org info, social links, donation
                       categories), contactSubjects.ts (Contact form
                       dropdown — single source of truth, also imported by
@@ -104,7 +103,7 @@ every `h1`–`h4` via the base layer, don't add the class by hand),
 `font-body` = IBM Plex Sans Devanagari (default body text), `font-nav` =
 Mona Sans (header nav only, applied at the `<nav>`/mobile-menu container
 level so it inherits down). All three support Devanagari, since the site
-mixes Nepali script into English copy (e.g. Posts, bilingual eyebrows).
+mixes Nepali script into English copy (e.g. bilingual eyebrows).
 
 **Signature elements** (the site's deliberate "this is ownable, not
 templated" details — reuse these instead of inventing new ones):
@@ -170,8 +169,8 @@ including the index page itself as one of the children (see
 ## Data model
 
 **Everything in `src/data/mockData.ts` is placeholder content** —
-events, albums, leadership bios, objectives, gallery photos, Facebook
-posts, monthly shoutouts, school staff. Several images are still generic
+events, albums, leadership bios, objectives, gallery photos, monthly
+shoutouts, school staff. Several images are still generic
 Unsplash stock photos (commented `// Unsplash placeholder images` in that
 file) rather than real photos of this community. When real content/photos
 become available, replace the relevant exports there; the components
