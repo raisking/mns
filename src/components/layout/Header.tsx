@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo-nepali.png';
-import prayerFlags from '../../assets/flag.png';
 
 interface NavItem {
   label: string;
@@ -205,19 +204,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-      {/* Prayer flag border — tiled rather than stretched, since the source
-          photo is fixed-resolution and would blur if stretched full-width. */}
-      <div
-        className="h-8 md:h-10"
-        style={{
-          backgroundImage: `url(${prayerFlags})`,
-          backgroundRepeat: 'repeat-x',
-          backgroundSize: 'auto 100%',
-          backgroundPosition: 'left center',
-        }}
-        role="presentation"
-        aria-hidden="true"
-      />
 
       {/* Mobile Menu */}
       {mobileOpen && (
