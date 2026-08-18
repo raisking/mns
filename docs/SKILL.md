@@ -90,7 +90,7 @@ utilities — `bg-saffron`, `text-ink-soft`, etc.):
 | Token | Hex | Meaning | Use |
 |---|---|---|---|
 | `saffron` / `saffron-dark` | `#b45309` / `#92400e` | Sindoor/tika-powder warmth | Accent color: headings, section markers, secondary buttons. Replaced the flag's literal crimson field (`#c8102e`) — that red read as cold "stop/danger" rather than festive; saffron keeps the ~5:1 text contrast crimson had while feeling warmer. Any literal `red-*` Tailwind class paired with it was swapped to the matching `amber-*` shade at the same time, except the genuine form-failure error banner in `ContactForm.tsx`, which keeps semantic red on purpose |
-| `indigo` / `indigo-dark` | `#003893` / `#00265f` | Nepal flag's border | **Primary action color** (buttons) — red reads as "danger" for CTAs, so indigo carries Donate/Submit/Contact |
+| `indigo` / `indigo-dark` | `#222222` / `#111111` | Set by explicit request (was `#003893`/`#00265f`, the flag's border) | **Primary action color** (buttons) — was navy, now a flat near-black. Still named `indigo` in code (existing callers didn't need to change), it just no longer means the flag-border blue |
 | `marigold` / `marigold-light` | `#e7a33e` / `#f2c374` | Tika/garland gold | Accent only on dark surfaces — fails contrast as text on light backgrounds, verified via WCAG math when introduced |
 | `ink` / `ink-soft` | `#241712` / `#5c4a3d` | — | Body text (replaces generic `gray-900`/`gray-600`) |
 | `paper` / `paper-deep` | `#fbf6ec` / `#f1e4c9` | Lokta paper | Backgrounds (replaces generic `white`/`gray-50`) |
@@ -146,6 +146,15 @@ templated" details — reuse these instead of inventing new ones):
   `rounded-full font-bold` treatment rather than a bespoke shape.
   Selection/filter chips (quick-nav pills, Donate's category/amount
   picker) are a different pattern and intentionally stayed `rounded-lg`.
+  Every non-disabled button also gets a subtle hover lift
+  (`hover:-translate-y-0.5 hover:shadow-md active:translate-y-0`, guarded
+  with `not-disabled:` where a button has a `disabled` state) instead of
+  just the color swap each variant already does on its own — applied to
+  `Button.tsx`'s shared `base` string and by hand on the standalone CTA
+  buttons listed above. Fixed-position floating buttons (Home's
+  Shoutouts button) use `hover:scale-105 active:scale-100` instead of a
+  translate lift, since a vertical shift reads oddly on something that's
+  already floating free of the page flow.
   Variants: `primary`
   (indigo — the default action color), `secondary` (saffron), `accent`
   (marigold, for celebratory contexts like the Donate CTA), `light` (solid
@@ -273,6 +282,18 @@ same card renders the School page's Principal/Teachers/Volunteers too
 `src/pages/School/index.tsx`). Reach for this pattern before building a
 new card for "a person with a photo and title" — check whether
 `LeadershipMember`'s shape already covers it first.
+
+The compact (non-`featured`) `LeadershipCard` variant truncates `bio` to
+3 lines (`line-clamp-3`) and, when a `bio` exists, renders as a real
+`<button>` with `aria-expanded` — hovering (`group-hover`) *or*
+tapping/Enter/Space (a `revealed` state toggle) reveals the full bio as
+an `absolute inset-0` overlay sized to the card's own footprint, so it
+never shifts sibling cards in the grid. The always-present truncated
+`<p>` already carries the full bio text to screen readers regardless of
+its visual clipping, so the overlay itself is `aria-hidden="true"`
+unconditionally — don't remove that, or expanding will announce the bio
+twice. Members with no `bio` get the plain non-interactive card (nothing
+to disclose, so no button semantics).
 
 Org-level config lives in `src/config/organization.ts` (name, tagline,
 contact info, social links, donation categories) — update values there

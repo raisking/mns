@@ -9,8 +9,11 @@
                                      against white/paper, so it still carries
                                      body-sized text and solid button fills. */
   --color-saffron-dark: #92400e; /* hover/pressed */
-  --color-indigo: #003893;       /* the flag's border — previously unused here */
-  --color-indigo-dark: #00265f;
+  --color-indigo: #222222;       /* set by explicit request — was #003893,
+                                     the flag's border color; now a flat
+                                     dark gray instead */
+  --color-indigo-dark: #111111;  /* hover/pressed — one step darker than
+                                     the new #222222 base, not the old navy */
   --color-marigold: #e7a33e;     /* tika & garland gold — dark-surface accent only */
   --color-marigold-light: #f2c374;
   --color-ink: #241712;          /* warm near-black body text */

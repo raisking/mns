@@ -56,7 +56,11 @@ export default function Button({
   className = '',
   fullWidth = false,
 }: ButtonProps) {
-  const base = `inline-flex items-center justify-center font-body font-bold rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 ${variantClasses[variant]} ${sizeClasses[size]} ${fullWidth ? 'w-full' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`;
+  // Subtle lift + deepened shadow on hover, not just the color swap each
+  // variant already does — disabled buttons opt out so they don't look
+  // interactive. transition-all (already set) covers the transform too.
+  const hoverLift = disabled ? '' : 'hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:shadow-sm';
+  const base = `inline-flex items-center justify-center font-body font-bold rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 ${variantClasses[variant]} ${sizeClasses[size]} ${hoverLift} ${fullWidth ? 'w-full' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`;
 
   if (to) return <Link to={to} className={base} onClick={onClick}>{children}</Link>;
   if (href) return <a href={href} className={base} target="_blank" rel="noopener noreferrer" onClick={onClick}>{children}</a>;

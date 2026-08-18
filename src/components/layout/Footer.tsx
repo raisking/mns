@@ -95,7 +95,7 @@ export default function Footer() {
           </p>
           <Link
             to="/donate"
-            className="text-sm font-bold text-white bg-indigo hover:bg-indigo-dark px-4 py-1.5 rounded-full transition-colors"
+            className="text-sm font-bold text-white bg-indigo hover:bg-indigo-dark px-4 py-1.5 rounded-full transition-all hover:-translate-y-0.5 hover:shadow-md active:translate-y-0"
           >
             Donate
           </Link>
