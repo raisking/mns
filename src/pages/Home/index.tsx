@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { mockEvents, galleryPreviewPhotos, objectives, heroImage, schoolImage, monthlyShoutouts, shoutoutMonth } from '../../data/mockData';
+import { mockEvents, galleryPreviewPhotos, objectives, heroImage, schoolCarouselSlides, monthlyShoutouts, shoutoutMonth } from '../../data/mockData';
 import { organization } from '../../config/organization';
 import SectionHeader from '../../components/common/SectionHeader';
 import EventCard from '../../components/events/EventCard';
 import Button from '../../components/common/Button';
 import ShoutoutModal from '../../components/common/ShoutoutModal';
+import ImageCarousel from '../../components/common/ImageCarousel';
 
 // sessionStorage (not localStorage): shows once for as long as this tab/
 // session stays open, but comes back on a fresh visit — new tab, browser
@@ -105,13 +106,12 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
-                <img
-                  src={schoolImage}
-                  alt="Nepali School students learning"
-                  loading="lazy"
-                  className="w-full h-80 md:h-[26rem] object-cover"
+                <ImageCarousel
+                  slides={schoolCarouselSlides}
+                  label="Nepali School photos"
+                  className="w-full h-80 md:h-[26rem]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent pointer-events-none" />
                 <div className="absolute top-4 left-4">
                   <div className="inline-flex items-center gap-1.5 bg-marigold text-ink text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-full shadow-sm">
                     ⭐ MNS's Most Active Program

@@ -34,7 +34,8 @@ src/
   assets/            Images — logos, banners, event/festival photos
   components/
     common/          Shared UI: Button, SectionHeader, PageHero, Emblem-
-                      style bits, EmptyState, LoadingSpinner, ShoutoutModal
+                      style bits, EmptyState, LoadingSpinner, ShoutoutModal,
+                      ImageCarousel
     contact/         ContactForm, TurnstileWidget (+ tests)
     events/          EventCard
     gallery/         AlbumCard
@@ -145,6 +146,16 @@ templated" details — reuse these instead of inventing new ones):
   glow. Used by About/Objectives/Leadership/School/Events/Gallery/Contact
   — EventDetail and AlbumDetail have bespoke hero markup instead (they
   need back-links/dynamic photo content `PageHero` doesn't support).
+- `ImageCarousel` (`slides: {src, alt}[]`, `className` sets the size since
+  slides are absolutely positioned and don't establish their own,
+  `intervalMs`, `label`): auto-advancing crossfade carousel — pauses on
+  hover/focus, skips auto-advance entirely for `prefers-reduced-motion`,
+  prev/next buttons + clickable dot indicators (top-right, so it doesn't
+  collide with a bottom caption card a caller overlays). Used on the Home
+  page's Nepali School photo (`schoolCarouselSlides` in mockData) with a
+  badge/gradient/caption overlaid as siblings around it, unchanged from
+  when that spot held a single `<img>`. Write honest per-slide `alt` text
+  — don't caption a generic stock photo as if it were a real MNS moment.
 
 ## Routes (`src/App.tsx`)
 
@@ -178,10 +189,16 @@ components consuming these exports don't change.
   (Prakash Khatri) and real photo (`src/assets/prakash_khattri.jpg`).
   The other five `schoolStaff` entries (teachers/volunteers) are still
   invented names on generic Unsplash headshots.
-- `SCHOOL_IMG` (exported as `schoolImage`, used by the Home page's
-  "Nepali Language & Culture" card and all three School sub-page hero
-  banners) — a real classroom photo
-  (`src/assets/language_culture.jpeg`), not a stock photo.
+- `SCHOOL_IMG` (exported as `schoolImage`, used by all three School
+  sub-page hero banners) — a real classroom photo
+  (`src/assets/slide/language_culture.jpeg`), not a stock photo. The Home
+  page's "Nepali Language & Culture" card no longer uses this single
+  export directly — it's an `ImageCarousel` over `schoolCarouselSlides`
+  (also in mockData.ts), which leads with this same real photo and
+  `kids_dancing.jpeg` (also real), then three generic stock photos
+  (`kids_laughing`/`kids_school`/`kids_slide.jpeg`, all in
+  `src/assets/slide/`) with no connection to Nepal or this community,
+  included at the site owner's request for rotation variety.
 - `GALLERY1`–`GALLERY6` (`galleryPreviewPhotos`, also reused as four of
   `mockAlbums`' cover photos) — still Unsplash, but swapped from
   off-theme/broken stock to verified-live, visually-confirmed **Nepal**

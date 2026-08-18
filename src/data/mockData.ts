@@ -6,7 +6,11 @@ import type { SchoolStaffMember } from '../types/SchoolStaff';
 import heroBanner from '../assets/nepali-school-banner.png';
 import dashain2026Img from '../assets/dashain2026.png';
 import prakashKhattriImg from '../assets/prakash_khattri.jpg';
-import languageCultureImg from '../assets/language_culture.jpeg';
+import languageCultureImg from '../assets/slide/language_culture.jpeg';
+import kidsDancingImg from '../assets/slide/kids_dancing.jpeg';
+import kidsLaughingImg from '../assets/slide/kids_laughing.jpeg';
+import kidsSchoolImg from '../assets/slide/kids_school.jpeg';
+import kidsSlideImg from '../assets/slide/kids_slide.jpeg';
 
 // Unsplash placeholder images — these will be replaced with real R2 URLs
 const HERO_IMG = heroBanner;
@@ -37,6 +41,21 @@ const GALLERY6 = 'https://images.unsplash.com/photo-1507743617593-0a422c9bb7f5?w
 export const heroImage = HERO_IMG;
 export const communityImage = COMMUNITY_IMG;
 export const schoolImage = SCHOOL_IMG;
+
+// Home page's "Nepali Language & Culture" carousel. Only the first two are
+// real Nepali School photos (a cultural dance performance and the alphabet-
+// puzzle photo also used as schoolImage above); the rest are generic stock
+// classroom/family photos with no connection to Nepal or this community,
+// included at the site owner's request for rotation variety. Alt text is
+// written to describe what's actually in each photo rather than implying
+// they're all real MNS moments.
+export const schoolCarouselSlides = [
+  { src: languageCultureImg, alt: 'Students working together on a Nepali alphabet puzzle in class' },
+  { src: kidsDancingImg, alt: 'Students in traditional Nepali dress performing a cultural dance on stage' },
+  { src: kidsLaughingImg, alt: 'Students laughing together in the classroom' },
+  { src: kidsSchoolImg, alt: 'Students raising their hands to answer in class' },
+  { src: kidsSlideImg, alt: 'A parent helping a child with schoolwork' },
+];
 
 export const mockEvents: Event[] = [
   {
