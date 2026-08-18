@@ -95,7 +95,12 @@ export default function Footer() {
           </p>
           <Link
             to="/donate"
-            className="text-sm font-bold text-white bg-indigo hover:bg-indigo-dark px-4 py-1.5 rounded-full transition-all hover:-translate-y-0.5 hover:shadow-md active:translate-y-0"
+            // Inverted (white fill, ink text) rather than bg-indigo: this
+            // link sits directly on the footer's own bg-ink background, and
+            // indigo is now #222222 (near-black) — contrast against bg-ink
+            // (#241712) computes to ~1.09:1, all but invisible. Same failure
+            // mode as the white-on-white button bug in Button.tsx, mirrored.
+            className="text-sm font-bold text-ink bg-white hover:bg-paper-deep px-4 py-1.5 rounded-full transition-colors"
           >
             Donate
           </Link>

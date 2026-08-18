@@ -43,7 +43,7 @@ export default function Home() {
       {!shoutoutOpen && (
         <button
           onClick={() => setShoutoutOpen(true)}
-          className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 bg-saffron hover:bg-saffron-dark text-white text-sm font-bold pl-3 pr-4 py-2.5 rounded-full shadow-lg transition-all hover:scale-105 active:scale-100"
+          className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 bg-saffron hover:bg-saffron/85 text-white text-sm font-bold pl-3 pr-4 py-2.5 rounded-full shadow-lg transition-colors"
         >
           Shoutouts
         </button>

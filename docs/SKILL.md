@@ -146,15 +146,21 @@ templated" details — reuse these instead of inventing new ones):
   `rounded-full font-bold` treatment rather than a bespoke shape.
   Selection/filter chips (quick-nav pills, Donate's category/amount
   picker) are a different pattern and intentionally stayed `rounded-lg`.
-  Every non-disabled button also gets a subtle hover lift
-  (`hover:-translate-y-0.5 hover:shadow-md active:translate-y-0`, guarded
-  with `not-disabled:` where a button has a `disabled` state) instead of
-  just the color swap each variant already does on its own — applied to
-  `Button.tsx`'s shared `base` string and by hand on the standalone CTA
-  buttons listed above. Fixed-position floating buttons (Home's
-  Shoutouts button) use `hover:scale-105 active:scale-100` instead of a
-  translate lift, since a vertical shift reads oddly on something that's
-  already floating free of the page flow.
+  Hover is color-only, no movement: solid variants (`primary`/
+  `secondary`) lighten via an opacity-lowered hover
+  (`hover:bg-indigo/85`, `hover:bg-saffron/85`) rather than the earlier
+  `-dark` companion tokens or the briefly-tried `hover:-translate-y`
+  lift — both were tried and explicitly reverted. `accent` already
+  lightened on hover before any of this (`hover:bg-marigold-light`), so
+  it was left alone. Apply the same `/85`-on-hover pattern to any new
+  solid indigo/saffron button instead of reaching for `-dark` or adding
+  a transform.
+  **Footer's Donate link is the one exception** — don't give it
+  `bg-indigo`: it sits directly on the footer's own `bg-ink` background,
+  and indigo (`#222222`) against `bg-ink` (`#241712`) computes to
+  ~1.09:1 contrast, all but invisible. It stays inverted (`bg-white
+  hover:bg-paper-deep text-ink`) instead, same fix pattern as the
+  white-on-white bug documented below.
   Variants: `primary`
   (indigo — the default action color), `secondary` (saffron), `accent`
   (marigold, for celebratory contexts like the Donate CTA), `light` (solid
