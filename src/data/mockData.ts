@@ -11,10 +11,12 @@ import kidsDancingImg from '../assets/slide/kids_dancing.jpeg';
 import kidsLaughingImg from '../assets/slide/kids_laughing.jpeg';
 import kidsSchoolImg from '../assets/slide/kids_school.jpeg';
 import kidsSlideImg from '../assets/slide/kids_slide.jpeg';
+import bhabindraBasnetImg from '../assets/slide/Bhabindra_Basnet.jpg';
 
 // Unsplash placeholder images — these will be replaced with real R2 URLs
 const HERO_IMG = heroBanner;
 const PRINCIPAL_IMG = prakashKhattriImg; // real photo — not a placeholder
+const PRESIDENT_IMG = bhabindraBasnetImg; // real photo — not a placeholder
 const COMMUNITY_IMG = 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80';
 const SCHOOL_IMG = languageCultureImg; // real photo — not a placeholder
 const EVENT1_IMG = 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80';
@@ -160,7 +162,7 @@ export const galleryPreviewPhotos = [
 ];
 
 export const executiveCommittee: LeadershipMember[] = [
-  { id: '1', name: 'Rajesh Sharma', position: 'President', photo: PERSON_IMG, bio: 'Leading our community with vision and dedication.' },
+  { id: '1', name: 'Bhabindra Basnet', position: 'President', photo: PRESIDENT_IMG, bio: 'Leading our community with vision and dedication.' },
   { id: '2', name: 'Sunita Thapa', position: 'Vice President', photo: PERSON_IMG },
   { id: '3', name: 'Bikram Adhikari', position: 'Secretary', photo: PERSON_IMG },
   { id: '4', name: 'Anita Gurung', position: 'Joint Secretary', photo: PERSON_IMG },
