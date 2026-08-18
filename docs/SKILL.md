@@ -123,9 +123,21 @@ templated" details — reuse these instead of inventing new ones):
 **Component conventions**:
 - `Button` (`src/components/common/Button.tsx`): variants `primary`
   (indigo — the default action color), `secondary` (crimson), `accent`
-  (marigold, for celebratory contexts like the Donate CTA), `outline`,
-  `ghost`. Renders `<Link>` if `to` is set, `<a>` if `href` is set,
-  otherwise `<button>` — `onClick` is forwarded in all three cases.
+  (marigold, for celebratory contexts like the Donate CTA), `light` (solid
+  white — for a high-contrast button on a saturated color background,
+  e.g. a crimson CTA card), `outline`, `ghost`. Renders `<Link>` if `to`
+  is set, `<a>` if `href` is set, otherwise `<button>` — `onClick` is
+  forwarded in all three cases.
+  **Never fake a variant's look by overriding `primary`/`secondary`/
+  `accent`/`light`'s className with a different `bg-*`/`text-*`** —
+  those variants already set their own base `bg-*`/`text-*` utilities,
+  and Tailwind's cascade order for two same-specificity classes on the
+  same property isn't guaranteed to favor the one that appears later in
+  the className string. This exact mistake shipped an invisible
+  white-on-white button once already (`bg-white` fighting `primary`'s
+  own `bg-indigo`) — add a proper variant instead, like `light` was
+  added for this. `outline`/`ghost` are the only variants safe to
+  override this way, since they don't set a base `bg-*` to fight with.
 - `SectionHeader`: `eyebrow`/`title`/`subtitle`/`centered`/`light` props —
   use `light` on dark-background sections so the eyebrow renders in
   marigold instead of crimson (contrast-driven, not arbitrary).

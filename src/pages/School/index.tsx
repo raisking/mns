@@ -74,14 +74,16 @@ export default function School() {
         </section>
 
         {/* CTA */}
-        <div className="text-center bg-gradient-to-r from-crimson to-crimson-dark rounded-2xl p-10 text-white">
-          <h2 className="text-2xl font-bold mb-3">Give Your Child the Gift of Their Heritage</h2>
-          <p className="text-red-100 mb-8 max-w-xl mx-auto">
+        <div className="text-center bg-gradient-to-br from-crimson to-crimson-dark rounded-2xl p-10 md:p-14 text-white">
+          <span className="text-4xl mb-4 block" role="img" aria-label="Graduation cap">🎓</span>
+          <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सहयोग · Support</p>
+          <h2 className="text-2xl md:text-3xl mb-4">Give Your Child the Gift of Their Heritage</h2>
+          <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed">
             Enroll your child in the Marietta Nepali School today and help them stay connected to the beautiful culture and language of Nepal.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button to="/contact" variant="outline" className="border-white text-white hover:bg-white hover:text-crimson">Contact to Enroll</Button>
-            <Button to="/donate?purpose=school" className="bg-white text-crimson hover:bg-red-50">Support the School</Button>
+            <Button to="/contact" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-crimson">Contact to Enroll</Button>
+            <Button to="/donate?purpose=school" size="lg" variant="light">Support the School</Button>
           </div>
         </div>
       </div>
