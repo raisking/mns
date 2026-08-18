@@ -43,7 +43,12 @@ const navItems: NavItem[] = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const navRef = useRef<HTMLElement>(null);
+  // Covers the whole header — desktop nav AND the mobile menu — not just
+  // the desktop <nav>. openDropdown is shared between both, so scoping
+  // this to only the desktop nav made every tap inside the mobile menu
+  // register as "outside" (the desktop nav is hidden/empty on mobile),
+  // racing the submenu button's own click handler and breaking it.
+  const headerRef = useRef<HTMLElement>(null);
   const location = useLocation();
 
   const toggleDropdown = (label: string) => {
@@ -70,7 +75,7 @@ export default function Header() {
     if (!openDropdown) return;
 
     const handleClickOutside = (e: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
         setOpenDropdown(null);
       }
     };
@@ -87,7 +92,7 @@ export default function Header() {
   }, [openDropdown]);
 
   return (
-    <header className="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
+    <header ref={headerRef} className="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
@@ -96,7 +101,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav ref={navRef} className="hidden lg:flex items-center gap-1 font-nav" aria-label="Main navigation">
+          <nav className="hidden lg:flex items-center gap-1 font-nav" aria-label="Main navigation">
             {navItems.map(item =>
               item.children ? (
                 <div
