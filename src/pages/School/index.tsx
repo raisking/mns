@@ -65,7 +65,7 @@ export default function School() {
                 { label: 'Day', value: 'Every Sunday' },
                 { label: 'Time', value: '10:00 AM – 12:00 PM' },
                 { label: 'Location', value: 'Marietta Community Center' },
-                { label: 'Ages', value: '5–16 years' },
+                { label: 'Ages', value: '3-16 years' },
                 { label: 'Language', value: 'Nepali' },
                 { label: 'Cost', value: 'Free for community members' },
               ].map(row => (

@@ -139,7 +139,7 @@ export default function Home() {
               <div className="grid grid-cols-3 gap-3 mb-8">
                 {[
                   { value: 'Weekly', label: 'Every Sunday' },
-                  { value: '5–16', label: 'Ages Welcome' },
+                  { value: '3-16', label: 'Ages Welcome' },
                   { value: 'Free', label: 'For Families' },
                 ].map(stat => (
                   <div key={stat.label} className="bg-white rounded-xl p-3 text-center shadow-sm">
