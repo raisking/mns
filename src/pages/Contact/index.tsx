@@ -64,21 +64,25 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Map placeholder */}
-            <div className="bg-gray-100 rounded-2xl h-64 flex items-center justify-center">
-              <div className="text-center text-gray-500">
-                <p className="text-2xl mb-2">🗺️</p>
-                <p className="text-sm font-medium">Marietta, Georgia</p>
-                <a
-                  href="https://maps.google.com/?q=Marietta+Georgia"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-saffron hover:underline mt-1 inline-block"
-                >
-                  View on Google Maps →
-                </a>
-              </div>
+            {/* Map — no-API-key embed via output=embed; requires no billing
+                setup, unlike the JS Maps Embed API. */}
+            <div className="bg-gray-100 rounded-2xl overflow-hidden h-64">
+              <iframe
+                src={`https://www.google.com/maps?q=${encodeURIComponent(organization.address)}&output=embed`}
+                title={`Map showing ${organization.name}'s location`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full border-0"
+              />
             </div>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(organization.address)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-saffron hover:underline mt-2 inline-block"
+            >
+              View on Google Maps →
+            </a>
           </div>
         </div>
       </div>

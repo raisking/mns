@@ -4,7 +4,10 @@ export const organization = {
   tagline: 'Connecting Our Community. Preserving Our Culture. Building Our Future.',
   email: 'info@mariettanepalisamaj.org',
   phone: '',
-  address: 'Marietta, Georgia, USA',
+  // Note: user supplied "2727 Conton Road" — corrected to "Canton Road"
+  // (a real road in Marietta, GA; "Conton" isn't), since this is a public-
+  // facing physical address. Flag/fix if that assumption is wrong.
+  address: '2727 Canton Road, Marietta, GA 30066',
   founded: '2010',
 };
 
