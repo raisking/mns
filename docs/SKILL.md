@@ -113,7 +113,6 @@ templated" details — reuse these instead of inventing new ones):
   hero's bottom edge.
 - Two-tone crimson/indigo rule — `SectionHeader`'s underline, and the top
   accent bar in dropdown menus and `ShoutoutModal`.
-- `.dhaka-strip` — repeating-gradient strip referencing Dhaka topi weave.
 - Bilingual "Nepali · English" eyebrow labels (`SectionHeader`'s
   `eyebrow` prop, or hand-written where `SectionHeader` isn't used) —
   short, well-established words/phrases only, not composed sentences

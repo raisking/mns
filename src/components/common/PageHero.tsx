@@ -27,7 +27,6 @@ export default function PageHero({ eyebrow, title, subtitle, image }: PageHeroPr
           <p className="text-white/75 text-lg max-w-2xl mx-auto">{subtitle}</p>
         )}
       </div>
-      <div className="dhaka-strip absolute bottom-0 left-0 right-0" aria-hidden="true" />
     </div>
   );
 }

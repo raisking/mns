@@ -75,21 +75,6 @@
   box-shadow: 0 18px 32px -14px rgba(200, 16, 46, 0.3);
 }
 
-/*
- * Thin woven accent strip referencing Dhaka fabric — the geometric weave
- * used in the Nepali topi and shawls. A quiet divider, not a background.
- */
-.dhaka-strip {
-  height: 6px;
-  background: repeating-linear-gradient(
-    -45deg,
-    var(--color-crimson) 0 6px,
-    var(--color-marigold) 6px 9px,
-    var(--color-indigo) 9px 15px,
-    var(--color-marigold) 15px 18px
-  );
-}
-
 /* Modal entrance — respects prefers-reduced-motion via the global
    animation-duration override above. */
 @keyframes fade-in {
