@@ -50,10 +50,13 @@ export default function Home() {
         </button>
       )}
 
-      {/* Hero — bottom edge cut into the shallow twin-pennant notch that is
-          this site's signature shape, echoing Nepal's flag silhouette. */}
+      {/* Hero — a soft twin-peak curve at the bottom edge echoes Nepal's
+          flag silhouette (this site's one signature shape), rendered as an
+          SVG divider rather than a hard clip-path so the peaks are smooth
+          curves and the fill matches the next section's color exactly
+          instead of a cutout revealing the page background underneath. */}
       <section
-        className="pennant-edge relative min-h-[85vh] flex items-center justify-center text-white overflow-hidden"
+        className="relative min-h-[85vh] flex items-center justify-center text-white overflow-hidden"
         aria-label="Hero section"
       >
         <div
@@ -97,6 +100,22 @@ export default function Home() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
+
+        {/* Twin-peak divider — filled with the next section's exact
+            bg-paper-deep color, so it reads as one smooth shape flowing
+            into the content below rather than a hard-edged cutout. */}
+        <svg
+          className="absolute -bottom-px left-0 w-full h-16 sm:h-20 md:h-28"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            fill="var(--color-paper-deep)"
+            style={{ filter: 'drop-shadow(0 -3px 6px rgba(36,23,18,0.07))' }}
+            d="M0,32 C150,90 270,105 360,105 C450,105 510,30 720,30 C930,30 990,105 1080,105 C1170,105 1290,90 1440,32 L1440,120 L0,120 Z"
+          />
+        </svg>
       </section>
 
       {/* Nepali School — MNS's most active program, given top billing right

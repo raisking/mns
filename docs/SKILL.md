@@ -108,9 +108,17 @@ mixes Nepali script into English copy (e.g. bilingual eyebrows).
 
 **Signature elements** (the site's deliberate "this is ownable, not
 templated" details — reuse these instead of inventing new ones):
-- `.pennant-edge` — clip-path notch echoing Nepal's flag silhouette (the
-  world's only non-rectangular national flag). Used once, on the Home
-  hero's bottom edge.
+- Twin-peak SVG divider — soft bezier-curve echo of Nepal's flag
+  silhouette (the world's only non-rectangular national flag). Used once,
+  inline in `Home/index.tsx` at the hero's bottom edge: an absolutely
+  positioned `<svg viewBox="0 0 1440 120" preserveAspectRatio="none">`
+  with a single curved `<path>`, `fill="var(--color-paper-deep)"` (the
+  next section's exact color, not a guess) plus a barely-there
+  `drop-shadow` filter. Previously a `.pennant-edge` CSS clip-path with
+  hard straight-line corners, which also had a real bug: the cut
+  triangles revealed the page's `bg-paper` showing through, visibly
+  mismatched against the `bg-paper-deep` section immediately below —
+  the SVG's fill sidesteps that by matching the next section on purpose.
 - Two-tone saffron/indigo rule — `SectionHeader`'s underline, and the top
   accent bar in dropdown menus and `ShoutoutModal`.
 - Bilingual "Nepali · English" eyebrow labels (`SectionHeader`'s

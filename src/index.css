@@ -63,13 +63,19 @@
 
 /*
  * Signature shape: Nepal's flag is the world's only non-rectangular
- * national flag — two stacked pennants. This shallow double-peak notch
- * echoes that silhouette at the hero's lower edge. Used once, deliberately,
- * as this site's one structural flourish.
+ * national flag — two stacked pennants. A soft twin-peak curve (SVG, see
+ * the Home hero) echoes that silhouette at the hero's lower edge. Used
+ * once, deliberately, as this site's one structural flourish.
+ *
+ * This used to be a hard-angled clip-path polygon cutting straight into
+ * the section, which left jagged points and let the page's plain bg-paper
+ * show through the cut triangles — visibly mismatched against the cream
+ * bg-paper-deep of the section immediately below. The SVG divider fixes
+ * both: smooth bezier curves instead of sharp corners, and its fill is
+ * the next section's exact color, so it reads as one continuous shape
+ * flowing into the content below rather than a cutout revealing whatever
+ * happened to be behind it.
  */
-.pennant-edge {
-  clip-path: polygon(0 0, 100% 0, 100% 92%, 75% 100%, 50% 88%, 25% 100%, 0 92%);
-}
 
 /* Card hover lift with a saffron-tinted shadow instead of generic gray. */
 .card-lift {
