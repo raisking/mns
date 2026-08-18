@@ -37,6 +37,31 @@ function asString(value: unknown): string {
   return typeof value === 'string' ? value : '';
 }
 
+/**
+ * True same-origin browser requests don't always carry an Origin header —
+ * only genuinely cross-origin (or CORS-preflighted) requests are guaranteed
+ * to. Falling back to Referer when Origin is absent avoids rejecting
+ * legitimate same-origin submissions outright, while still rejecting
+ * requests that carry neither (a real browser always sends at least one).
+ */
+function isAllowedOrigin(request: Request, allowedOrigin: string): boolean {
+  const origin = request.headers.get('Origin');
+  if (origin) {
+    return origin === allowedOrigin;
+  }
+
+  const referer = request.headers.get('Referer');
+  if (referer) {
+    try {
+      return new URL(referer).origin === allowedOrigin;
+    } catch {
+      return false;
+    }
+  }
+
+  return false;
+}
+
 async function verifyTurnstile(token: string, secret: string, remoteIp: string | null): Promise<boolean> {
   if (!token) return false;
   try {
@@ -90,17 +115,16 @@ async function forwardToAppsScript(env: Env, payload: AppsScriptForwardInput): P
 }
 
 export async function handleContactRequest(request: Request, env: Env): Promise<Response> {
-  const origin = request.headers.get('Origin');
-
   // 2. Reject unsupported HTTP methods.
   if (request.method !== 'POST') {
     return jsonResponse({ success: false }, 405);
   }
 
   // 3. Validate the request origin.
-  if (!origin || origin !== env.ALLOWED_ORIGIN) {
+  if (!isAllowedOrigin(request, env.ALLOWED_ORIGIN)) {
     return jsonResponse({ success: false }, 403);
   }
+  const origin = env.ALLOWED_ORIGIN;
 
   // 4. Limit request-body size — checked against the Content-Length header
   //    when present, and again against the actual decoded bytes below in

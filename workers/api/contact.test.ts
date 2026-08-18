@@ -105,9 +105,33 @@ describe('handleContactRequest', () => {
     expect(res.status).toBe(403);
   });
 
-  it('rejects a missing origin', async () => {
+  it('rejects a request with neither Origin nor Referer', async () => {
     mockUpstream();
     const res = await handleContactRequest(makeRequest(validPayload, { origin: null }), baseEnv);
+    expect(res.status).toBe(403);
+  });
+
+  it('falls back to a matching Referer when Origin is absent (same-origin proxies do not always send Origin)', async () => {
+    mockUpstream();
+    const res = await handleContactRequest(
+      makeRequest(validPayload, {
+        origin: null,
+        headers: { Referer: `${ALLOWED_ORIGIN}/contact` },
+      }),
+      baseEnv
+    );
+    expect(res.status).toBe(200);
+  });
+
+  it('rejects a mismatched Referer when Origin is absent', async () => {
+    mockUpstream();
+    const res = await handleContactRequest(
+      makeRequest(validPayload, {
+        origin: null,
+        headers: { Referer: 'https://evil.example/contact' },
+      }),
+      baseEnv
+    );
     expect(res.status).toBe(403);
   });
 
