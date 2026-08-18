@@ -42,6 +42,8 @@ const sizeClasses: Record<Size, string> = {
   lg: 'px-8 py-3.5 text-base',
 };
 
+// Fully-rounded pill + bold weight (not the earlier rounded-lg/semibold) —
+// same colors as always (indigo/saffron/marigold), just a bolder shape.
 export default function Button({
   children,
   variant = 'primary',
@@ -54,7 +56,7 @@ export default function Button({
   className = '',
   fullWidth = false,
 }: ButtonProps) {
-  const base = `inline-flex items-center justify-center font-body font-semibold rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 ${variantClasses[variant]} ${sizeClasses[size]} ${fullWidth ? 'w-full' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`;
+  const base = `inline-flex items-center justify-center font-body font-bold rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 ${variantClasses[variant]} ${sizeClasses[size]} ${fullWidth ? 'w-full' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`;
 
   if (to) return <Link to={to} className={base} onClick={onClick}>{children}</Link>;
   if (href) return <a href={href} className={base} target="_blank" rel="noopener noreferrer" onClick={onClick}>{children}</a>;

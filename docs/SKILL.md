@@ -136,7 +136,17 @@ templated" details — reuse these instead of inventing new ones):
   same-shape info cards in a grid.
 
 **Component conventions**:
-- `Button` (`src/components/common/Button.tsx`): variants `primary`
+- `Button` (`src/components/common/Button.tsx`): fully-rounded pill shape
+  (`rounded-full`) + `font-bold` for every variant — not `rounded-lg`/
+  `font-semibold` like earlier. Same indigo/saffron/marigold colors as
+  always; only the shape/weight changed. Standalone CTA-style buttons
+  that don't go through this component (Header/Footer Donate links,
+  ContactForm's submit button, Donate page's submit button) were updated
+  to match by hand — if you add another one, give it the same
+  `rounded-full font-bold` treatment rather than a bespoke shape.
+  Selection/filter chips (quick-nav pills, Donate's category/amount
+  picker) are a different pattern and intentionally stayed `rounded-lg`.
+  Variants: `primary`
   (indigo — the default action color), `secondary` (saffron), `accent`
   (marigold, for celebratory contexts like the Donate CTA), `light` (solid
   white — for a high-contrast button on a saturated color background,

@@ -124,7 +124,7 @@ export default function Donate() {
 
           <button
             onClick={handleDonate}
-            className="w-full py-4 bg-indigo hover:bg-indigo-dark text-white font-bold text-base rounded-xl transition-colors shadow-md hover:shadow-lg"
+            className="w-full py-4 bg-indigo hover:bg-indigo-dark text-white font-bold text-base rounded-full transition-colors shadow-md hover:shadow-lg"
           >
             Donate Now →
           </button>
