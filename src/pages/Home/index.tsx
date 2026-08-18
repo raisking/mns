@@ -85,7 +85,7 @@ export default function Home() {
             {organization.tagline}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button to="/about" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-ink">
+            <Button to="/about" size="lg" variant="outlineLight">
               Explore Our Community
             </Button>
             <Button to="/donate" size="lg" variant="accent">
@@ -257,7 +257,7 @@ export default function Home() {
           <p className="text-white/80 leading-relaxed max-w-2xl mx-auto mb-8">
             Flexible sponsorship packages are available on a quarterly, semi-annual, or annual basis. Contact us to learn more about visibility and rates.
           </p>
-          <Button to="/contact" variant="outline" className="border-white text-white hover:bg-white hover:text-indigo">
+          <Button to="/contact" variant="outlineLight">
             Contact Us
           </Button>
         </div>
@@ -295,7 +295,7 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center">
-            <Button to="/gallery" variant="outline" className="border-white text-white hover:bg-white hover:text-ink">
+            <Button to="/gallery" variant="outlineLight">
               View All Albums
             </Button>
           </div>
@@ -314,7 +314,7 @@ export default function Home() {
             <Button to="/donate" size="lg" variant="accent">
               Donate Now
             </Button>
-            <Button to="/donate?purpose=school" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-saffron">
+            <Button to="/donate?purpose=school" size="lg" variant="outlineLight">
               Support Nepali School
             </Button>
           </div>

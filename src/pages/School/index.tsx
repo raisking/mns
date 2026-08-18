@@ -109,7 +109,7 @@ export default function School() {
             Enroll your child in the Marietta Nepali School today and help them stay connected to the beautiful culture and language of Nepal.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button to="/contact" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-saffron">Contact to Enroll</Button>
+            <Button to="/contact" size="lg" variant="outlineLight">Contact to Enroll</Button>
             <Button to="/donate?purpose=school" size="lg" variant="light">Support the School</Button>
           </div>
         </div>

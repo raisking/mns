@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-type Variant = 'primary' | 'secondary' | 'accent' | 'light' | 'outline' | 'ghost';
+type Variant = 'primary' | 'secondary' | 'accent' | 'light' | 'outline' | 'outlineLight' | 'ghost';
 type Size = 'sm' | 'md' | 'lg';
 
 interface ButtonProps {
@@ -35,6 +35,17 @@ const variantClasses: Record<Variant, string> = {
   // guaranteed to favor a later className override for the same property.
   light: 'bg-white hover:bg-paper-deep text-saffron shadow-sm',
   outline: 'border-2 border-indigo text-indigo hover:bg-indigo hover:text-white',
+  // White-bordered outline for use ON a saturated/dark background (hero,
+  // CTA gradients) — inverts to solid white + ink text on hover. This
+  // used to be `variant="outline"` with a className override
+  // (`border-white text-white hover:bg-white hover:text-{saffron,ink,indigo}`)
+  // at six different call sites, which hit the exact cascade-order bug this
+  // file already warns about: outline's own `hover:text-white` competes
+  // with the override's `hover:text-*` at equal specificity, so the winner
+  // isn't guaranteed — that's what made the text disappear on hover (white
+  // fill + white text both won independently). A real variant sidesteps the
+  // conflict entirely instead of layering another override on top of it.
+  outlineLight: 'border-2 border-white text-white hover:bg-white hover:text-ink',
   ghost: 'text-indigo hover:bg-indigo/10',
 };
 

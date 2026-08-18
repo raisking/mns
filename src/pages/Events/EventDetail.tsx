@@ -65,7 +65,7 @@ export default function EventDetail() {
               <div className="bg-gradient-to-r from-saffron to-saffron-dark rounded-2xl p-6 text-white text-center">
                 <h3 className="font-bold text-lg mb-2">Support This Event</h3>
                 <p className="text-amber-100 text-sm mb-4">Help us make this event a success with your generous contribution.</p>
-                <Button href={event.donationUrl} variant="outline" className="border-white text-white hover:bg-white hover:text-saffron">
+                <Button href={event.donationUrl} variant="outlineLight">
                   Donate for This Event
                 </Button>
               </div>
