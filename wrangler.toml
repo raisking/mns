@@ -1,0 +1,16 @@
+name = "marietta-nepali-samaj-contact-api"
+main = "workers/api/contact.ts"
+compatibility_date = "2024-11-01"
+
+# Non-secret configuration. Secrets (GOOGLE_APPS_SCRIPT_URL,
+# CONTACT_FORM_SECRET, TURNSTILE_SECRET_KEY) are NOT set here — they must be
+# pushed with `wrangler secret put <NAME>` so they're never committed to the
+# repo. See docs/contact-form-google-sheets.md for the full setup.
+[vars]
+ALLOWED_ORIGIN = "https://mariettanepalisamaj.org"
+
+# Route the worker at /api/* on the production domain once it's attached to
+# a zone. Uncomment and fill in once the domain/zone is confirmed:
+# [[routes]]
+# pattern = "mariettanepalisamaj.org/api/*"
+# zone_name = "mariettanepalisamaj.org"
