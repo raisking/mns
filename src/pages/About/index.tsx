@@ -35,18 +35,12 @@ export default function About() {
           <SectionHeader title="Mission & Vision" subtitle="What drives us and where we are headed." />
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-saffron text-white rounded-2xl p-8">
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
-                <span className="text-2xl">🎯</span>
-              </div>
               <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
               <p className="text-amber-100 leading-relaxed">
                 To unite and empower the Nepali community in Marietta, Georgia by preserving our cultural heritage, promoting Nepali language education, supporting community members, and fostering strong bonds among families and individuals.
               </p>
             </div>
             <div className="bg-indigo text-white rounded-2xl p-8">
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
-                <span className="text-2xl">🌟</span>
-              </div>
               <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
               <p className="text-blue-100 leading-relaxed">
                 A thriving, connected Nepali community where every member feels at home, where our culture is celebrated and passed to future generations, and where we contribute positively to the broader Marietta community.
@@ -90,15 +84,14 @@ export default function About() {
           <SectionHeader title="Community Activities" subtitle="What we do throughout the year." />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: '🪔', title: 'Cultural Festivals', desc: 'Annual celebrations of Dashain, Tihar, Nepali New Year, Teej, and other cultural festivals.' },
-              { icon: '📚', title: 'Educational Programs', desc: 'Nepali School, tutoring support, scholarship programs, and educational workshops.' },
-              { icon: '🎭', title: 'Cultural Programs', desc: 'Dance performances, music programs, cultural showcases, and talent shows.' },
-              { icon: '⛺', title: 'Community Events', desc: 'Annual summer picnic, community dinners, sports tournaments, and social gatherings.' },
-              { icon: '🙌', title: 'Volunteer Programs', desc: 'Community service initiatives, helping those in need, and giving back to Marietta.' },
-              { icon: '👨‍👩‍👧‍👦', title: 'Family Support', desc: 'New member welcome programs, community networking, and family support services.' },
+              { title: 'Cultural Festivals', desc: 'Annual celebrations of Dashain, Tihar, Nepali New Year, Teej, and other cultural festivals.' },
+              { title: 'Educational Programs', desc: 'Nepali School, tutoring support, scholarship programs, and educational workshops.' },
+              { title: 'Cultural Programs', desc: 'Dance performances, music programs, cultural showcases, and talent shows.' },
+              { title: 'Community Events', desc: 'Annual summer picnic, community dinners, sports tournaments, and social gatherings.' },
+              { title: 'Volunteer Programs', desc: 'Community service initiatives, helping those in need, and giving back to Marietta.' },
+              { title: 'Family Support', desc: 'New member welcome programs, community networking, and family support services.' },
             ].map(item => (
               <div key={item.title} className="bg-gray-50 rounded-2xl p-6">
-                <span className="text-3xl mb-3 block" role="img" aria-label={item.title}>{item.icon}</span>
                 <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
               </div>

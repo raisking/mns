@@ -28,9 +28,7 @@ export default function EventCard({ event }: EventCardProps) {
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-amber-50 to-amber-100">
-            <span className="text-4xl">🎉</span>
-          </div>
+          <div className="w-full h-full bg-gradient-to-br from-amber-50 to-amber-100" />
         )}
         {/* Date badge */}
         <div className="absolute top-3 left-3 bg-white rounded-xl shadow-md text-center px-3 py-2 min-w-[3.5rem]">

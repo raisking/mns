@@ -1,6 +1,7 @@
-import { organization, socialLinks } from '../../config/organization';
+import { organization } from '../../config/organization';
 import PageHero from '../../components/common/PageHero';
 import ContactForm from '../../components/contact/ContactForm';
+import SocialIcons from '../../components/common/SocialIcons';
 
 export default function Contact() {
   return (
@@ -46,20 +47,10 @@ export default function Contact() {
                 </div>
               )}
 
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl" role="img" aria-label="Connect">🌐</span>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-2">Follow Us</p>
-                  <div className="flex gap-3">
-                    {socialLinks.facebook && (
-                      <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-sm text-saffron hover:underline font-medium">Facebook</a>
-                    )}
-                    {socialLinks.youtube && (
-                      <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="text-sm text-saffron hover:underline font-medium">YouTube</a>
-                    )}
-                  </div>
+              <div>
+                <p className="font-semibold text-gray-900 mb-2">Follow Us</p>
+                <div className="flex gap-3">
+                  <SocialIcons variant="light" />
                 </div>
               </div>
             </div>

@@ -22,9 +22,7 @@ export default function AlbumCard({ album }: AlbumCardProps) {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
-              <span className="text-5xl">🖼️</span>
-            </div>
+            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200" />
           )}
           {/* Photo count badge */}
           <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1.5 rounded-lg">

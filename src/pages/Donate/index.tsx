@@ -25,7 +25,6 @@ export default function Donate() {
     <>
       <div className="bg-gradient-to-br from-saffron to-saffron-dark text-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="text-4xl mb-3 block" role="img" aria-label="Heart">❤️</span>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Support Our Community</h1>
           <p className="text-amber-100 text-lg max-w-2xl mx-auto">
             Your generosity keeps our cultural programs, Nepali School, and community events going strong.
@@ -131,7 +130,7 @@ export default function Donate() {
           </button>
 
           <p className="text-center text-xs text-gray-400 mt-4">
-            🔒 Secured by Stripe. We never store your card information.
+            Secured by Stripe. We never store your card information.
           </p>
         </div>
 
@@ -139,26 +138,17 @@ export default function Donate() {
         <div className="mt-8 bg-gray-50 rounded-2xl p-6">
           <h3 className="font-bold text-gray-900 mb-4">Other Ways to Support</h3>
           <div className="space-y-3">
-            <div className="flex gap-3">
-              <span className="text-xl">📬</span>
-              <div>
-                <p className="font-medium text-gray-800 text-sm">Mail a Check</p>
-                <p className="text-xs text-gray-500">Payable to: Marietta Nepali Samaj</p>
-              </div>
+            <div>
+              <p className="font-medium text-gray-800 text-sm">Mail a Check</p>
+              <p className="text-xs text-gray-500">Payable to: Marietta Nepali Samaj</p>
             </div>
-            <div className="flex gap-3">
-              <span className="text-xl">🙌</span>
-              <div>
-                <p className="font-medium text-gray-800 text-sm">Volunteer</p>
-                <p className="text-xs text-gray-500">Give your time and talents to our events and programs.</p>
-              </div>
+            <div>
+              <p className="font-medium text-gray-800 text-sm">Volunteer</p>
+              <p className="text-xs text-gray-500">Give your time and talents to our events and programs.</p>
             </div>
-            <div className="flex gap-3">
-              <span className="text-xl">📢</span>
-              <div>
-                <p className="font-medium text-gray-800 text-sm">Spread the Word</p>
-                <p className="text-xs text-gray-500">Share our events and mission with your network.</p>
-              </div>
+            <div>
+              <p className="font-medium text-gray-800 text-sm">Spread the Word</p>
+              <p className="text-xs text-gray-500">Share our events and mission with your network.</p>
             </div>
           </div>
         </div>

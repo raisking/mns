@@ -5,12 +5,12 @@ import PageHero from '../../components/common/PageHero';
 import { schoolImage } from '../../data/mockData';
 
 const subjects = [
-  { icon: '🔤', title: 'Nepali Language', desc: 'Reading, writing, and speaking Nepali — from the alphabet to full sentences.' },
-  { icon: '🎭', title: 'Cultural Traditions', desc: 'Festivals, customs, rituals, and the stories that make Nepal unique.' },
-  { icon: '🎵', title: 'Music & Dance', desc: 'Traditional Nepali songs, folk music, and cultural dances.' },
-  { icon: '📜', title: 'History & Geography', desc: "Nepal's rich history, geography, and its place in the world." },
-  { icon: '🙏', title: 'Values & Character', desc: 'Respect, kindness, community spirit, and Nepali values.' },
-  { icon: '🎨', title: 'Arts & Crafts', desc: 'Traditional Nepali art forms, crafts, and creative expression.' },
+  { title: 'Nepali Language', desc: 'Reading, writing, and speaking Nepali — from the alphabet to full sentences.' },
+  { title: 'Cultural Traditions', desc: 'Festivals, customs, rituals, and the stories that make Nepal unique.' },
+  { title: 'Music & Dance', desc: 'Traditional Nepali songs, folk music, and cultural dances.' },
+  { title: 'History & Geography', desc: "Nepal's rich history, geography, and its place in the world." },
+  { title: 'Values & Character', desc: 'Respect, kindness, community spirit, and Nepali values.' },
+  { title: 'Arts & Crafts', desc: 'Traditional Nepali art forms, crafts, and creative expression.' },
 ];
 
 const scheduleRows = [
@@ -26,7 +26,7 @@ export default function School() {
   return (
     <>
       <PageHero
-        eyebrow="🎓 Education & Culture"
+        eyebrow="Education & Culture"
         title="Nepali School"
         subtitle="Building a bridge between two worlds — teaching the language, culture, and values of Nepal to the next generation."
         image={schoolImage}
@@ -67,10 +67,8 @@ export default function School() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader title="What We Teach" subtitle="A well-rounded Nepali education for our children." />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {subjects.map((item, i) => (
-              <div key={item.title} className="card-lift bg-white rounded-2xl p-6 relative overflow-hidden">
-                <span className={`absolute top-0 left-0 right-0 h-1 ${i % 2 === 0 ? 'bg-saffron' : 'bg-indigo'}`} aria-hidden="true" />
-                <span className="text-3xl mb-3 block" role="img" aria-label={item.title}>{item.icon}</span>
+            {subjects.map(item => (
+              <div key={item.title} className="card-lift bg-white rounded-2xl p-6">
                 <h3 className="font-bold text-ink mb-2">{item.title}</h3>
                 <p className="text-sm text-ink-soft leading-relaxed">{item.desc}</p>
               </div>
@@ -96,9 +94,7 @@ export default function School() {
           </section>
 
           <section className="border-l-4 border-saffron pl-6 bg-amber-50 rounded-r-xl py-6 pr-6">
-            <h3 className="font-bold text-ink mb-2">
-              <span aria-hidden="true">📸</span> Photo & Media Policy
-            </h3>
+            <h3 className="font-bold text-ink mb-2">Photo & Media Policy</h3>
             <p className="text-sm text-ink-soft leading-relaxed">
               We respect the privacy of all students and families. Photographs of school activities are shared only with appropriate consent. We do not publicly display student personal information such as home addresses, phone numbers, or birth dates. Parents may opt out of photography at any time by notifying a school administrator.
             </p>
@@ -107,7 +103,6 @@ export default function School() {
 
         {/* CTA */}
         <div className="text-center bg-gradient-to-br from-saffron to-saffron-dark rounded-2xl p-10 md:p-14 text-white">
-          <span className="text-4xl mb-4 block" role="img" aria-label="Graduation cap">🎓</span>
           <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सहयोग · Support</p>
           <h2 className="text-2xl md:text-3xl mb-4">Give Your Child the Gift of Their Heritage</h2>
           <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed">

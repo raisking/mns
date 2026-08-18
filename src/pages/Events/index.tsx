@@ -37,7 +37,6 @@ export default function Events() {
 
         {events.length === 0 ? (
           <EmptyState
-            icon={activeTab === 'upcoming' ? '📅' : '📷'}
             title={activeTab === 'upcoming' ? 'No Upcoming Events' : 'No Past Events'}
             message={
               activeTab === 'upcoming'

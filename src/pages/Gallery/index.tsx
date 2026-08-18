@@ -13,7 +13,7 @@ export default function Gallery() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {publicAlbums.length === 0 ? (
-          <EmptyState icon="🖼️" title="No Albums Yet" message="Photo albums will appear here as they are added." />
+          <EmptyState title="No Albums Yet" message="Photo albums will appear here as they are added." />
         ) : (
           <>
             <SectionHeader title="Photo Albums" subtitle={`${publicAlbums.length} albums`} />

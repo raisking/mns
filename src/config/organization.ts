@@ -14,6 +14,10 @@ export const organization = {
 export const socialLinks = {
   facebook: 'https://www.facebook.com/profile.php?id=61584445633390',
   youtube: 'https://www.youtube.com',
+  // Empty on purpose — no real Instagram account/handle yet. SocialIcons
+  // (src/components/common/SocialIcons.tsx) skips any platform with a
+  // falsy URL here, so this just stays hidden everywhere until a real
+  // profile URL is set.
   instagram: '',
 };
 

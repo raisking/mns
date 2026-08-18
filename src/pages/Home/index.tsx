@@ -45,7 +45,6 @@ export default function Home() {
           onClick={() => setShoutoutOpen(true)}
           className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 bg-saffron hover:bg-saffron-dark text-white text-sm font-semibold pl-3 pr-4 py-2.5 rounded-full shadow-lg transition-colors"
         >
-          <span className="text-base" aria-hidden="true">🎉</span>
           Shoutouts
         </button>
       )}
@@ -133,12 +132,12 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent pointer-events-none" />
                 <div className="absolute top-4 left-4">
                   <div className="inline-flex items-center gap-1.5 bg-marigold text-ink text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-full shadow-sm">
-                    ⭐ MNS's Most Active Program
+                    MNS's Most Active Program
                   </div>
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="bg-white/95 rounded-xl p-3 shadow">
-                    <p className="text-sm font-bold text-ink">🎓 Nepali Language & Culture</p>
+                    <p className="text-sm font-bold text-ink">Nepali Language & Culture</p>
                     <p className="text-xs text-ink-soft mt-0.5">Teaching the next generation their heritage</p>
                   </div>
                 </div>
@@ -208,10 +207,8 @@ export default function Home() {
               <Button to="/about" variant="primary">Learn More About Us</Button>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              {objectives.map((obj, i) => (
-                <div key={obj.title} className="card-lift bg-paper-deep rounded-2xl p-5 relative overflow-hidden">
-                  <span className={`absolute top-0 left-0 right-0 h-1 ${i % 2 === 0 ? 'bg-saffron' : 'bg-indigo'}`} aria-hidden="true" />
-                  <span className="text-3xl mb-3 block" role="img" aria-label={obj.title}>{obj.icon}</span>
+              {objectives.map(obj => (
+                <div key={obj.title} className="card-lift bg-paper-deep rounded-2xl p-5">
                   <h3 className="text-ink mb-1">
                     {obj.title} <span className="text-ink-soft/60 font-normal">· {obj.titleNp}</span>
                   </h3>
@@ -308,7 +305,6 @@ export default function Home() {
       {/* Donation CTA */}
       <section className="py-16 md:py-20 bg-gradient-to-br from-saffron to-saffron-dark text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="text-4xl mb-4 block" role="img" aria-label="Heart">❤️</span>
           <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">धन्यवाद · Thank You</p>
           <h2 className="text-3xl md:text-4xl mb-4">Support Our Community</h2>
           <p className="text-lg text-white/85 mb-10 max-w-2xl mx-auto leading-relaxed">

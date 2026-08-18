@@ -35,7 +35,7 @@ src/
   components/
     common/          Shared UI: Button, SectionHeader, PageHero, Emblem-
                       style bits, EmptyState, LoadingSpinner, ShoutoutModal,
-                      ImageCarousel
+                      ImageCarousel, SocialIcons
     contact/         ContactForm, TurnstileWidget (+ tests)
     events/          EventCard
     gallery/         AlbumCard
@@ -171,6 +171,22 @@ templated" details — reuse these instead of inventing new ones):
   badge/gradient/caption overlaid as siblings around it, unchanged from
   when that spot held a single `<img>`. Write honest per-slide `alt` text
   — don't caption a generic stock photo as if it were a real MNS moment.
+- `SocialIcons` (`variant: 'dark' | 'light'`): real Facebook/YouTube/
+  Instagram brand-mark SVGs (not generic icons), one `<a>` per platform
+  present in `socialLinks` (`src/config/organization.ts`) — add a
+  platform there and it appears everywhere `SocialIcons` is used, no
+  per-page wiring. `dark` = small white-on-white/10 circles (Footer),
+  `light` = larger saffron-on-amber-50 circles (Contact page's "Get in
+  Touch"). Reuse this instead of duplicating the brand SVG paths again.
+
+**No decorative emoji icons.** The site used to lean on emoji as
+lightweight icons throughout (card icons, badges, section eyebrows, CTA
+glyphs, empty-state placeholders) — all of that was deliberately removed.
+Where a slot still needs a real icon (like Contact's Location/Email/
+Follow Us rows), use an inline SVG matching the existing stroke-2
+`viewBox="0 0 24 24"` style, not an emoji. Bilingual Nepali/English text
+and the eyebrow/title/subtitle copy pattern are unaffected — this is
+about glyph-as-icon usage specifically, not the bilingual convention.
 
 ## Routes (`src/App.tsx`)
 

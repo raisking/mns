@@ -11,7 +11,6 @@ export default function AlbumDetail() {
   if (!album) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-        <span className="text-6xl mb-4">😕</span>
         <h2 className="text-2xl font-bold text-gray-900 mb-3">Album Not Found</h2>
         <Button to="/gallery">Back to Gallery</Button>
       </div>

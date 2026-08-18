@@ -102,7 +102,6 @@ export default function ShoutoutModal({ open, onClose, shoutouts, month }: Shout
 
         <div className="p-6 sm:p-8">
           <div className="text-center mb-6">
-            <span className="text-4xl mb-3 block" role="img" aria-label="Celebration">🎉</span>
             <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-2">{month} · शाबास</p>
             <h2 id="shoutout-modal-title" className="text-2xl sm:text-3xl text-ink">
               Community Shoutouts

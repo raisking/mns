@@ -15,7 +15,6 @@ export default function EventDetail() {
   if (!event) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-        <span className="text-6xl mb-4">😕</span>
         <h2 className="text-2xl font-bold text-gray-900 mb-3">Event Not Found</h2>
         <p className="text-gray-500 mb-6">The event you're looking for doesn't exist or has been removed.</p>
         <Button to="/events" variant="primary">View All Events</Button>

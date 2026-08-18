@@ -182,25 +182,21 @@ export const pastPresidents: PastPresident[] = [
 
 export const objectives = [
   {
-    icon: '🤝',
     title: 'Community',
     titleNp: 'समुदाय',
     description: 'Strengthen relationships within the Nepali community and support families in Marietta and surrounding areas.',
   },
   {
-    icon: '🪔',
     title: 'Culture',
     titleNp: 'संस्कृति',
     description: 'Preserve and celebrate Nepali culture, traditions, festivals, music, and arts for future generations.',
   },
   {
-    icon: '📚',
     title: 'Education',
     titleNp: 'शिक्षा',
     description: 'Promote Nepali language education through our Nepali School and support academic excellence among our youth.',
   },
   {
-    icon: '🙌',
     title: 'Service',
     titleNp: 'सेवा',
     description: 'Organize volunteer programs and provide community assistance to those in need.',

@@ -95,7 +95,6 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center" role="status">
-        <span className="text-4xl mb-3 block">✅</span>
         <h3 className="font-bold text-green-800 text-lg mb-2">Message Sent!</h3>
         <p className="text-green-700">
           Thank you for contacting Marietta Nepali Samaj.
