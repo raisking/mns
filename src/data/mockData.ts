@@ -22,12 +22,17 @@ const PERSON_IMG2 = 'https://images.unsplash.com/photo-1494790108377-be9c29b2933
 const PERSON_IMG3 = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80';
 const PERSON_IMG4 = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80';
 const PERSON_IMG5 = 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80';
-const GALLERY1 = 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80';
-const GALLERY2 = 'https://images.unsplash.com/photo-1601758174493-49e52f2e5e4d?w=600&q=80';
-const GALLERY3 = 'https://images.unsplash.com/photo-1513623935135-c896b59073c1?w=600&q=80';
-const GALLERY4 = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80';
-const GALLERY5 = 'https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?w=600&q=80';
-const GALLERY6 = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80';
+// Nepal-specific replacements for the previous generic/off-theme set (a
+// Japanese lantern street, a dead 404 link, a Western wedding table, a
+// tropical resort, a burger, and an unrelated mountain range — none of
+// which read as "Marietta Nepali Samaj"). Every URL below was verified
+// with a live HTTP 200 and eyeballed before use.
+const GALLERY1 = 'https://images.unsplash.com/photo-1550642249-b715bc35f898?w=600&q=80'; // Patan Durbar Square, Nepal's flag flying over the crowd
+const GALLERY2 = 'https://images.unsplash.com/photo-1513614835783-51537729c8ba?w=600&q=80'; // Prayer flags strung across a Himalayan mountain stream
+const GALLERY3 = 'https://images.unsplash.com/photo-1763733594205-4a48978cd5e6?w=600&q=80'; // Girls in traditional dress performing a folk dance on stage
+const GALLERY4 = 'https://images.unsplash.com/photo-1770904336762-6ff2ecdab4d1?w=600&q=80'; // Boy with a red tika on his forehead, smiling
+const GALLERY5 = 'https://images.unsplash.com/photo-1648298470994-7065f521375c?w=600&q=80'; // Pashupatinath Temple's golden pagoda roofs, Kathmandu
+const GALLERY6 = 'https://images.unsplash.com/photo-1507743617593-0a422c9bb7f5?w=600&q=80'; // Kathmandu Durbar Square temple at dusk
 
 export const heroImage = HERO_IMG;
 export const communityImage = COMMUNITY_IMG;
