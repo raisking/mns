@@ -6,12 +6,13 @@ import type { SchoolStaffMember } from '../types/SchoolStaff';
 import heroBanner from '../assets/nepali-school-banner.png';
 import dashain2026Img from '../assets/dashain2026.png';
 import prakashKhattriImg from '../assets/prakash_khattri.jpg';
+import languageCultureImg from '../assets/language_culture.jpeg';
 
 // Unsplash placeholder images — these will be replaced with real R2 URLs
 const HERO_IMG = heroBanner;
 const PRINCIPAL_IMG = prakashKhattriImg; // real photo — not a placeholder
 const COMMUNITY_IMG = 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80';
-const SCHOOL_IMG = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80';
+const SCHOOL_IMG = languageCultureImg; // real photo — not a placeholder
 const EVENT1_IMG = 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80';
 const EVENT2_IMG = 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80';
 const EVENT3_IMG = 'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=800&q=80';
