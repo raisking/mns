@@ -113,8 +113,8 @@ export default function Header() {
                   <button
                     className={`flex items-center gap-1 px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
                       openDropdown === item.label || item.children.some(c => c.to === location.pathname)
-                        ? 'text-crimson border-crimson'
-                        : 'text-gray-700 border-transparent hover:text-crimson hover:border-crimson/30'
+                        ? 'text-saffron border-saffron'
+                        : 'text-gray-700 border-transparent hover:text-saffron hover:border-saffron/30'
                     }`}
                     onClick={() => toggleDropdown(item.label)}
                     aria-expanded={openDropdown === item.label}
@@ -142,7 +142,7 @@ export default function Header() {
                   >
                     <div className="bg-white rounded-xl shadow-xl ring-1 ring-black/5 overflow-hidden">
                       <div className="h-0.5 flex" aria-hidden="true">
-                        <span className="w-2/3 bg-crimson" />
+                        <span className="w-2/3 bg-saffron" />
                         <span className="w-1/3 bg-indigo" />
                       </div>
                       <div className="py-1.5">
@@ -152,14 +152,14 @@ export default function Header() {
                             to={child.to}
                             className={({ isActive }) =>
                               `group flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
-                                isActive ? 'text-crimson bg-crimson/5 font-medium' : 'text-gray-700 hover:bg-gray-50 hover:text-crimson'
+                                isActive ? 'text-saffron bg-saffron/5 font-medium' : 'text-gray-700 hover:bg-gray-50 hover:text-saffron'
                               }`
                             }
                             onClick={() => setOpenDropdown(null)}
                           >
                             {({ isActive }) => (
                               <>
-                                <span className={`w-1 h-1 rounded-full flex-shrink-0 transition-colors ${isActive ? 'bg-crimson' : 'bg-gray-300 group-hover:bg-crimson'}`} aria-hidden="true" />
+                                <span className={`w-1 h-1 rounded-full flex-shrink-0 transition-colors ${isActive ? 'bg-saffron' : 'bg-gray-300 group-hover:bg-saffron'}`} aria-hidden="true" />
                                 {child.label}
                               </>
                             )}
@@ -177,7 +177,7 @@ export default function Header() {
                   onClick={item.to === '/' ? goHome : undefined}
                   className={({ isActive }) =>
                     `px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
-                      isActive ? 'text-crimson font-semibold border-crimson' : 'text-gray-700 border-transparent hover:text-crimson hover:border-crimson/30'
+                      isActive ? 'text-saffron font-semibold border-saffron' : 'text-gray-700 border-transparent hover:text-saffron hover:border-saffron/30'
                     }`
                   }
                 >
@@ -198,7 +198,7 @@ export default function Header() {
 
             {/* Hamburger */}
             <button
-              className="lg:hidden p-2 rounded-md text-gray-700 hover:text-crimson hover:bg-gray-100 transition-colors"
+              className="lg:hidden p-2 rounded-md text-gray-700 hover:text-saffron hover:bg-gray-100 transition-colors"
               onClick={() => setMobileOpen(prev => !prev)}
               aria-label="Toggle navigation menu"
               aria-expanded={mobileOpen}
@@ -227,8 +227,8 @@ export default function Header() {
                   <button
                     className={`w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${
                       openDropdown === item.label || item.children.some(c => c.to === location.pathname)
-                        ? 'text-crimson bg-crimson/5'
-                        : 'text-gray-700 hover:text-crimson hover:bg-gray-50'
+                        ? 'text-saffron bg-saffron/5'
+                        : 'text-gray-700 hover:text-saffron hover:bg-gray-50'
                     }`}
                     onClick={() => toggleDropdown(item.label)}
                     aria-expanded={openDropdown === item.label}
@@ -245,14 +245,14 @@ export default function Header() {
                       measured pixel value, and collapses cleanly to 0. */}
                   <div className={`grid transition-all duration-200 ${openDropdown === item.label ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
                     <div className="overflow-hidden">
-                      <div className="ml-4 mt-1 mb-1 space-y-0.5 border-l-2 border-crimson/20 pl-4">
+                      <div className="ml-4 mt-1 mb-1 space-y-0.5 border-l-2 border-saffron/20 pl-4">
                         {item.children.map(child => (
                           <NavLink
                             key={child.to}
                             to={child.to}
                             className={({ isActive }) =>
                               `block px-3 py-2 text-sm rounded-md transition-colors ${
-                                isActive ? 'text-crimson font-medium bg-crimson/5' : 'text-gray-600 hover:text-crimson hover:bg-gray-50'
+                                isActive ? 'text-saffron font-medium bg-saffron/5' : 'text-gray-600 hover:text-saffron hover:bg-gray-50'
                               }`
                             }
                             onClick={closeMobile}
@@ -271,7 +271,7 @@ export default function Header() {
                   end={item.to === '/'}
                   className={({ isActive }) =>
                     `block px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${
-                      isActive ? 'text-crimson font-semibold bg-crimson/5' : 'text-gray-700 hover:text-crimson hover:bg-gray-50'
+                      isActive ? 'text-saffron font-semibold bg-saffron/5' : 'text-gray-700 hover:text-saffron hover:bg-gray-50'
                     }`
                   }
                   onClick={() => { closeMobile(); if (item.to === '/') goHome(); }}

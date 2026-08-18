@@ -140,34 +140,34 @@ export default function ContactForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">
-            Full Name <span className="text-crimson">*</span>
+            Full Name <span className="text-saffron">*</span>
           </label>
           <input
             id="name" name="name" type="text" required
             value={form.name} onChange={handleChange}
             aria-invalid={Boolean(errors.fullName)}
             aria-describedby={errors.fullName ? 'name-error' : undefined}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-crimson focus:border-transparent transition"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-saffron focus:border-transparent transition"
             placeholder="Your name"
           />
           {errors.fullName && (
-            <p id="name-error" className="mt-1.5 text-xs text-crimson">{errors.fullName}</p>
+            <p id="name-error" className="mt-1.5 text-xs text-saffron">{errors.fullName}</p>
           )}
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
-            Email Address <span className="text-crimson">*</span>
+            Email Address <span className="text-saffron">*</span>
           </label>
           <input
             id="email" name="email" type="email" required
             value={form.email} onChange={handleChange}
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? 'email-error' : undefined}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-crimson focus:border-transparent transition"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-saffron focus:border-transparent transition"
             placeholder="your@email.com"
           />
           {errors.email && (
-            <p id="email-error" className="mt-1.5 text-xs text-crimson">{errors.email}</p>
+            <p id="email-error" className="mt-1.5 text-xs text-saffron">{errors.email}</p>
           )}
         </div>
       </div>
@@ -181,24 +181,24 @@ export default function ContactForm() {
           value={form.phone} onChange={handleChange}
           aria-invalid={Boolean(errors.phone)}
           aria-describedby={errors.phone ? 'phone-error' : undefined}
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-crimson focus:border-transparent transition"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-saffron focus:border-transparent transition"
           placeholder="+1 (555) 000-0000"
         />
         {errors.phone && (
-          <p id="phone-error" className="mt-1.5 text-xs text-crimson">{errors.phone}</p>
+          <p id="phone-error" className="mt-1.5 text-xs text-saffron">{errors.phone}</p>
         )}
       </div>
 
       <div>
         <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Subject <span className="text-crimson">*</span>
+          Subject <span className="text-saffron">*</span>
         </label>
         <select
           id="subject" name="subject" required
           value={form.subject} onChange={handleChange}
           aria-invalid={Boolean(errors.subject)}
           aria-describedby={errors.subject ? 'subject-error' : undefined}
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-crimson focus:border-transparent transition bg-white"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-saffron focus:border-transparent transition bg-white"
         >
           <option value="">Select a subject</option>
           {contactSubjects.map(subject => (
@@ -206,24 +206,24 @@ export default function ContactForm() {
           ))}
         </select>
         {errors.subject && (
-          <p id="subject-error" className="mt-1.5 text-xs text-crimson">{errors.subject}</p>
+          <p id="subject-error" className="mt-1.5 text-xs text-saffron">{errors.subject}</p>
         )}
       </div>
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1.5">
-          Message <span className="text-crimson">*</span>
+          Message <span className="text-saffron">*</span>
         </label>
         <textarea
           id="message" name="message" required rows={5}
           value={form.message} onChange={handleChange}
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? 'message-error' : undefined}
-          className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-crimson focus:border-transparent transition resize-none"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-saffron focus:border-transparent transition resize-none"
           placeholder="How can we help you?"
         />
         {errors.message && (
-          <p id="message-error" className="mt-1.5 text-xs text-crimson">{errors.message}</p>
+          <p id="message-error" className="mt-1.5 text-xs text-saffron">{errors.message}</p>
         )}
       </div>
 
@@ -237,7 +237,7 @@ export default function ContactForm() {
             onError={() => setTurnstileError(true)}
           />
           {turnstileError && (
-            <p className="mt-1.5 text-xs text-crimson" role="alert">
+            <p className="mt-1.5 text-xs text-saffron" role="alert">
               Please complete the verification challenge.
             </p>
           )}

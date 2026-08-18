@@ -20,8 +20,8 @@ export default function SchoolTeam() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Quick nav */}
         <div className="flex flex-wrap gap-3 justify-center mb-12">
-          <Link to="/nepali-school" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-crimson hover:text-crimson transition-colors">School Overview</Link>
-          <Link to="/nepali-school/about" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-crimson hover:text-crimson transition-colors">About the School</Link>
+          <Link to="/nepali-school" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-saffron hover:text-saffron transition-colors">School Overview</Link>
+          <Link to="/nepali-school/about" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-saffron hover:text-saffron transition-colors">About the School</Link>
           <span className="px-5 py-2.5 bg-ink text-white text-sm font-semibold rounded-lg cursor-default">Meet Our Team</span>
         </div>
 

@@ -18,8 +18,8 @@ export default function School() {
         {/* Quick nav */}
         <div className="flex flex-wrap gap-3 justify-center mb-12">
           <span className="px-5 py-2.5 bg-ink text-white text-sm font-semibold rounded-lg cursor-default">School Overview</span>
-          <Link to="/nepali-school/about" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-crimson hover:text-crimson transition-colors">About the School</Link>
-          <Link to="/nepali-school/team" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-crimson hover:text-crimson transition-colors">Meet Our Team</Link>
+          <Link to="/nepali-school/about" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-saffron hover:text-saffron transition-colors">About the School</Link>
+          <Link to="/nepali-school/team" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-saffron hover:text-saffron transition-colors">Meet Our Team</Link>
         </div>
 
         {/* What We Teach */}
@@ -66,7 +66,7 @@ export default function School() {
         </section>
 
         {/* Media consent notice */}
-        <section className="mb-20 border-l-4 border-crimson pl-6 bg-red-50 rounded-r-xl py-5 pr-5">
+        <section className="mb-20 border-l-4 border-saffron pl-6 bg-amber-50 rounded-r-xl py-5 pr-5">
           <h3 className="font-bold text-gray-900 mb-2">📸 Photo & Media Policy</h3>
           <p className="text-sm text-gray-600 leading-relaxed">
             We respect the privacy of all students and families. Photographs of school activities are shared only with appropriate consent. We do not publicly display student personal information such as home addresses, phone numbers, or birth dates. Parents may opt out of photography at any time by notifying a school administrator.
@@ -74,7 +74,7 @@ export default function School() {
         </section>
 
         {/* CTA */}
-        <div className="text-center bg-gradient-to-br from-crimson to-crimson-dark rounded-2xl p-10 md:p-14 text-white">
+        <div className="text-center bg-gradient-to-br from-saffron to-saffron-dark rounded-2xl p-10 md:p-14 text-white">
           <span className="text-4xl mb-4 block" role="img" aria-label="Graduation cap">🎓</span>
           <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सहयोग · Support</p>
           <h2 className="text-2xl md:text-3xl mb-4">Give Your Child the Gift of Their Heritage</h2>
@@ -82,7 +82,7 @@ export default function School() {
             Enroll your child in the Marietta Nepali School today and help them stay connected to the beautiful culture and language of Nepal.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button to="/contact" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-crimson">Contact to Enroll</Button>
+            <Button to="/contact" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-saffron">Contact to Enroll</Button>
             <Button to="/donate?purpose=school" size="lg" variant="light">Support the School</Button>
           </div>
         </div>

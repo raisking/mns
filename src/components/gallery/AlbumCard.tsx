@@ -32,7 +32,7 @@ export default function AlbumCard({ album }: AlbumCardProps) {
           </div>
         </div>
         <div className="p-4">
-          <h3 className="text-base text-ink line-clamp-1 group-hover:text-crimson transition-colors">
+          <h3 className="text-base text-ink line-clamp-1 group-hover:text-saffron transition-colors">
             {album.title}
           </h3>
           {date && <p className="text-sm text-ink-soft/80 mt-1">{date}</p>}

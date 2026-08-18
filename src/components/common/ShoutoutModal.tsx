@@ -9,7 +9,7 @@ interface ShoutoutModalProps {
 }
 
 const categoryStyles: Record<Shoutout['category'], string> = {
-  Member: 'bg-crimson/10 text-crimson',
+  Member: 'bg-saffron/10 text-saffron',
   Student: 'bg-indigo/10 text-indigo',
   Volunteer: 'bg-marigold/25 text-ink',
 };
@@ -82,10 +82,10 @@ export default function ShoutoutModal({ open, onClose, shoutouts, month }: Shout
         aria-labelledby="shoutout-modal-title"
         className="animate-modal-in relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
       >
-        {/* Two-tone accent bar — the same crimson/indigo signature used
+        {/* Two-tone accent bar — the same saffron/indigo signature used
             throughout the site's section headers. */}
         <div className="h-1.5 flex sticky top-0" aria-hidden="true">
-          <span className="w-2/3 bg-crimson" />
+          <span className="w-2/3 bg-saffron" />
           <span className="w-1/3 bg-indigo" />
         </div>
 
@@ -103,7 +103,7 @@ export default function ShoutoutModal({ open, onClose, shoutouts, month }: Shout
         <div className="p-6 sm:p-8">
           <div className="text-center mb-6">
             <span className="text-4xl mb-3 block" role="img" aria-label="Celebration">🎉</span>
-            <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-2">{month} · शाबास</p>
+            <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-2">{month} · शाबास</p>
             <h2 id="shoutout-modal-title" className="text-2xl sm:text-3xl text-ink">
               Community Shoutouts
             </h2>

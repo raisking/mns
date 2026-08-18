@@ -11,8 +11,8 @@ export default function President() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex flex-wrap gap-3 mb-10">
           <span className="px-5 py-2.5 bg-ink text-white text-sm font-semibold rounded-lg cursor-default">President</span>
-          <Link to="/leadership" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-crimson hover:text-crimson transition-colors">Executive Committee</Link>
-          <Link to="/leadership/past-presidents" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-crimson hover:text-crimson transition-colors">Past Presidents</Link>
+          <Link to="/leadership" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-saffron hover:text-saffron transition-colors">Executive Committee</Link>
+          <Link to="/leadership/past-presidents" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-saffron hover:text-saffron transition-colors">Past Presidents</Link>
         </div>
 
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -25,7 +25,7 @@ export default function President() {
               />
             </div>
             <div className="p-8 md:p-12 flex flex-col justify-center">
-              <span className="text-sm font-semibold text-crimson uppercase tracking-wider">{president.position}</span>
+              <span className="text-sm font-semibold text-saffron uppercase tracking-wider">{president.position}</span>
               <h2 className="text-3xl mt-2 mb-6 text-ink">{president.name}</h2>
 
               <div className="prose prose-gray max-w-none">

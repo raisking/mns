@@ -18,19 +18,20 @@ interface ButtonProps {
 
 // Indigo (the flag's border color) carries the primary action — red reads as
 // "stop/danger" in UI convention, which fights a Donate/Submit/Contact button.
-// Crimson (the flag's field) stays the accent throughout the rest of the
-// site — headings, the emblem, section markers — so the flag identity isn't
-// lost, it's just no longer doing double duty as "the button color".
+// Warm saffron (sindoor/tika powder, not the flag's literal crimson field)
+// stays the accent throughout the rest of the site — headings, section
+// markers — so the Nepali cultural grounding isn't lost, it's just warmer
+// than the flag-red original and no longer doubles as "the button color".
 const variantClasses: Record<Variant, string> = {
   primary: 'bg-indigo hover:bg-indigo-dark text-white shadow-sm',
-  secondary: 'bg-crimson hover:bg-crimson-dark text-white shadow-sm',
+  secondary: 'bg-saffron hover:bg-saffron-dark text-white shadow-sm',
   accent: 'bg-marigold hover:bg-marigold-light text-ink shadow-sm',
   // Solid white — for a high-contrast button ON a saturated color
-  // background (e.g. a crimson CTA banner). Don't try to get this look by
+  // background (e.g. a saffron CTA banner). Don't try to get this look by
   // overriding primary/secondary/accent's className instead: those set
   // their own bg-*/text-* utilities, and Tailwind's cascade order isn't
   // guaranteed to favor a later className override for the same property.
-  light: 'bg-white hover:bg-paper-deep text-crimson shadow-sm',
+  light: 'bg-white hover:bg-paper-deep text-saffron shadow-sm',
   outline: 'border-2 border-indigo text-indigo hover:bg-indigo hover:text-white',
   ghost: 'text-indigo hover:bg-indigo/10',
 };

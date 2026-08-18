@@ -53,7 +53,7 @@ export default function AlbumDetail() {
             <button
               key={i}
               onClick={() => setLightboxIndex(i)}
-              className="group relative aspect-square overflow-hidden rounded-xl bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson"
+              className="group relative aspect-square overflow-hidden rounded-xl bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron"
               aria-label={`View photo ${i + 1}`}
             >
               <img

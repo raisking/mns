@@ -31,12 +31,12 @@ export default function Objectives() {
               className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0">
                   <span className="text-2xl" role="img" aria-label={obj.title}>{obj.icon}</span>
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-bold text-crimson bg-red-50 px-2 py-0.5 rounded-full">
+                    <span className="text-xs font-bold text-saffron bg-amber-50 px-2 py-0.5 rounded-full">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   </div>

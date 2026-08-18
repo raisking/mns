@@ -84,19 +84,19 @@ not generic template defaults. See the color/type rationale comments
 directly in `src/index.css`.
 
 **Color tokens** (`@theme` in `src/index.css`, so they're plain Tailwind
-utilities — `bg-crimson`, `text-ink-soft`, etc.):
+utilities — `bg-saffron`, `text-ink-soft`, etc.):
 
 | Token | Hex | Meaning | Use |
 |---|---|---|---|
-| `crimson` / `crimson-dark` | `#c8102e` / `#970e23` | Nepal flag's field | Accent color: headings, section markers, secondary buttons |
+| `saffron` / `saffron-dark` | `#b45309` / `#92400e` | Sindoor/tika-powder warmth | Accent color: headings, section markers, secondary buttons. Replaced the flag's literal crimson field (`#c8102e`) — that red read as cold "stop/danger" rather than festive; saffron keeps the ~5:1 text contrast crimson had while feeling warmer. Any literal `red-*` Tailwind class paired with it was swapped to the matching `amber-*` shade at the same time, except the genuine form-failure error banner in `ContactForm.tsx`, which keeps semantic red on purpose |
 | `indigo` / `indigo-dark` | `#003893` / `#00265f` | Nepal flag's border | **Primary action color** (buttons) — red reads as "danger" for CTAs, so indigo carries Donate/Submit/Contact |
 | `marigold` / `marigold-light` | `#e7a33e` / `#f2c374` | Tika/garland gold | Accent only on dark surfaces — fails contrast as text on light backgrounds, verified via WCAG math when introduced |
 | `ink` / `ink-soft` | `#241712` / `#5c4a3d` | — | Body text (replaces generic `gray-900`/`gray-600`) |
 | `paper` / `paper-deep` | `#fbf6ec` / `#f1e4c9` | Lokta paper | Backgrounds (replaces generic `white`/`gray-50`) |
 
-Older pages still have some literal `gray-*`/`red-*` Tailwind classes from
-before this palette existed — not wrong, just not using the named tokens.
-Prefer the tokens above for anything new.
+Older pages still have some literal `gray-*` Tailwind classes from before
+this palette existed — not wrong, just not using the named tokens. Prefer
+the tokens above for anything new.
 
 **Type**: `font-display` = Baloo 2 (headings — applied automatically to
 every `h1`–`h4` via the base layer, don't add the class by hand),
@@ -110,21 +110,21 @@ templated" details — reuse these instead of inventing new ones):
 - `.pennant-edge` — clip-path notch echoing Nepal's flag silhouette (the
   world's only non-rectangular national flag). Used once, on the Home
   hero's bottom edge.
-- Two-tone crimson/indigo rule — `SectionHeader`'s underline, and the top
+- Two-tone saffron/indigo rule — `SectionHeader`'s underline, and the top
   accent bar in dropdown menus and `ShoutoutModal`.
 - Bilingual "Nepali · English" eyebrow labels (`SectionHeader`'s
   `eyebrow` prop, or hand-written where `SectionHeader` isn't used) —
   short, well-established words/phrases only, not composed sentences
   (translation-accuracy risk).
-- `.card-lift` — crimson-tinted hover shadow instead of generic gray, for
+- `.card-lift` — saffron-tinted hover shadow instead of generic gray, for
   card components.
 
 **Component conventions**:
 - `Button` (`src/components/common/Button.tsx`): variants `primary`
-  (indigo — the default action color), `secondary` (crimson), `accent`
+  (indigo — the default action color), `secondary` (saffron), `accent`
   (marigold, for celebratory contexts like the Donate CTA), `light` (solid
   white — for a high-contrast button on a saturated color background,
-  e.g. a crimson CTA card), `outline`, `ghost`. Renders `<Link>` if `to`
+  e.g. a saffron CTA card), `outline`, `ghost`. Renders `<Link>` if `to`
   is set, `<a>` if `href` is set, otherwise `<button>` — `onClick` is
   forwarded in all three cases.
   **Never fake a variant's look by overriding `primary`/`secondary`/
@@ -139,9 +139,9 @@ templated" details — reuse these instead of inventing new ones):
   override this way, since they don't set a base `bg-*` to fight with.
 - `SectionHeader`: `eyebrow`/`title`/`subtitle`/`centered`/`light` props —
   use `light` on dark-background sections so the eyebrow renders in
-  marigold instead of crimson (contrast-driven, not arbitrary).
+  marigold instead of saffron (contrast-driven, not arbitrary).
 - `PageHero`: shared hero banner for inner pages (`eyebrow`/`title`/
-  `subtitle`/optional `image`), ink background with a crimson radial
+  `subtitle`/optional `image`), ink background with a saffron radial
   glow. Used by About/Objectives/Leadership/School/Events/Gallery/Contact
   — EventDetail and AlbumDetail have bespoke hero markup instead (they
   need back-links/dynamic photo content `PageHero` doesn't support).
@@ -160,7 +160,7 @@ own).
 **Sub-page pattern** (Leadership, now Nepali School too): the index route
 keeps its own distinct content and a quick-nav pill row (current page as
 a plain `bg-ink` span, siblings as `bg-white border-gray-200` links,
-`hover:border-crimson hover:text-crimson`) linking to sibling pages that
+`hover:border-saffron hover:text-saffron`) linking to sibling pages that
 each own one slice of content — never duplicate a section across two of
 these pages. The corresponding Header dropdown lists all of them,
 including the index page itself as one of the children (see

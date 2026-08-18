@@ -42,7 +42,7 @@ export default function Home() {
       {!shoutoutOpen && (
         <button
           onClick={() => setShoutoutOpen(true)}
-          className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 bg-crimson hover:bg-crimson-dark text-white text-sm font-semibold pl-3 pr-4 py-2.5 rounded-full shadow-lg transition-colors"
+          className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 bg-saffron hover:bg-saffron-dark text-white text-sm font-semibold pl-3 pr-4 py-2.5 rounded-full shadow-lg transition-colors"
         >
           <span className="text-base" aria-hidden="true">🎉</span>
           Shoutouts
@@ -126,7 +126,7 @@ export default function Home() {
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-3">नेपाली पाठशाला · Nepali School</p>
+              <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-3">नेपाली पाठशाला · Nepali School</p>
               <h2 className="text-3xl md:text-4xl text-ink mb-4">
                 Where Our Community Shows Up Every Week
               </h2>
@@ -142,7 +142,7 @@ export default function Home() {
                   { value: 'Free', label: 'For Families' },
                 ].map(stat => (
                   <div key={stat.label} className="bg-white rounded-xl p-3 text-center shadow-sm">
-                    <p className="text-lg font-display font-bold text-crimson leading-none">{stat.value}</p>
+                    <p className="text-lg font-display font-bold text-saffron leading-none">{stat.value}</p>
                     <p className="text-xs text-ink-soft mt-1">{stat.label}</p>
                   </div>
                 ))}
@@ -155,7 +155,7 @@ export default function Home() {
                   "Children's programs and activities",
                 ].map(item => (
                   <li key={item} className="flex items-center gap-3 text-ink-soft">
-                    <svg className="w-5 h-5 text-crimson flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-saffron flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     {item}
@@ -176,7 +176,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-3">हाम्रो समुदाय · Who We Are</p>
+              <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-3">हाम्रो समुदाय · Who We Are</p>
               <h2 className="text-3xl md:text-4xl text-ink mb-6">
                 A Home Away From Home for the Nepali Community
               </h2>
@@ -191,7 +191,7 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-4">
               {objectives.map((obj, i) => (
                 <div key={obj.title} className="card-lift bg-paper-deep rounded-2xl p-5 relative overflow-hidden">
-                  <span className={`absolute top-0 left-0 right-0 h-1 ${i % 2 === 0 ? 'bg-crimson' : 'bg-indigo'}`} aria-hidden="true" />
+                  <span className={`absolute top-0 left-0 right-0 h-1 ${i % 2 === 0 ? 'bg-saffron' : 'bg-indigo'}`} aria-hidden="true" />
                   <span className="text-3xl mb-3 block" role="img" aria-label={obj.title}>{obj.icon}</span>
                   <h3 className="text-ink mb-1">
                     {obj.title} <span className="text-ink-soft/60 font-normal">· {obj.titleNp}</span>
@@ -230,7 +230,7 @@ export default function Home() {
       </section>
 
       {/* Sponsor & Advertise CTA — indigo, the flag's border color, giving
-          this CTA its own identity apart from the crimson donation CTA. */}
+          this CTA its own identity apart from the saffron donation CTA. */}
       <section className="py-14 md:py-16 bg-indigo text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सहयोग · Sponsorship</p>
@@ -287,7 +287,7 @@ export default function Home() {
       </section>
 
       {/* Donation CTA */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-crimson to-crimson-dark text-white">
+      <section className="py-16 md:py-20 bg-gradient-to-br from-saffron to-saffron-dark text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="text-4xl mb-4 block" role="img" aria-label="Heart">❤️</span>
           <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">धन्यवाद · Thank You</p>
@@ -299,7 +299,7 @@ export default function Home() {
             <Button to="/donate" size="lg" variant="accent">
               Donate Now
             </Button>
-            <Button to="/donate?purpose=school" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-crimson">
+            <Button to="/donate?purpose=school" size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-saffron">
               Support Nepali School
             </Button>
           </div>

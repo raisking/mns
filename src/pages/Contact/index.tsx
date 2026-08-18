@@ -20,8 +20,8 @@ export default function Contact() {
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
             <div className="space-y-6 mb-8">
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <svg className="w-6 h-6 text-crimson" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg className="w-6 h-6 text-saffron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -34,30 +34,30 @@ export default function Contact() {
 
               {organization.email && (
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg className="w-6 h-6 text-crimson" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-saffron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">Email</p>
-                    <a href={`mailto:${organization.email}`} className="text-crimson hover:underline text-sm">{organization.email}</a>
+                    <a href={`mailto:${organization.email}`} className="text-saffron hover:underline text-sm">{organization.email}</a>
                   </div>
                 </div>
               )}
 
               <div className="flex gap-4">
-                <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0">
                   <span className="text-xl" role="img" aria-label="Connect">🌐</span>
                 </div>
                 <div>
                   <p className="font-semibold text-gray-900 mb-2">Follow Us</p>
                   <div className="flex gap-3">
                     {socialLinks.facebook && (
-                      <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-sm text-crimson hover:underline font-medium">Facebook</a>
+                      <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-sm text-saffron hover:underline font-medium">Facebook</a>
                     )}
                     {socialLinks.youtube && (
-                      <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="text-sm text-crimson hover:underline font-medium">YouTube</a>
+                      <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="text-sm text-saffron hover:underline font-medium">YouTube</a>
                     )}
                   </div>
                 </div>
@@ -73,7 +73,7 @@ export default function Contact() {
                   href="https://maps.google.com/?q=Marietta+Georgia"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-crimson hover:underline mt-1 inline-block"
+                  className="text-xs text-saffron hover:underline mt-1 inline-block"
                 >
                   View on Google Maps →
                 </a>

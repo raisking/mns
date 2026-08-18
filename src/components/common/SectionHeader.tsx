@@ -10,7 +10,7 @@ export default function SectionHeader({ eyebrow, title, subtitle, centered = tru
   return (
     <div className={`mb-10 ${centered ? 'text-center' : ''}`}>
       {eyebrow && (
-        <p className={`text-sm font-semibold uppercase tracking-wider mb-3 ${light ? 'text-marigold' : 'text-crimson'}`}>
+        <p className={`text-sm font-semibold uppercase tracking-wider mb-3 ${light ? 'text-marigold' : 'text-saffron'}`}>
           {eyebrow}
         </p>
       )}
@@ -22,9 +22,9 @@ export default function SectionHeader({ eyebrow, title, subtitle, centered = tru
           {subtitle}
         </p>
       )}
-      {/* Two-tone rule — the flag's crimson field and indigo border, side by side */}
+      {/* Two-tone rule — warm saffron accent and the flag's indigo border, side by side */}
       <div className={`mt-4 flex h-1 w-16 overflow-hidden rounded-full ${centered ? 'mx-auto' : ''}`}>
-        <span className="w-2/3 bg-crimson" />
+        <span className="w-2/3 bg-saffron" />
         <span className="w-1/3 bg-indigo" />
       </div>
     </div>

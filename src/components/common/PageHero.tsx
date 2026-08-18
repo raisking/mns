@@ -12,10 +12,10 @@ export default function PageHero({ eyebrow, title, subtitle, image }: PageHeroPr
       {image && (
         <img src={image} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-25" />
       )}
-      {/* Quiet radial glow of the flag's crimson, grounding the ink background */}
+      {/* Quiet radial glow of warm saffron, grounding the ink background */}
       <div
         className="absolute inset-0"
-        style={{ background: 'radial-gradient(ellipse at 20% 15%, rgba(200,16,46,0.35), transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 20% 15%, rgba(180,83,9,0.35), transparent 60%)' }}
         aria-hidden="true"
       />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

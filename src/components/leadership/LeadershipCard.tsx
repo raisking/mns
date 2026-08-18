@@ -17,7 +17,7 @@ export default function LeadershipCard({ member, featured = false }: LeadershipC
           />
         </div>
         <div className="p-8 flex flex-col justify-center">
-          <span className="text-sm font-semibold text-crimson uppercase tracking-wider">{member.position}</span>
+          <span className="text-sm font-semibold text-saffron uppercase tracking-wider">{member.position}</span>
           <h3 className="text-2xl mt-1 mb-3 text-ink">{member.name}</h3>
           {member.bio && <p className="text-ink-soft leading-relaxed">{member.bio}</p>}
         </div>
@@ -27,7 +27,7 @@ export default function LeadershipCard({ member, featured = false }: LeadershipC
 
   return (
     <div className="card-lift bg-white rounded-2xl p-6 text-center">
-      <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-crimson/10">
+      <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-saffron/10">
         <img
           src={member.photo || '/placeholder-person.jpg'}
           alt={member.name}
@@ -36,7 +36,7 @@ export default function LeadershipCard({ member, featured = false }: LeadershipC
         />
       </div>
       <h3 className="text-base text-ink">{member.name}</h3>
-      <p className="text-sm text-crimson font-medium mt-1">{member.position}</p>
+      <p className="text-sm text-saffron font-medium mt-1">{member.position}</p>
       {member.bio && <p className="text-sm text-ink-soft/80 mt-2 line-clamp-3">{member.bio}</p>}
     </div>
   );
