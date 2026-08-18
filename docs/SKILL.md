@@ -168,13 +168,34 @@ including the index page itself as one of the children (see
 
 ## Data model
 
-**Everything in `src/data/mockData.ts` is placeholder content** —
-events, albums, leadership bios, objectives, gallery photos, monthly
-shoutouts, school staff. Several images are still generic
-Unsplash stock photos (commented `// Unsplash placeholder images` in that
-file) rather than real photos of this community. When real content/photos
-become available, replace the relevant exports there; the components
-consuming them don't need to change.
+**Most of `src/data/mockData.ts` is still placeholder content** —
+events, leadership bios, objectives, monthly shoutouts, and most school
+staff (name/bio/photo) are invented. A few exports have been swapped for
+real content already, and the pattern is the same each time: import the
+real file from `src/assets/` and point the existing constant at it — the
+components consuming these exports don't change.
+- `PRINCIPAL_IMG`/the Principal's `schoolStaff` entry — real name
+  (Prakash Khatri) and real photo (`src/assets/prakash_khattri.jpg`).
+  The other five `schoolStaff` entries (teachers/volunteers) are still
+  invented names on generic Unsplash headshots.
+- `SCHOOL_IMG` (exported as `schoolImage`, used by the Home page's
+  "Nepali Language & Culture" card and all three School sub-page hero
+  banners) — a real classroom photo
+  (`src/assets/language_culture.jpeg`), not a stock photo.
+- `GALLERY1`–`GALLERY6` (`galleryPreviewPhotos`, also reused as four of
+  `mockAlbums`' cover photos) — still Unsplash, but swapped from
+  off-theme/broken stock to verified-live, visually-confirmed **Nepal**
+  photos (Durbar Square, Pashupatinath, prayer flags, tika, a school
+  dance performance) matched to whichever event each one doubles as the
+  cover for. Still not real MNS event photos — replace with actual
+  community photos first if any of these need updating again.
+
+Any other Unsplash URL still in this file (`COMMUNITY_IMG`,
+`EVENT1_IMG`–`EVENT3_IMG`, `PERSON_IMG`–`PERSON_IMG5`) is a generic,
+thematically-unverified placeholder — check before assuming it's
+accurate or even still live (Unsplash photo URLs do go dead; that's how
+the old `GALLERY2` was found broken). When real content/photos become
+available for these, replace the relevant exports the same way.
 
 `LeadershipCard` isn't just for org leadership — `SchoolStaffMember`
 (`src/types/SchoolStaff.ts`) is a superset of `LeadershipMember`'s shape
