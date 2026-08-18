@@ -159,6 +159,44 @@ identical to issue #4 above but had a different root cause. Fixed by
 killing both stale processes and starting a single fresh instance,
 confirming its actual port before trusting it.
 
+**This one recurred later** (multiple Vite/Wrangler processes had piled up
+over a long session), so here's the fast path to diagnose and fix it
+without re-deriving the above from scratch:
+
+*Symptom:* form shows "We could not send your message right now" even
+though everything's filled in correctly and Turnstile passed. Nothing
+about the code changed since it last worked.
+
+*Confirm it's this issue* (not a real bug) — call the Worker directly and
+compare the two origins:
+```bash
+# Should return {"success":false} with HTTP 403 if wrong, since it's
+# missing turnstileToken too — the point is just checking the status
+# code isn't 403 (Origin rejected) for a *matching* Origin:
+curl -s -w '\nHTTP %{http_code}\n' -X POST http://localhost:8787/api/contact \
+  -H "Content-Type: application/json" \
+  -H "Origin: http://localhost:5173" \
+  -d '{"fullName":"t","email":"t@t.com","subject":"General Inquiry","message":"t"}'
+```
+If that 403s even with the correct origin, or if `http://localhost:5173/`
+isn't reachable at all, stale processes are almost certainly the cause.
+
+*Fix — kill everything and start exactly one of each:*
+```powershell
+# List what's actually running (Windows) — look for duplicate
+# `npm run dev` / `wrangler dev` entries:
+Get-CimInstance Win32_Process -Filter "Name = 'node.exe'" | Select-Object ProcessId, CommandLine
+
+# Kill every one of them, then start fresh:
+Stop-Process -Id <id> -Force   # repeat for each node.exe PID above
+```
+```bash
+npm run dev          # confirm it lands on the port ALLOWED_ORIGIN expects (5173)
+npm run worker:dev    # separate terminal/process — reads .dev.vars automatically
+```
+Then reload the browser tab pointed at whatever port `npm run dev` printed
+— not whatever port an old tab happens to still be open to.
+
 ---
 
 ## Switching to production
