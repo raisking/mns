@@ -139,12 +139,22 @@ templated" details — reuse these instead of inventing new ones):
 ## Routes (`src/App.tsx`)
 
 `/`, `/about`, `/objectives`, `/leadership` (+ `/leadership/president`,
-`/leadership/past-presidents`), `/nepali-school`, `/events` (+
-`/events/:slug`), `/gallery` (+ `/gallery/:slug`), `/donate`, `/contact`,
-`/donation-success`, `/donation-cancelled`, `*` → NotFound. All nested
-under `Layout` (Header + `<Outlet>` + Footer). `ScrollToTop` resets scroll
-position on route change — see its file for why that's needed (React
-Router doesn't do this on its own).
+`/leadership/past-presidents`), `/nepali-school` (+ `/nepali-school/about`,
+`/nepali-school/team`), `/events` (+ `/events/:slug`), `/gallery` (+
+`/gallery/:slug`), `/donate`, `/contact`, `/donation-success`,
+`/donation-cancelled`, `*` → NotFound. All nested under `Layout` (Header +
+`<Outlet>` + Footer). `ScrollToTop` resets scroll position on route change
+— see its file for why that's needed (React Router doesn't do this on its
+own).
+
+**Sub-page pattern** (Leadership, now Nepali School too): the index route
+keeps its own distinct content and a quick-nav pill row (current page as
+a plain `bg-ink` span, siblings as `bg-white border-gray-200` links,
+`hover:border-crimson hover:text-crimson`) linking to sibling pages that
+each own one slice of content — never duplicate a section across two of
+these pages. The corresponding Header dropdown lists all of them,
+including the index page itself as one of the children (see
+`navItems` in `Header.tsx`).
 
 ## Data model
 

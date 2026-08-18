@@ -1,12 +1,8 @@
+import { Link } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import SectionHeader from '../../components/common/SectionHeader';
 import PageHero from '../../components/common/PageHero';
-import LeadershipCard from '../../components/leadership/LeadershipCard';
-import { schoolImage, schoolStaff } from '../../data/mockData';
-
-const principal = schoolStaff.find(s => s.category === 'Principal');
-const teachers = schoolStaff.filter(s => s.category === 'Teacher');
-const volunteers = schoolStaff.filter(s => s.category === 'Volunteer');
+import { schoolImage } from '../../data/mockData';
 
 export default function School() {
   return (
@@ -19,26 +15,12 @@ export default function School() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* About */}
-        <section className="grid md:grid-cols-2 gap-12 items-center mb-20">
-          <div>
-            <p className="text-sm font-semibold text-crimson uppercase tracking-wider mb-3">About the School</p>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Building a Bridge Between Two Worlds</h2>
-            <p className="text-gray-600 leading-relaxed mb-4">
-              The Marietta Nepali School, operated by Marietta Nepali Samaj, provides Nepali language education and cultural programs to children of Nepali families living in Marietta and surrounding areas.
-            </p>
-            <p className="text-gray-600 leading-relaxed mb-4">
-              Our school meets regularly with dedicated volunteer teachers who are passionate about passing on our language, traditions, and values to the next generation.
-            </p>
-            <p className="text-gray-600 leading-relaxed mb-8">
-              We believe that children who stay connected to their cultural roots grow up with a stronger sense of identity, pride, and belonging.
-            </p>
-            <Button to="/contact">Enroll Your Child</Button>
-          </div>
-          <div className="rounded-2xl overflow-hidden shadow-xl">
-            <img src={schoolImage} alt="Nepali School class" className="w-full h-80 object-cover" />
-          </div>
-        </section>
+        {/* Quick nav */}
+        <div className="flex flex-wrap gap-3 justify-center mb-12">
+          <span className="px-5 py-2.5 bg-ink text-white text-sm font-semibold rounded-lg cursor-default">School Overview</span>
+          <Link to="/nepali-school/about" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-crimson hover:text-crimson transition-colors">About the School</Link>
+          <Link to="/nepali-school/team" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-crimson hover:text-crimson transition-colors">Meet Our Team</Link>
+        </div>
 
         {/* What We Teach */}
         <section className="mb-20">
@@ -59,43 +41,6 @@ export default function School() {
               </div>
             ))}
           </div>
-        </section>
-
-        {/* Meet Our Team */}
-        <section className="mb-20">
-          <SectionHeader
-            eyebrow="हाम्रो टिम · Our Team"
-            title="Meet Our Team"
-            subtitle="The principal, teachers, and volunteers who make Nepali School possible every Sunday."
-          />
-
-          {principal && (
-            <div className="mb-12">
-              <LeadershipCard member={principal} featured />
-            </div>
-          )}
-
-          {teachers.length > 0 && (
-            <div className="mb-12">
-              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Teachers</h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {teachers.map(teacher => (
-                  <LeadershipCard key={teacher.id} member={teacher} />
-                ))}
-              </div>
-            </div>
-          )}
-
-          {volunteers.length > 0 && (
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Volunteers</h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {volunteers.map(volunteer => (
-                  <LeadershipCard key={volunteer.id} member={volunteer} />
-                ))}
-              </div>
-            </div>
-          )}
         </section>
 
         {/* Schedule */}

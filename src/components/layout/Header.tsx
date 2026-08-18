@@ -27,7 +27,14 @@ const navItems: NavItem[] = [
       { label: 'Past Presidents', to: '/leadership/past-presidents' },
     ],
   },
-  { label: 'Nepali School', to: '/nepali-school' },
+  {
+    label: 'Nepali School',
+    children: [
+      { label: 'School Overview', to: '/nepali-school' },
+      { label: 'About the School', to: '/nepali-school/about' },
+      { label: 'Meet Our Team', to: '/nepali-school/team' },
+    ],
+  },
   { label: 'Events', to: '/events' },
   { label: 'Gallery', to: '/gallery' },
   { label: 'Contact', to: '/contact' },

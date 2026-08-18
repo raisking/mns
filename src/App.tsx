@@ -8,6 +8,8 @@ import Leadership from './pages/Leadership';
 import President from './pages/Leadership/President';
 import PastPresidents from './pages/Leadership/PastPresidents';
 import School from './pages/School';
+import SchoolAbout from './pages/School/About';
+import SchoolTeam from './pages/School/Team';
 import Events from './pages/Events';
 import EventDetail from './pages/Events/EventDetail';
 import Gallery from './pages/Gallery';
@@ -31,6 +33,8 @@ export default function App() {
           <Route path="leadership/president" element={<President />} />
           <Route path="leadership/past-presidents" element={<PastPresidents />} />
           <Route path="nepali-school" element={<School />} />
+          <Route path="nepali-school/about" element={<SchoolAbout />} />
+          <Route path="nepali-school/team" element={<SchoolTeam />} />
           <Route path="events" element={<Events />} />
           <Route path="events/:slug" element={<EventDetail />} />
           <Route path="gallery" element={<Gallery />} />
