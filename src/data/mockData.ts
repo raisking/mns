@@ -3,6 +3,7 @@ import type { Album } from '../types/Album';
 import type { LeadershipMember, PastPresident } from '../types/Leadership';
 import type { Post } from '../types/Post';
 import type { Shoutout } from '../types/Shoutout';
+import type { SchoolStaffMember } from '../types/SchoolStaff';
 import heroBanner from '../assets/nepali-school-banner.png';
 import dashain2026Img from '../assets/dashain2026.png';
 
@@ -17,6 +18,8 @@ const DASHAIN_2026_IMG = dashain2026Img;
 const PERSON_IMG = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80';
 const PERSON_IMG2 = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80';
 const PERSON_IMG3 = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80';
+const PERSON_IMG4 = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80';
+const PERSON_IMG5 = 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80';
 const GALLERY1 = 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80';
 const GALLERY2 = 'https://images.unsplash.com/photo-1601758174493-49e52f2e5e4d?w=600&q=80';
 const GALLERY3 = 'https://images.unsplash.com/photo-1513623935135-c896b59073c1?w=600&q=80';
@@ -232,5 +235,56 @@ export const monthlyShoutouts: Shoutout[] = [
     category: 'Volunteer',
     photo: PERSON_IMG3,
     highlight: 'Showed up early and stayed late for setup and cleanup at every single event this month, rain or shine.',
+  },
+];
+
+export const schoolStaff: SchoolStaffMember[] = [
+  {
+    id: '1',
+    name: 'Bishnu Adhikari',
+    position: 'Principal',
+    category: 'Principal',
+    photo: PERSON_IMG4,
+    bio: 'Leads the Nepali School with a focus on making language learning joyful for every child, regardless of how much Nepali they speak at home.',
+  },
+  {
+    id: '2',
+    name: 'Radha Poudel',
+    position: 'Nepali Language Teacher',
+    category: 'Teacher',
+    photo: PERSON_IMG5,
+    bio: 'Teaches reading and writing from the alphabet up, and has been part of the school since its earliest classes.',
+  },
+  {
+    id: '3',
+    name: 'Nirmala Bhattarai',
+    position: 'Cultural Arts & Dance Teacher',
+    category: 'Teacher',
+    photo: PERSON_IMG2,
+    bio: "Leads traditional dance and craft lessons, and choreographs the students' performances for Dashain and Tihar.",
+  },
+  {
+    id: '4',
+    name: 'Ramesh Koirala',
+    position: 'Music Teacher',
+    category: 'Teacher',
+    photo: PERSON_IMG,
+    bio: 'Teaches folk songs and traditional instruments, helping students connect with Nepali music across generations.',
+  },
+  {
+    id: '5',
+    name: 'Sarita Karki',
+    position: 'Volunteer Coordinator',
+    category: 'Volunteer',
+    photo: PERSON_IMG3,
+    bio: 'Organizes the volunteer schedule every semester and is usually the first person new families meet on a Sunday morning.',
+  },
+  {
+    id: '6',
+    name: 'Deepak Thapa',
+    position: 'Classroom Volunteer',
+    category: 'Volunteer',
+    photo: PERSON_IMG4,
+    bio: 'Assists in the younger classrooms and helps run snack time and recess every week.',
   },
 ];

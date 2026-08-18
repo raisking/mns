@@ -1,7 +1,12 @@
 import Button from '../../components/common/Button';
 import SectionHeader from '../../components/common/SectionHeader';
 import PageHero from '../../components/common/PageHero';
-import { schoolImage } from '../../data/mockData';
+import LeadershipCard from '../../components/leadership/LeadershipCard';
+import { schoolImage, schoolStaff } from '../../data/mockData';
+
+const principal = schoolStaff.find(s => s.category === 'Principal');
+const teachers = schoolStaff.filter(s => s.category === 'Teacher');
+const volunteers = schoolStaff.filter(s => s.category === 'Volunteer');
 
 export default function School() {
   return (
@@ -54,6 +59,43 @@ export default function School() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* Meet Our Team */}
+        <section className="mb-20">
+          <SectionHeader
+            eyebrow="हाम्रो टिम · Our Team"
+            title="Meet Our Team"
+            subtitle="The principal, teachers, and volunteers who make Nepali School possible every Sunday."
+          />
+
+          {principal && (
+            <div className="mb-12">
+              <LeadershipCard member={principal} featured />
+            </div>
+          )}
+
+          {teachers.length > 0 && (
+            <div className="mb-12">
+              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Teachers</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {teachers.map(teacher => (
+                  <LeadershipCard key={teacher.id} member={teacher} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {volunteers.length > 0 && (
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Volunteers</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {volunteers.map(volunteer => (
+                  <LeadershipCard key={volunteer.id} member={volunteer} />
+                ))}
+              </div>
+            </div>
+          )}
         </section>
 
         {/* Schedule */}

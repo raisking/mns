@@ -150,11 +150,20 @@ Router doesn't do this on its own).
 
 **Everything in `src/data/mockData.ts` is placeholder content** —
 events, albums, leadership bios, objectives, gallery photos, Facebook
-posts, monthly shoutouts. Several images are still generic Unsplash stock
-photos (commented `// Unsplash placeholder images` in that file) rather
-than real photos of this community. When real content/photos become
-available, replace the relevant exports there; the components consuming
-them don't need to change.
+posts, monthly shoutouts, school staff. Several images are still generic
+Unsplash stock photos (commented `// Unsplash placeholder images` in that
+file) rather than real photos of this community. When real content/photos
+become available, replace the relevant exports there; the components
+consuming them don't need to change.
+
+`LeadershipCard` isn't just for org leadership — `SchoolStaffMember`
+(`src/types/SchoolStaff.ts`) is a superset of `LeadershipMember`'s shape
+(`id`/`name`/`position`/`photo`/`bio`, plus a `category` field), so the
+same card renders the School page's Principal/Teachers/Volunteers too
+(`schoolStaff` in mockData, filtered by `category` in
+`src/pages/School/index.tsx`). Reach for this pattern before building a
+new card for "a person with a photo and title" — check whether
+`LeadershipMember`'s shape already covers it first.
 
 Org-level config lives in `src/config/organization.ts` (name, tagline,
 contact info, social links, donation categories) — update values there
