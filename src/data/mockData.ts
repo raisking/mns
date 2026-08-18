@@ -5,9 +5,11 @@ import type { Shoutout } from '../types/Shoutout';
 import type { SchoolStaffMember } from '../types/SchoolStaff';
 import heroBanner from '../assets/nepali-school-banner.png';
 import dashain2026Img from '../assets/dashain2026.png';
+import prakashKhattriImg from '../assets/prakash_khattri.jpg';
 
 // Unsplash placeholder images — these will be replaced with real R2 URLs
 const HERO_IMG = heroBanner;
+const PRINCIPAL_IMG = prakashKhattriImg; // real photo — not a placeholder
 const COMMUNITY_IMG = 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80';
 const SCHOOL_IMG = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80';
 const EVENT1_IMG = 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80';
@@ -209,10 +211,10 @@ export const monthlyShoutouts: Shoutout[] = [
 export const schoolStaff: SchoolStaffMember[] = [
   {
     id: '1',
-    name: 'Bishnu Adhikari',
+    name: 'Prakash Khatri',
     position: 'Principal',
     category: 'Principal',
-    photo: PERSON_IMG4,
+    photo: PRINCIPAL_IMG,
     bio: 'Leads the Nepali School with a focus on making language learning joyful for every child, regardless of how much Nepali they speak at home.',
   },
   {
