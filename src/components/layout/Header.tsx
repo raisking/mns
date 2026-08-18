@@ -31,7 +31,6 @@ const navItems: NavItem[] = [
     label: 'Nepali School',
     children: [
       { label: 'School Overview', to: '/nepali-school' },
-      { label: 'About the School', to: '/nepali-school/about' },
       { label: 'Meet Our Team', to: '/nepali-school/team' },
     ],
   },

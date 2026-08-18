@@ -119,6 +119,13 @@ templated" details — reuse these instead of inventing new ones):
   (translation-accuracy risk).
 - `.card-lift` — saffron-tinted hover shadow instead of generic gray, for
   card components.
+- Alternating-accent card grid — `card-lift bg-white` (or `bg-paper-deep`
+  on a white section) card, `relative overflow-hidden`, with a `absolute
+  top-0 left-0 right-0 h-1` strip alternating `bg-saffron`/`bg-indigo` by
+  `i % 2`, an emoji icon (`role="img" aria-label`), title, description.
+  Used for Home's "objectives" grid and School's "What We Teach" grid —
+  reach for this instead of a plain flat card when a page needs 4+
+  same-shape info cards in a grid.
 
 **Component conventions**:
 - `Button` (`src/components/common/Button.tsx`): variants `primary`
@@ -160,22 +167,32 @@ templated" details — reuse these instead of inventing new ones):
 ## Routes (`src/App.tsx`)
 
 `/`, `/about`, `/objectives`, `/leadership` (+ `/leadership/president`,
-`/leadership/past-presidents`), `/nepali-school` (+ `/nepali-school/about`,
-`/nepali-school/team`), `/events` (+ `/events/:slug`), `/gallery` (+
-`/gallery/:slug`), `/donate`, `/contact`, `/donation-success`,
-`/donation-cancelled`, `*` → NotFound. All nested under `Layout` (Header +
-`<Outlet>` + Footer). `ScrollToTop` resets scroll position on route change
-— see its file for why that's needed (React Router doesn't do this on its
-own).
+`/leadership/past-presidents`), `/nepali-school` (+ `/nepali-school/team`),
+`/events` (+ `/events/:slug`), `/gallery` (+ `/gallery/:slug`), `/donate`,
+`/contact`, `/donation-success`, `/donation-cancelled`, `*` → NotFound. All
+nested under `Layout` (Header + `<Outlet>` + Footer). `ScrollToTop` resets
+scroll position on route change — see its file for why that's needed
+(React Router doesn't do this on its own).
 
-**Sub-page pattern** (Leadership, now Nepali School too): the index route
-keeps its own distinct content and a quick-nav pill row (current page as
-a plain `bg-ink` span, siblings as `bg-white border-gray-200` links,
-`hover:border-saffron hover:text-saffron`) linking to sibling pages that
-each own one slice of content — never duplicate a section across two of
-these pages. The corresponding Header dropdown lists all of them,
-including the index page itself as one of the children (see
-`navItems` in `Header.tsx`).
+`/nepali-school/about` is a `<Navigate replace>` redirect to
+`/nepali-school`, not a page — School Overview and About the School were
+merged into one page (single narrative + curriculum + schedule flow) and
+the old URL redirects instead of 404ing for anyone with it
+bookmarked/indexed. Follow this same redirect-don't-404 pattern if another
+sub-page ever gets folded into its parent.
+
+**Sub-page pattern** (Leadership; Nepali School now merged down to 2
+pages): the index route keeps its own distinct content and a quick-nav
+pill row (current page as a plain `bg-ink` span, siblings as `bg-white
+border-gray-200` links, `hover:border-saffron hover:text-saffron`) linking
+to sibling pages that each own one slice of content — never duplicate a
+section across two of these pages. The corresponding Header dropdown lists
+all of them, including the index page itself as one of the children (see
+`navItems` in `Header.tsx`). Not every distinct concern needs its own
+page — School's old "About the School" page was one narrative section
+that fit naturally inside the Overview page once merged; only split out a
+sub-page when there's enough real content to justify a dedicated route
+(Leadership's President/Past Presidents, School's Team roster).
 
 ## Data model
 
