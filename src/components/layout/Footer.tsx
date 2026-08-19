@@ -18,7 +18,7 @@ export default function Footer() {
                 light plate behind it here, unlike a logo with light/white
                 text that could sit directly on the dark footer. */}
             <div className="inline-block bg-white rounded-lg p-3 mb-4">
-              <img src={logo} alt="Marietta Nepali Samaj" className="h-10 w-auto" />
+              <img src={logo} alt="Marietta Nepali Samaj" className="h-12 w-auto" />
             </div>
             <p className="text-sm text-white/60 leading-relaxed mb-4">
               Connecting the Nepali community in Marietta, Georgia. Preserving our culture, celebrating our heritage.

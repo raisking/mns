@@ -99,7 +99,7 @@ export default function Header() {
             {/* mns-logo.png is a wide horizontal lockup (icon + wordmark,
                 ~4:1 aspect), not the old square emblem — sized shorter so
                 it doesn't overrun the nav next to it. */}
-            <img src={logo} alt="Marietta Nepali Samaj" className="h-8 md:h-10 w-auto" />
+            <img src={logo} alt="Marietta Nepali Samaj" className="h-10 md:h-12 w-auto" />
           </Link>
 
           {/* Desktop Nav */}
