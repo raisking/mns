@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { organization } from '../../config/organization';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/mns-logo.png';
 import SocialIcons from '../common/SocialIcons';
 
 export default function Footer() {
@@ -12,10 +12,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            {/* logo.png has a real transparent background (unlike the old
-                logo-nepali.png, which needed a white plate behind it) and
-                its own colors read fine directly against bg-ink. */}
-            <img src={logo} alt="Marietta Nepali Samaj" className="h-16 w-auto mb-4" />
+            {/* mns-logo.png has a transparent background, but its wordmark
+                text is near-black (~rgb(22,27,33)) — contrast-checked
+                against bg-ink and it computes to ~1:1, invisible. Needs a
+                light plate behind it here, unlike a logo with light/white
+                text that could sit directly on the dark footer. */}
+            <div className="inline-block bg-white rounded-lg p-3 mb-4">
+              <img src={logo} alt="Marietta Nepali Samaj" className="h-10 w-auto" />
+            </div>
             <p className="text-sm text-white/60 leading-relaxed mb-4">
               Connecting the Nepali community in Marietta, Georgia. Preserving our culture, celebrating our heritage.
             </p>
