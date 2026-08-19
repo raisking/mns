@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import logo from '../../assets/logo-nepali.png';
+import logo from '../../assets/logo.png';
 
 interface NavItem {
   label: string;
