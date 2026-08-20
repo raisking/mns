@@ -6,6 +6,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://marietta-nepali-samaj-contact-api.marietta-nepali-samaj.workers.dev/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
