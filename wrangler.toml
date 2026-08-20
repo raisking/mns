@@ -7,7 +7,14 @@ compatibility_date = "2024-11-01"
 # pushed with `wrangler secret put <NAME>` so they're never committed to the
 # repo. See docs/contact-form-google-sheets.md for the full setup.
 [vars]
-ALLOWED_ORIGIN = "https://mariettanepalisamaj.org"
+# The frontend is deployed on Vercel (https://mns-hazel.vercel.app), not yet
+# on mariettanepalisamaj.org — the Worker's Origin check (isAllowedOrigin in
+# workers/api/contact.ts) rejects anything that doesn't match this exactly,
+# same failure mode as the stale-dev-server issue documented in
+# docs/contact-form-setup.md, just in production. Update this the moment a
+# custom domain is attached in Vercel — don't leave it pointed at a domain
+# nothing actually serves from.
+ALLOWED_ORIGIN = "https://mns-hazel.vercel.app"
 
 # Route the worker at /api/* on the production domain once it's attached to
 # a zone. Uncomment and fill in once the domain/zone is confirmed:

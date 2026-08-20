@@ -1,0 +1,11 @@
+{
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://marietta-nepali-samaj-contact-api.marietta-nepali-samaj.workers.dev/api/:path*"
+    }
+  ]
+}
