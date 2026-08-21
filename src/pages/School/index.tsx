@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import SectionHeader from '../../components/common/SectionHeader';
@@ -23,6 +24,12 @@ const scheduleRows = [
 ];
 
 export default function School() {
+  // Drives both the fee cards' selected state and which amount "Enroll &
+  // Pay" carries forward to /donate — defaults to the member rate since
+  // that's already the one badged "Best Value".
+  const [selectedTier, setSelectedTier] = useState<'member' | 'nonmember'>('member');
+  const feeAmount = selectedTier === 'member' ? 200 : 250;
+
   return (
     <>
       <PageHero
@@ -105,39 +112,64 @@ export default function School() {
             scroll-mt so the sticky header doesn't cover the heading when
             landing here via that anchor. */}
         <section id="fees" className="scroll-mt-24 mb-20">
-          <h3 className="text-xl font-bold text-ink mb-8 text-center">Tuition & Fees</h3>
-          <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-8">
-            <div className="bg-white rounded-xl shadow-sm p-6 text-center border border-gray-100">
-              <p className="text-sm font-semibold text-ink-soft uppercase tracking-wide mb-2">Non-Member</p>
-              <p className="text-3xl font-display font-bold text-ink">$250</p>
-              <p className="text-sm text-ink-soft mt-1">per semester</p>
-            </div>
-            {/* relative + the absolute badge is the one deliberately bold
-                touch here — everything else on this card matches its
-                Non-Member sibling exactly, so the badge (not a heavier
-                shadow or a bigger price) is what reads as "the one to
-                pick." */}
-            <div className="relative bg-white rounded-xl shadow-sm p-6 text-center ring-2 ring-saffron">
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-saffron text-white text-[11px] font-bold uppercase tracking-wide px-3 py-1 rounded-full shadow-sm">
-                Best Value
-              </span>
-              <p className="text-sm font-semibold text-saffron uppercase tracking-wide mb-2">MNS Member</p>
-              <p className="text-3xl font-display font-bold text-ink">$200</p>
-              <p className="text-sm text-ink-soft mt-1">per semester</p>
-            </div>
+          <h3 className="text-xl font-bold text-ink mb-2 text-center">Tuition & Fees</h3>
+          <p className="text-sm text-ink-soft text-center mb-8">Select a rate to continue to payment.</p>
+          <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-8" role="radiogroup" aria-label="Tuition rate">
+            <label className="cursor-pointer">
+              <input
+                type="radio"
+                name="fee-tier"
+                checked={selectedTier === 'nonmember'}
+                onChange={() => setSelectedTier('nonmember')}
+                className="sr-only"
+              />
+              <div
+                className={`rounded-xl shadow-sm p-6 text-center border-2 transition-all ${
+                  selectedTier === 'nonmember' ? 'border-saffron bg-amber-50 ring-2 ring-saffron' : 'border-gray-100 bg-white hover:border-gray-200'
+                }`}
+              >
+                <p className={`text-sm font-semibold uppercase tracking-wide mb-2 ${selectedTier === 'nonmember' ? 'text-saffron' : 'text-ink-soft'}`}>
+                  Non-Member
+                </p>
+                <p className="text-3xl font-display font-bold text-ink">$250</p>
+                <p className="text-sm text-ink-soft mt-1">per semester</p>
+              </div>
+            </label>
+
+            {/* relative + the absolute badge is the one permanent, always-on
+                signal that this is the better deal — independent of the
+                border/ring styling below, which instead reflects whichever
+                card is currently *selected* (either can be picked). */}
+            <label className="cursor-pointer">
+              <input
+                type="radio"
+                name="fee-tier"
+                checked={selectedTier === 'member'}
+                onChange={() => setSelectedTier('member')}
+                className="sr-only"
+              />
+              <div
+                className={`relative rounded-xl shadow-sm p-6 text-center border-2 transition-all ${
+                  selectedTier === 'member' ? 'border-saffron bg-amber-50 ring-2 ring-saffron' : 'border-gray-100 bg-white hover:border-gray-200'
+                }`}
+              >
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-saffron text-white text-[11px] font-bold uppercase tracking-wide px-3 py-1 rounded-full shadow-sm">
+                  Best Value
+                </span>
+                <p className="text-sm font-semibold text-saffron uppercase tracking-wide mb-2">MNS Member</p>
+                <p className="text-3xl font-display font-bold text-ink">$200</p>
+                <p className="text-sm text-ink-soft mt-1">per semester</p>
+              </div>
+            </label>
           </div>
 
-          {/* Pre-fills the Contact form's Subject + Message (see
-              ContactForm.tsx) — payment is arranged directly with MNS, not
-              an automated checkout, so the honest "next step" is a
-              message that already says what it's for, not a blank form. */}
+          {/* Carries the selected rate to Donate/Payment as ?amount= — no
+              live payment processor exists yet (see Donate's own comment
+              on handleDonate), so Submit there still shows a placeholder
+              alert rather than actually charging anything. */}
           <div className="flex justify-center mb-6">
-            <Button
-              to={`/contact?subject=school&message=${encodeURIComponent("I'd like to enroll my child in the Nepali School and arrange tuition payment.")}`}
-              variant="primary"
-              size="lg"
-            >
-              Enroll & Pay →
+            <Button to={`/donate?purpose=school&amount=${feeAmount}`} variant="primary" size="lg">
+              Enroll & Pay (${feeAmount}) →
             </Button>
           </div>
 
