@@ -62,9 +62,8 @@ export default function Home() {
           aria-hidden="true"
         />
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-ink/60 backdrop-blur-sm text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-marigold flex-shrink-0" aria-hidden="true" />
-            स्वागत छ |
+          <div className="text-white text-base sm:text-lg font-semibold tracking-wide mb-6 drop-shadow-lg">
+            स्वागत छ।
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight mb-6 drop-shadow-lg">
             Welcome to<br />

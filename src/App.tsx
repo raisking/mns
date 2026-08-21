@@ -7,6 +7,7 @@ import Objectives from './pages/Objectives';
 import Leadership from './pages/Leadership';
 import President from './pages/Leadership/President';
 import PastPresidents from './pages/Leadership/PastPresidents';
+import CommitteeArchive from './pages/Leadership/CommitteeArchive';
 import School from './pages/School';
 import SchoolTeam from './pages/School/Team';
 import Events from './pages/Events';
@@ -17,6 +18,11 @@ import Donate from './pages/Donate';
 import Contact from './pages/Contact';
 import DonationSuccess from './pages/DonationSuccess';
 import DonationCancelled from './pages/DonationCancelled';
+import Volunteer from './pages/Volunteer';
+import Membership from './pages/Membership';
+import Sponsorship from './pages/Sponsorship';
+import Bylaws from './pages/Bylaws';
+import Privacy from './pages/Privacy';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -31,6 +37,7 @@ export default function App() {
           <Route path="leadership" element={<Leadership />} />
           <Route path="leadership/president" element={<President />} />
           <Route path="leadership/past-presidents" element={<PastPresidents />} />
+          <Route path="leadership/committee-archive" element={<CommitteeArchive />} />
           <Route path="nepali-school" element={<School />} />
           {/* About the School was merged into the Overview page — redirect
               rather than 404 for anyone with the old URL bookmarked/indexed. */}
@@ -44,6 +51,11 @@ export default function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="donation-success" element={<DonationSuccess />} />
           <Route path="donation-cancelled" element={<DonationCancelled />} />
+          <Route path="volunteer" element={<Volunteer />} />
+          <Route path="membership" element={<Membership />} />
+          <Route path="sponsorship" element={<Sponsorship />} />
+          <Route path="bylaws" element={<Bylaws />} />
+          <Route path="privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

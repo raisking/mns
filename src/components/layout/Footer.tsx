@@ -39,6 +39,7 @@ export default function Footer() {
                 { label: 'Nepali School', to: '/nepali-school' },
                 { label: 'Events', to: '/events' },
                 { label: 'Gallery', to: '/gallery' },
+                { label: 'Bylaws', to: '/bylaws' },
               ].map(link => (
                 <li key={link.to}>
                   <Link to={link.to} className="text-sm text-white/60 hover:text-white transition-colors">
@@ -55,6 +56,9 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 { label: 'Donate', to: '/donate' },
+                { label: 'Volunteer', to: '/volunteer' },
+                { label: 'Membership', to: '/membership' },
+                { label: 'Sponsorship', to: '/sponsorship' },
                 { label: 'Contact Us', to: '/contact' },
                 { label: 'Privacy Policy', to: '/privacy' },
               ].map(link => (
@@ -98,13 +102,18 @@ export default function Footer() {
           </p>
           <Link
             to="/donate"
-            // Inverted (white fill, ink text) rather than bg-indigo: this
-            // link sits directly on the footer's own bg-ink background, and
-            // indigo is now #222222 (near-black) — contrast against bg-ink
-            // (#241712) computes to ~1.09:1, all but invisible. Same failure
-            // mode as the white-on-white button bug in Button.tsx, mirrored.
-            className="text-sm font-bold text-ink bg-white hover:bg-paper-deep px-4 py-1.5 rounded-full transition-colors"
+            // Marigold, matching the Header/mobile-nav Donate treatment
+            // (styled after cmn.org's yellow "pill + pin" Donate button —
+            // see Header.tsx). Still resolves the original white-fill
+            // reasoning below: marigold (#e7a33e) is nowhere near bg-ink
+            // (#241712) in hue/luminance, so it doesn't repeat the
+            // near-invisible indigo-on-ink bug this used to work around.
+            className="inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-wide text-ink bg-marigold hover:bg-marigold-light px-4 py-1.5 rounded-full transition-colors"
           >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
             Donate
           </Link>
         </div>

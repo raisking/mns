@@ -98,6 +98,13 @@ export const mockEvents: Event[] = [
     address: '456 Celebration Ave, Marietta, GA 30060',
     coverImage: DASHAIN_2026_IMG,
     status: 'published',
+    // MNS's biggest annual festival — pinned as its own item in the
+    // Events nav dropdown (see Header.tsx) rather than only reachable by
+    // browsing the Events list, and given the registration/donation CTAs
+    // most events here don't set. Internal paths (EventDetail.tsx resolves
+    // these via <Link>, not an external <a>, when they start with "/").
+    registrationUrl: '/contact?subject=events',
+    donationUrl: '/donate?purpose=dashain&amount=50',
   },
   {
     id: '4',
@@ -180,6 +187,53 @@ export const pastPresidents: PastPresident[] = [
   { id: '3', name: 'Hira Tamang', photo: PERSON_IMG, term: '2018–2020', description: 'Founded key community partnerships.' },
   { id: '4', name: 'Gopal Acharya', photo: PERSON_IMG, term: '2016–2018' },
   { id: '5', name: 'Laxmi Devi KC', photo: PERSON_IMG, term: '2014–2016' },
+];
+
+// Invented placeholder names, like every other roster in this file —
+// About page's own History timeline already says MNS started as an
+// informal 2010 gathering before formally organizing in 2012, so these
+// predate pastPresidents' earliest listed term (2014–2016) rather than
+// overlapping/contradicting it. Replace with the real founders' names
+// once available.
+export const founders: LeadershipMember[] = [
+  { id: '1', name: 'Ramesh Sharma', position: 'Founding President', photo: PERSON_IMG2, bio: 'Helped bring the first informal gatherings together in 2010.' },
+  { id: '2', name: 'Kabita Rai', position: 'Founding Secretary', photo: PERSON_IMG3 },
+  { id: '3', name: 'Dipendra Shrestha', position: 'Founding Treasurer', photo: PERSON_IMG4 },
+  { id: '4', name: 'Nirmala Gurung', position: 'Founding Member', photo: PERSON_IMG5 },
+];
+
+// Yearly Executive Committee rosters — each term's President matches the
+// corresponding pastPresidents entry above (same person, same years) so
+// the two lists don't contradict each other; the other officers are
+// invented, same placeholder-data convention as the rest of this file.
+export const executiveCommitteeArchive: { term: string; members: LeadershipMember[] }[] = [
+  {
+    term: '2022–2024',
+    members: [
+      { id: '1', name: 'Binod Bhattarai', position: 'President', photo: PERSON_IMG },
+      { id: '2', name: 'Sarita Basnet', position: 'Vice President', photo: PERSON_IMG2 },
+      { id: '3', name: 'Rajan Thapa', position: 'Secretary', photo: PERSON_IMG3 },
+      { id: '4', name: 'Puja Karki', position: 'Treasurer', photo: PERSON_IMG4 },
+    ],
+  },
+  {
+    term: '2020–2022',
+    members: [
+      { id: '1', name: 'Kamal Regmi', position: 'President', photo: PERSON_IMG },
+      { id: '2', name: 'Nabin Adhikari', position: 'Vice President', photo: PERSON_IMG2 },
+      { id: '3', name: 'Sabina Poudel', position: 'Secretary', photo: PERSON_IMG3 },
+      { id: '4', name: 'Deepak Magar', position: 'Treasurer', photo: PERSON_IMG4 },
+    ],
+  },
+  {
+    term: '2018–2020',
+    members: [
+      { id: '1', name: 'Hira Tamang', position: 'President', photo: PERSON_IMG },
+      { id: '2', name: 'Manisha Rana', position: 'Vice President', photo: PERSON_IMG2 },
+      { id: '3', name: 'Suresh Bista', position: 'Secretary', photo: PERSON_IMG3 },
+      { id: '4', name: 'Kalpana Neupane', position: 'Treasurer', photo: PERSON_IMG4 },
+    ],
+  },
 ];
 
 export const objectives = [

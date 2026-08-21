@@ -17,6 +17,7 @@ const navItems: NavItem[] = [
       { label: 'Mission & Vision', to: '/about#mission' },
       { label: 'Objectives', to: '/objectives' },
       { label: 'History', to: '/about#history' },
+      { label: 'Bylaws', to: '/bylaws' },
     ],
   },
   {
@@ -25,6 +26,7 @@ const navItems: NavItem[] = [
       { label: 'President', to: '/leadership/president' },
       { label: 'Executive Committee', to: '/leadership' },
       { label: 'Past Presidents', to: '/leadership/past-presidents' },
+      { label: 'Committee Archive', to: '/leadership/committee-archive' },
     ],
   },
   {
@@ -34,10 +36,43 @@ const navItems: NavItem[] = [
       { label: 'Meet Our Team', to: '/nepali-school/team' },
     ],
   },
-  { label: 'Events', to: '/events' },
-  { label: 'Gallery', to: '/gallery' },
-  { label: 'Contact', to: '/contact' },
+  // Events + Gallery merged into one dropdown (event photos are naturally
+  // part of "Events"), and Get Involved absorbed Contact (asking to get
+  // involved and reaching out are the same intent) — brings 8 top-level
+  // items down to 6 without losing any destination, just nesting two of
+  // them one click deeper.
+  {
+    label: 'Events',
+    children: [
+      { label: 'Upcoming Events', to: '/events' },
+      // Pinned flagship event — MNS's biggest annual festival, given its
+      // own promoted nav slot rather than only reachable by browsing the
+      // full Events list, mirroring how peer org sites pin their headline
+      // event. Points straight at its real event-detail page (which now
+      // carries RSVP/donate CTAs — see mockData.ts) instead of a separate
+      // duplicate landing page.
+      { label: 'Dashain 2026', to: '/events/dashain-celebration-2026' },
+      { label: 'Photo Gallery', to: '/gallery' },
+    ],
+  },
+  {
+    label: 'Get Involved',
+    children: [
+      { label: 'Volunteer', to: '/volunteer' },
+      { label: 'Membership', to: '/membership' },
+      { label: 'Sponsorship', to: '/sponsorship' },
+      { label: 'Contact Us', to: '/contact' },
+    ],
+  },
 ];
+
+// Exact-match (`c.to === pathname`) misses detail routes that hang off a
+// dropdown child, e.g. /events/:slug or /gallery/:slug under the "Events"
+// child links — the parent button wouldn't highlight while reading an
+// event or viewing an album. Treat any path that starts with a child's
+// `to` (at a segment boundary) as still "inside" that child.
+const isChildActive = (childTo: string, pathname: string) =>
+  pathname === childTo || pathname.startsWith(`${childTo}/`);
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -114,7 +149,7 @@ export default function Header() {
                 >
                   <button
                     className={`flex items-center gap-1 px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
-                      openDropdown === item.label || item.children.some(c => c.to === location.pathname)
+                      openDropdown === item.label || item.children.some(c => isChildActive(c.to, location.pathname))
                         ? 'text-saffron border-saffron'
                         : 'text-gray-700 border-transparent hover:text-saffron hover:border-saffron/30'
                     }`}
@@ -191,10 +226,21 @@ export default function Header() {
 
           {/* Donate button + hamburger */}
           <div className="flex items-center gap-3">
+            {/* Marigold "pill + pin" treatment, styled after cmn.org's
+                header Donate button — bright/celebratory rather than the
+                site's usual indigo primary-action color, so it reads as
+                the one CTA on the page that's different from every other
+                button. The pin is decorative (aria-hidden) — MNS is a
+                single-location org, so unlike cmn.org's version it isn't
+                a hospital-locator trigger, just the same visual mark. */}
             <Link
               to="/donate"
-              className="hidden sm:inline-flex items-center px-5 py-2.5 text-sm font-bold text-white bg-indigo hover:bg-indigo/85 rounded-full transition-colors shadow-sm"
+              className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-ink bg-marigold hover:bg-marigold-light rounded-full transition-colors shadow-sm"
             >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
               Donate
             </Link>
 
@@ -228,7 +274,7 @@ export default function Header() {
                 <div key={item.label}>
                   <button
                     className={`w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${
-                      openDropdown === item.label || item.children.some(c => c.to === location.pathname)
+                      openDropdown === item.label || item.children.some(c => isChildActive(c.to, location.pathname))
                         ? 'text-saffron bg-saffron/5'
                         : 'text-gray-700 hover:text-saffron hover:bg-gray-50'
                     }`}
@@ -285,9 +331,13 @@ export default function Header() {
             <div className="pt-3 border-t border-gray-100">
               <Link
                 to="/donate"
-                className="block w-full text-center px-4 py-2.5 text-sm font-bold text-white bg-indigo hover:bg-indigo/85 rounded-full transition-colors"
+                className="flex items-center justify-center gap-1.5 w-full px-4 py-2.5 text-sm font-bold uppercase tracking-wide text-ink bg-marigold hover:bg-marigold-light rounded-full transition-colors"
                 onClick={closeMobile}
               >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
                 Donate
               </Link>
             </div>

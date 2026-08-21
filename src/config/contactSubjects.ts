@@ -13,6 +13,7 @@ export const contactSubjects = [
   { value: 'events', label: 'Events' },
   { value: 'donation', label: 'Donation' },
   { value: 'volunteer', label: 'Volunteering' },
+  { value: 'sponsorship', label: 'Business Sponsorship' },
   { value: 'other', label: 'Other' },
 ] as const;
 

@@ -13,6 +13,7 @@ export default function PastPresidents() {
           <Link to="/leadership/president" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-saffron hover:text-saffron transition-colors">President</Link>
           <Link to="/leadership" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-saffron hover:text-saffron transition-colors">Executive Committee</Link>
           <span className="px-5 py-2.5 bg-ink text-white text-sm font-semibold rounded-lg cursor-default">Past Presidents</span>
+          <Link to="/leadership/committee-archive" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-saffron hover:text-saffron transition-colors">Committee Archive</Link>
         </div>
 
         <SectionHeader title="Our Past Presidents" subtitle="Recognizing the dedicated leaders of Marietta Nepali Samaj." />

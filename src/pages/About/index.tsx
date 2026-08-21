@@ -2,7 +2,7 @@ import SectionHeader from '../../components/common/SectionHeader';
 import PageHero from '../../components/common/PageHero';
 import Button from '../../components/common/Button';
 import { organization } from '../../config/organization';
-import { communityImage } from '../../data/mockData';
+import { communityImage, founders } from '../../data/mockData';
 
 export default function About() {
   return (
@@ -73,6 +73,31 @@ export default function About() {
                     <h3 className="font-bold text-gray-900 text-lg mb-2">{item.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{item.description}</p>
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Founding Members — invented placeholder names, same convention
+              as every other roster in mockData.ts (see the comment above
+              the `founders` export). Swap for the real names once known. */}
+          <div className="max-w-5xl mx-auto mt-16">
+            <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Our Founding Members</h3>
+            <p className="text-sm text-gray-500 text-center mb-8">The community members who brought MNS together in 2010.</p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {founders.map(founder => (
+                <div key={founder.id} className="bg-gray-50 rounded-2xl p-6 text-center">
+                  {founder.photo && (
+                    <img
+                      src={founder.photo}
+                      alt={founder.name}
+                      loading="lazy"
+                      className="w-20 h-20 rounded-full object-cover object-top mx-auto mb-4 ring-4 ring-saffron/10"
+                    />
+                  )}
+                  <h4 className="font-bold text-gray-900">{founder.name}</h4>
+                  <p className="text-sm text-saffron font-semibold mt-0.5">{founder.position}</p>
+                  {founder.bio && <p className="text-xs text-gray-500 mt-2 leading-relaxed">{founder.bio}</p>}
                 </div>
               ))}
             </div>

@@ -31,6 +31,9 @@ export const donationCategories = [
   // one, and repoint the non-tuition CTAs (Home's "Support Nepali School",
   // School page's "Support the School") back to it.
   { id: 'tuition', label: 'Nepali School Tuition' },
+  // Membership page's tier picker carries its selected amount here, same
+  // ?purpose=/&amount= handoff to /donate as the School fee toggle uses.
+  { id: 'membership', label: 'Membership Dues' },
   { id: 'events', label: 'Community Events' },
   { id: 'education', label: 'Education Fund' },
   { id: 'dashain', label: 'Dashain Celebration' },

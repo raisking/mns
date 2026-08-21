@@ -156,12 +156,24 @@ templated" details — reuse these instead of inventing new ones):
   it was left alone. Apply the same `/85`-on-hover pattern to any new
   solid indigo/saffron button instead of reaching for `-dark` or adding
   a transform.
-  **Footer's Donate link is the one exception** — don't give it
-  `bg-indigo`: it sits directly on the footer's own `bg-ink` background,
-  and indigo (`#222222`) against `bg-ink` (`#241712`) computes to
-  ~1.09:1 contrast, all but invisible. It stays inverted (`bg-white
-  hover:bg-paper-deep text-ink`) instead, same fix pattern as the
-  white-on-white bug documented below.
+  **The three standalone Donate links (Header desktop, Header mobile
+  menu, Footer) are marigold, not `bg-indigo`** — a "pill + location pin
+  icon" treatment styled after cmn.org's yellow header Donate button
+  (bright/celebratory, visually distinct from every other button on the
+  page, unlike `primary`'s indigo which is also used for ordinary
+  buttons). The pin (the same outline map-pin path already used for
+  Contact's Location card and Footer's address row) is decorative
+  (`aria-hidden`) — MNS is single-location, so unlike cmn.org's version
+  it isn't wired to a hospital/chapter locator, just the same visual mark.
+  This also happens to be why Footer's version was never `bg-indigo` in
+  the first place: it sits directly on the footer's own `bg-ink`
+  background, and indigo (`#222222`) against `bg-ink` (`#241712`)
+  computes to ~1.09:1 contrast, all but invisible (same failure mode as
+  the white-on-white bug documented below). Marigold (`#e7a33e`) doesn't
+  have that problem — it's nowhere near `bg-ink` in hue/luminance — so
+  the fix that used to require inverting to `bg-white` isn't needed
+  anymore; Footer's Donate link now matches Header's exactly instead of
+  using its own one-off color.
   Variants: `primary`
   (indigo — the default action color), `secondary` (saffron), `accent`
   (marigold, for celebratory contexts like the Donate CTA), `light` (solid
@@ -230,12 +242,65 @@ about glyph-as-icon usage specifically, not the bilingual convention.
 ## Routes (`src/App.tsx`)
 
 `/`, `/about`, `/objectives`, `/leadership` (+ `/leadership/president`,
-`/leadership/past-presidents`), `/nepali-school` (+ `/nepali-school/team`),
-`/events` (+ `/events/:slug`), `/gallery` (+ `/gallery/:slug`), `/donate`,
-`/contact`, `/donation-success`, `/donation-cancelled`, `*` → NotFound. All
-nested under `Layout` (Header + `<Outlet>` + Footer). `ScrollToTop` resets
-scroll position on route change — see its file for why that's needed
-(React Router doesn't do this on its own).
+`/leadership/past-presidents`, `/leadership/committee-archive`),
+`/nepali-school` (+ `/nepali-school/team`), `/events` (+ `/events/:slug`),
+`/gallery` (+ `/gallery/:slug`), `/donate`, `/contact`, `/donation-success`,
+`/donation-cancelled`, `/volunteer`, `/membership`, `/sponsorship`,
+`/bylaws`, `/privacy`, `*` → NotFound. All nested under `Layout` (Header +
+`<Outlet>` + Footer). `ScrollToTop` resets scroll position on route change
+— see its file for why that's needed (React Router doesn't do this on its
+own).
+
+`/volunteer`, `/membership`, and `/sponsorship` are content-only pages (no
+dedicated form — each routes its CTA button through `ContactForm`'s
+existing `?subject=` + `?message=` pre-fill support, same mechanism the
+School fee toggle uses to hand off to Donate). `/membership`'s tier picker
+hands off to **Donate** instead (`?purpose=membership&amount=`), same
+pattern as School's fee toggle, since dues are a fixed self-serve
+purchase; `/sponsorship`'s tier picker hands off to **Contact** instead —
+a sponsorship is a negotiated deal, not a one-click purchase, so it needs
+a conversation before any amount is final. `/bylaws` deliberately does not
+publish fabricated bylaws text — it outlines the topics a nonprofit's
+bylaws typically cover and routes "get the real document" to Contact;
+replace it with the actual bylaws once MNS has one ready to publish.
+`/leadership/committee-archive` lists full yearly Executive Committee
+rosters (not just the President) — a 4th sibling in the Leadership
+sub-page family, so it also needed a quick-nav pill added to the other
+three Leadership pages. `/privacy` is a plain prose page (no cards/hero
+image) — Footer already linked to `/privacy` before this route existed, so
+that link was 404ing until this page landed.
+
+Pricing on `/membership` and `/sponsorship` is placeholder — invented
+numbers explicitly authorized to stand in until real board-approved
+figures exist, same as the rest of this file's mock data. Don't mistake
+either for real financial commitments.
+
+**Header nav is 6 top-level items, not 8** (see next section for how it
+got there) — `Header.tsx`'s `navItems` folds Gallery into the "Events"
+dropdown and folds Contact into "Get Involved," rather than giving
+Gallery, Get Involved, and Contact each their own top-level slot. Both
+`/events/:slug` and `/gallery/:slug` are detail routes reachable *through*
+their dropdown child, not nav entries themselves — the dropdown parent
+button's active-state check (`isChildActive` in `Header.tsx`) matches on
+path *prefix*, not exact equality, specifically so viewing an event or
+album still highlights "Events." Follow that same prefix-match helper
+(not `c.to === location.pathname`) for any future dropdown whose child
+owns a `:slug` sub-route, or the parent button silently stops
+highlighting on that child's detail pages.
+
+**Events dropdown pins the flagship event** — alongside `Upcoming Events`
+and `Photo Gallery`, it links a `Dashain 2026` entry straight at
+`/events/dashain-celebration-2026` (an ordinary entry in `mockEvents`, not
+a separate landing page — see the "never duplicate a section across two
+pages" rule below). That event is also the only one currently exercising
+`registrationUrl`/`donationUrl`. Those two `Event` fields were originally
+external-link-only, always rendered through `Button`'s `href` branch
+(new-tab, correct for leaving the site) — an internal path like
+`/donate?...` still "worked" through `href`, just as a full-page reload in
+a new tab instead of an in-app transition. `EventDetail.tsx` now has a
+small `EventLinkButton` wrapper that picks `to` vs `href` based on whether
+the URL starts with `/`; use it (not `Button href={...}` directly) for
+either field going forward.
 
 `/nepali-school/about` is a `<Navigate replace>` redirect to
 `/nepali-school`, not a page — School Overview and About the School were
@@ -244,18 +309,22 @@ the old URL redirects instead of 404ing for anyone with it
 bookmarked/indexed. Follow this same redirect-don't-404 pattern if another
 sub-page ever gets folded into its parent.
 
-**Sub-page pattern** (Leadership; Nepali School now merged down to 2
-pages): the index route keeps its own distinct content and a quick-nav
-pill row (current page as a plain `bg-ink` span, siblings as `bg-white
-border-gray-200` links, `hover:border-saffron hover:text-saffron`) linking
-to sibling pages that each own one slice of content — never duplicate a
-section across two of these pages. The corresponding Header dropdown lists
-all of them, including the index page itself as one of the children (see
-`navItems` in `Header.tsx`). Not every distinct concern needs its own
-page — School's old "About the School" page was one narrative section
-that fit naturally inside the Overview page once merged; only split out a
-sub-page when there's enough real content to justify a dedicated route
-(Leadership's President/Past Presidents, School's Team roster).
+**Sub-page pattern** (Leadership — now 4 sibling pages: index/Executive
+Committee, President, Past Presidents, Committee Archive; Nepali School
+merged down to 2 pages): the index route keeps its own distinct content
+and a quick-nav pill row (current page as a plain `bg-ink` span, siblings
+as `bg-white border-gray-200` links, `hover:border-saffron
+hover:text-saffron`) linking to sibling pages that each own one slice of
+content — never duplicate a section across two of these pages. The
+corresponding Header dropdown lists all of them, including the index page
+itself as one of the children (see `navItems` in `Header.tsx`). Adding a
+sibling means touching the pill row on *every* existing sibling page, not
+just the new one. Not every distinct concern needs its own page —
+School's old "About the School" page was one narrative section that fit
+naturally inside the Overview page once merged; only split out a sub-page
+when there's enough real content to justify a dedicated route
+(Leadership's President/Past Presidents/Committee Archive, School's Team
+roster).
 
 ## Data model
 
@@ -301,7 +370,21 @@ same card renders the School page's Principal/Teachers/Volunteers too
 (`schoolStaff` in mockData, filtered by `category` in
 `src/pages/School/index.tsx`). Reach for this pattern before building a
 new card for "a person with a photo and title" — check whether
-`LeadershipMember`'s shape already covers it first.
+`LeadershipMember`'s shape already covers it first. Two more exports
+reuse it the same way: `founders` (About page's "Our Founding Members"
+section) and `executiveCommitteeArchive` (`{ term, members:
+LeadershipMember[] }[]`, powering `/leadership/committee-archive`) — both
+invented placeholder names like everything else in this file, with one
+deliberate consistency rule: each archived term's President is the *same
+person* as the matching `pastPresidents` entry for that term, not a
+different invented name, so the two rosters don't contradict each other.
+Keep that in sync if either list's terms ever change.
+
+`contactSubjects.ts` gained a `sponsorship` value (`/sponsorship`'s CTA
+uses it) — remember it's the Worker's validation list too
+(`contactValidation.ts` imports `isValidContactSubject` from this same
+file), so adding a value here is sufficient; there's no separate
+Worker-side list to keep in sync.
 
 The compact (non-`featured`) `LeadershipCard` variant truncates `bio` to
 3 lines (`line-clamp-3`) and, when a `bio` exists, renders as a real

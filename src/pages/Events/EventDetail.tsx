@@ -8,6 +8,17 @@ function formatDate(dateStr: string) {
   });
 }
 
+// donationUrl/registrationUrl were originally external-only (Eventbrite,
+// a third-party ticketing link, etc.), always rendered via Button's href
+// branch — which opens in a new tab, correct for leaving the site. An
+// internal path like /donate?... would still "work" through href, just
+// as a full-page reload in a new tab instead of an in-app transition.
+// Route those through Button's `to` prop instead so they behave like any
+// other internal link.
+function EventLinkButton({ url, ...props }: { url: string } & Omit<React.ComponentProps<typeof Button>, 'to' | 'href'>) {
+  return url.startsWith('/') ? <Button to={url} {...props} /> : <Button href={url} {...props} />;
+}
+
 export default function EventDetail() {
   const { slug } = useParams<{ slug: string }>();
   const event = mockEvents.find(e => e.slug === slug);
@@ -65,9 +76,9 @@ export default function EventDetail() {
               <div className="bg-gradient-to-r from-saffron to-saffron-dark rounded-2xl p-6 text-white text-center">
                 <h3 className="font-bold text-lg mb-2">Support This Event</h3>
                 <p className="text-amber-100 text-sm mb-4">Help us make this event a success with your generous contribution.</p>
-                <Button href={event.donationUrl} variant="outlineLight">
+                <EventLinkButton url={event.donationUrl} variant="outlineLight">
                   Donate for This Event
-                </Button>
+                </EventLinkButton>
               </div>
             )}
           </div>
@@ -129,7 +140,7 @@ export default function EventDetail() {
               </div>
 
               {event.registrationUrl && (
-                <Button href={event.registrationUrl} fullWidth>Register Now</Button>
+                <EventLinkButton url={event.registrationUrl} fullWidth>Register Now</EventLinkButton>
               )}
               <Button to="/contact" variant="outline" fullWidth>Contact Us</Button>
             </div>
