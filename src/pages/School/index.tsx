@@ -19,7 +19,7 @@ const scheduleRows = [
   { label: 'Location', value: 'Marietta Community Center' },
   { label: 'Ages', value: '3-16 years' },
   { label: 'Language', value: 'Nepali' },
-  { label: 'Cost', value: 'Free for community members' },
+  { label: 'Tuition', value: '$200–$250 / semester — see below' },
 ];
 
 export default function School() {
@@ -100,6 +100,29 @@ export default function School() {
             </p>
           </section>
         </div>
+
+        {/* Tuition & Fees — id target for the Home page's fee-details link.
+            scroll-mt so the sticky header doesn't cover the heading when
+            landing here via that anchor. */}
+        <section id="fees" className="scroll-mt-24 mb-20">
+          <h3 className="text-xl font-bold text-ink mb-6 text-center">Tuition & Fees</h3>
+          <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-4">
+            <div className="bg-white rounded-xl shadow-sm p-6 text-center border border-gray-100">
+              <p className="text-sm font-semibold text-ink-soft uppercase tracking-wide mb-2">Non-Member</p>
+              <p className="text-3xl font-display font-bold text-ink">$250</p>
+              <p className="text-sm text-ink-soft mt-1">per semester</p>
+            </div>
+            <div className="bg-white rounded-xl shadow-sm p-6 text-center ring-2 ring-saffron">
+              <p className="text-sm font-semibold text-saffron uppercase tracking-wide mb-2">MNS Member</p>
+              <p className="text-3xl font-display font-bold text-ink">$200</p>
+              <p className="text-sm text-ink-soft mt-1">per semester</p>
+            </div>
+          </div>
+          <p className="text-sm text-ink-soft leading-relaxed text-center max-w-2xl mx-auto">
+            Enrolling more than one child? Families get a discounted rate for each additional
+            child enrolled — <Link to="/contact" className="text-saffron hover:underline font-semibold">contact us</Link> for details.
+          </p>
+        </section>
 
         {/* CTA */}
         <div className="text-center bg-gradient-to-br from-saffron to-saffron-dark rounded-2xl p-10 md:p-14 text-white">

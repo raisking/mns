@@ -141,18 +141,32 @@ export default function Home() {
                 Of everything MNS runs, the Nepali School is where our community gathers most. It's our most active program — a weekly gathering that teaches Nepali language, culture, and values to the next generation.
               </p>
 
-              {/* Activity stats — evidence for "most active," not just the claim */}
+              {/* Activity stats — evidence for "most active," not just the claim.
+                  The fee card links to the School page's full pricing (Home
+                  is a summary, not the place to spell out member/non-member
+                  rates) — the only one of the three that goes anywhere. */}
               <div className="grid grid-cols-3 gap-3 mb-8">
                 {[
                   { value: 'Weekly', label: 'Every Sunday' },
                   { value: '3-16', label: 'Ages Welcome' },
-                  { value: 'Free', label: 'For Families' },
-                ].map(stat => (
-                  <div key={stat.label} className="bg-white rounded-xl p-3 text-center shadow-sm">
-                    <p className="text-lg font-display font-bold text-saffron leading-none">{stat.value}</p>
-                    <p className="text-xs text-ink-soft mt-1">{stat.label}</p>
-                  </div>
-                ))}
+                  { value: '$200+', label: 'Fee Details', to: '/nepali-school#fees' },
+                ].map(stat =>
+                  stat.to ? (
+                    <Link
+                      key={stat.label}
+                      to={stat.to}
+                      className="bg-white rounded-xl p-3 text-center shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <p className="text-lg font-display font-bold text-saffron leading-none">{stat.value}</p>
+                      <p className="text-xs text-ink-soft mt-1 underline underline-offset-2">{stat.label}</p>
+                    </Link>
+                  ) : (
+                    <div key={stat.label} className="bg-white rounded-xl p-3 text-center shadow-sm">
+                      <p className="text-lg font-display font-bold text-saffron leading-none">{stat.value}</p>
+                      <p className="text-xs text-ink-soft mt-1">{stat.label}</p>
+                    </div>
+                  )
+                )}
               </div>
 
               <ul className="space-y-3 mb-8">
