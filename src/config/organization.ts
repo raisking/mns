@@ -24,6 +24,12 @@ export const socialLinks = {
 export const donationCategories = [
   { id: 'general', label: 'General Fund' },
   { id: 'school', label: 'Nepali School' },
+  // Distinct from 'school' above (a general donation toward the program) —
+  // this is specifically "I'm paying my own child's tuition," which is
+  // what the School page's fee cards link to. Keep both: someone donating
+  // to support the school in general isn't the same as a parent paying
+  // what they owe.
+  { id: 'tuition', label: 'Nepali School Tuition' },
   { id: 'events', label: 'Community Events' },
   { id: 'education', label: 'Education Fund' },
   { id: 'dashain', label: 'Dashain Celebration' },
