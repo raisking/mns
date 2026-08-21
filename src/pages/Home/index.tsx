@@ -38,17 +38,6 @@ export default function Home() {
         month={shoutoutMonth}
       />
 
-      {/* Reopens the shoutout modal after it's been dismissed — a one-time
-          popup with no way back is a dead end. */}
-      {!shoutoutOpen && (
-        <button
-          onClick={() => setShoutoutOpen(true)}
-          className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 bg-saffron hover:bg-saffron/85 text-white text-sm font-bold pl-3 pr-4 py-2.5 rounded-full shadow-lg transition-colors"
-        >
-          Shoutouts
-        </button>
-      )}
-
       {/* Hero — a soft twin-peak curve at the bottom edge echoes Nepal's
           flag silhouette (this site's one signature shape), rendered as an
           SVG divider rather than a hard clip-path so the peaks are smooth
