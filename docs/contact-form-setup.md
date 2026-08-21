@@ -8,11 +8,16 @@ the way and how they were fixed. For the generic step-by-step reference
 same folder — this document is the "what we actually did and learned"
 companion to that one.
 
-**You told me you're creating a separate, dedicated Google Sheet for this
-site and getting a `.com` domain.** Everything below marked
-**⚠️ TEMPORARY** was set up against a test Sheet and `localhost` for local
-development/verification — see [Switching to production](#switching-to-production)
-at the bottom for exactly what to change and where.
+**Status as of August 2026: the form is live and working in production** at
+`https://mns-hazel.vercel.app/contact`, submitting real rows to the Google
+Sheet. A `.com` domain is still coming — see
+[Next step: custom `.com` domain](#next-step-custom-com-domain) at the
+bottom for exactly what to change when that happens. Everything below
+marked **⚠️ TEMPORARY** was set up against a test Sheet and `localhost` for
+local development — it's still true today (see the callout in
+[Production rollout](#production-rollout-vercel--cloudflare-worker) below:
+production is currently writing to that same test Sheet, not a separate
+dedicated one).
 
 ---
 
@@ -199,62 +204,265 @@ Then reload the browser tab pointed at whatever port `npm run dev` printed
 
 ---
 
-## Switching to production
+## Production rollout (Vercel + Cloudflare Worker)
 
-### 1. New Google Sheet
+This is the full account of what it took to get the form actually working
+on the live internet, after the code was already pushed to GitHub and the
+frontend deployed to Vercel. It took far more than a code push — nine
+separate issues, each hiding the next one behind it. Keeping the complete
+list here because most of these will recur if this ever gets redone (new
+Worker, new Vercel project, migrating to a different host, etc.).
 
-Once your dedicated Sheet exists (name it `Marietta Nepali Samaj - Contact
-Submissions`, tab `Contact Submissions`, per the setup guide):
+**⚠️ Known gap:** production is currently pointed at the same test Apps
+Script / Google Sheet described earlier in this doc (`SHEET_ID`
+`1FMOkTGta9xrSBCBFeD41r5EpfD5kXEw_vnYNl7gEEgk`) — the "create a separate
+dedicated Sheet for production" step was never done. Real inquiries and
+every test submission made while debugging this (several, all obviously
+labeled as tests) are in the same sheet right now. Worth splitting before
+this gets much more real-world traffic — see
+[step 1 below](#1-optional-but-recommended-a-real-dedicated-sheet) in the
+`.com` section for how.
+
+### Current live configuration (non-secret values, safe to reference)
+
+| What | Value |
+|---|---|
+| Frontend (Vercel) | `https://mns-hazel.vercel.app` |
+| Worker | `https://marietta-nepali-samaj-contact-api.marietta-nepali-samaj.workers.dev` |
+| `wrangler.toml` → `ALLOWED_ORIGIN` | `https://mns-hazel.vercel.app` |
+| Turnstile site key (public by design) | `0x4AAAAAAETeeylbMGI9XEWw` |
+| Turnstile allowed hostnames | includes `mns-hazel.vercel.app` |
+
+`vercel.json` (repo root) ties the frontend build and the API proxy
+together:
+
+```json
+{
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://marietta-nepali-samaj-contact-api.marietta-nepali-samaj.workers.dev/api/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+```
+
+### Issue 1 — Vercel build failed: wrong output directory
+
+Vercel's default assumed a `build/` output folder (a Create React App
+convention). Vite actually outputs to `dist/`. Error was literal: `No
+Output Directory named "build" found`. Fixed by adding `vercel.json` with
+`"outputDirectory": "dist"` (shown above).
+
+### Issue 2 — the Worker had never been deployed to production
+
+`npx wrangler whoami` returned "not authenticated" — this Worker had only
+ever run locally via `wrangler dev`. Fixed by: `npx wrangler login`
+(OAuth device-code flow, opens a browser tab to authorize), then `npm run
+worker:deploy`, which prompted to register a one-time `*.workers.dev`
+account subdomain (separate from the Worker's own `name` in
+`wrangler.toml` — the final URL is
+`<worker-name>.<account-subdomain>.workers.dev`).
+
+### Issue 3 — nothing told Vercel to route `/api/contact` anywhere
+
+`contactService.ts` calls `fetch('/api/contact', ...)` — a same-origin
+relative path. That's correct for local dev (Vite's dev proxy handles it),
+but in production the frontend (Vercel) and the Worker (`*.workers.dev`)
+are two entirely separate domains. Without a rewrite, that fetch just
+404s against Vercel's own (nonexistent) route. Fixed by the first
+`rewrites` entry in `vercel.json` above, once the Worker's real URL was
+known (verified directly with `curl` before trusting it — a GET returned
+`405`, matching the Worker's own method-not-allowed logic exactly).
+
+### Issue 4 — `ALLOWED_ORIGIN` still pointed at the unattached custom domain
+
+`wrangler.toml` had `ALLOWED_ORIGIN = "https://mariettanepalisamaj.org"` —
+correct for the eventual future, but nothing was serving from that domain
+yet, so the Worker's own Origin check (`isAllowedOrigin()`) rejected every
+real request from the actual live site with a `403`. Fixed by pointing it
+at the real live URL, `https://mns-hazel.vercel.app`, with a code comment
+flagging that this needs to change again once the `.com` domain is
+attached (see the bottom of this doc).
+
+### Issue 5 — every direct page load 404'd (not just the API)
+
+After issues 1–4 were fixed, the whole site still appeared broken —
+`GET /contact` returned a bare `404` before any JS, Turnstile, or API call
+ever fired (confirmed with a headless browser: zero follow-up network
+requests at all). Root cause: adding a custom `rewrites` array to
+`vercel.json` **overrides** the automatic single-page-app fallback that
+Vercel's Vite framework preset normally provides for free. React Router
+does client-side routing — a direct hit on `/contact` needs Vercel to
+serve `index.html` and let the router take over. Fixed by adding the
+second `rewrites` entry above (`"/(.*)" → "/index.html"`), ordered *after*
+the `/api/*` rule so API requests still match first (Vercel evaluates
+`rewrites` in order and stops at the first match; static assets that
+exist in `dist/` are still served by the filesystem check before any
+rewrite is even considered, so this doesn't touch JS/CSS/image loading).
+
+### Issue 6 — `VITE_TURNSTILE_SITE_KEY` existed in Vercel but was blank
+
+Vite bakes `VITE_*` env vars in at **build time** — setting one in the
+Vercel dashboard does nothing until the next build. Checked with `vercel
+env pull` and found the variable already existed but held an empty
+string, so the Turnstile widget's own render guard
+(`{TURNSTILE_SITE_KEY && (...)}` in `ContactForm.tsx`) silently rendered
+nothing. Worse, the same guard also skips the *frontend's* required-token
+check, so the form could still be submitted — it just failed later, at
+the Worker's server-side Turnstile verification, with no visible reason
+why. Fixed by setting the real value via `vercel env add
+VITE_TURNSTILE_SITE_KEY production` and triggering a fresh `vercel deploy
+--prod` (the env var alone doesn't help an already-built deployment).
+
+**Also found:** this Vercel project has several other env vars that
+nothing in this codebase uses at all — `STRIPE_SECRET_KEY`,
+`STRIPE_WEBHOOK_SECRET`, `CLOUDFLARE_ACCOUNT_ID`, `R2_BUCKET_NAME`,
+`R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_PUBLIC_URL`,
+`DATABASE_URL`, `VITE_APP_NAME`, `VITE_API_BASE_URL` — apparent leftover
+scaffolding from something unrelated. Harmless (unused), but worth
+deleting from the Vercel dashboard for hygiene whenever convenient.
+
+### Issue 7 — Turnstile widget rejected the domain (error 110200)
+
+Once the site key was correct, Turnstile failed with its own error
+overlay: *"Unable to connect to website," Error Code 110200.* That code
+specifically means the current hostname isn't on the widget's allowed-
+hostname list — same shape of mistake as issue 4, just in a third place
+(the Turnstile dashboard, not `wrangler.toml`). Fixed in the **Cloudflare
+Turnstile dashboard**: widget → Hostname Management → add
+`mns-hazel.vercel.app`. Not retryable client-side; takes effect
+immediately once saved, no redeploy needed.
+
+### Issue 8 — three Worker secrets, three different naming mistakes
+
+`wrangler secret put <NAME>` only ever accepts the secret's **name** as
+its argument — the value must be typed at the interactive prompt that
+follows, never appended to the command. Running it as `wrangler secret put
+NAME=value` (one string) doesn't error — it just creates a secret whose
+**name** is the literal text `NAME=value`, leaving nothing actually bound
+to `NAME`. This happened three separate times here and produced three
+different failure modes, all diagnosed the same way: `npx wrangler secret
+list` (prints names only, never values) —
+
+- **`TURNSTILE_SECRET_KEY`** — two garbage-named secrets existed
+  (`"0x4AAAAAAETeeylbMGI9XEWw"` and
+  `"TURNSTILE_SECRET_KEY=0x4AAAAAAETee..."`), no secret literally named
+  `TURNSTILE_SECRET_KEY`. At runtime this made `env.TURNSTILE_SECRET_KEY`
+  `undefined`, which got sent to Cloudflare's `siteverify` as the literal
+  string `"undefined"` — rejected with HTTP `400`,
+  `error-codes: ["invalid-input-secret"]`.
+- **`GOOGLE_APPS_SCRIPT_URL`** and **`CONTACT_FORM_SECRET`** — didn't
+  exist under *any* name; never successfully set at all. Worker's `fetch()`
+  to `env.GOOGLE_APPS_SCRIPT_URL` threw `Invalid URL: ` (empty string).
+- **Fix, all three:** `npx wrangler secret put <EXACT_NAME>`, wait for the
+  separate value prompt, paste only the value there, confirm it visibly
+  appears before pressing Enter (one attempt silently stored an empty
+  value because the paste didn't register).
+
+### Issue 9 — `CONTACT_FORM_SECRET` mismatch between Worker and Apps Script
+
+Once all three secrets existed under correct names, Turnstile passed
+cleanly and the request reached Apps Script — which then rejected it with
+its own `{"success":false,"error":"Unauthorized."}`. The Worker's
+`CONTACT_FORM_SECRET` didn't match the value in the Apps Script's Script
+Properties. This traces back to an earlier incident in this project: this
+exact secret was once accidentally pasted into a chat session while
+attempting the invalid `NAME=value` syntax, and rotating it had been
+recommended at the time but not yet done — the two sides had simply
+drifted apart since. Fixed by generating a fresh value
+(`python -c "import secrets; print(secrets.token_urlsafe(32))"`) and
+setting it **identically in both places**: the Apps Script's Script
+Properties (⚙ Project Settings → Script Properties →
+`CONTACT_FORM_SECRET`) and `wrangler secret put CONTACT_FORM_SECRET` on
+the Worker.
+
+### Diagnostic technique that actually cracked this
+
+Guessing from symptoms alone didn't work — issues 6 through 9 all
+produced the identical generic "We could not send your message right
+now" on-screen, with completely different causes. What worked:
+
+1. **`npx wrangler tail marietta-nepali-samaj-contact-api --format
+   pretty`** — watches real production requests as they happen, live.
+   Essential; nothing above was found by guessing.
+2. `verifyTurnstile()` and `forwardToAppsScript()` in
+   `workers/api/contact.ts` originally swallowed every failure silently
+   (`return false` with no log). Temporarily added `console.error(...)`
+   at each branch — the failing HTTP status, the provider's own
+   `error-codes`/`error` text, never secret material or message content
+   — redeployed, watched the tail for the next real submission, repeated
+   as each layer got fixed and the next one surfaced.
+3. A one-off `/api/debug-turnstile-secret` GET endpoint tested whether
+   `TURNSTILE_SECRET_KEY` was valid in isolation (a deliberately bogus
+   response token still tells you, via Cloudflare's error code, whether
+   the *secret* itself is accepted) — useful for confirming a fix without
+   needing a real browser to solve the widget each time. Removed after
+   use; not something that should stay live in production.
+4. Once root-caused, the verbose per-attempt logging was trimmed back to
+   permanent, low-noise versions of the two most useful signals (Turnstile
+   `error-codes`, Apps Script's own rejection reason) — see the code
+   comments in `workers/api/contact.ts` for exactly what's still logged
+   and why it's considered safe to keep.
+
+### Final verification
+
+Confirmed via the live tail showing a real `200`, and directly in the
+Google Sheet — a new row from an actual submission on
+`https://mns-hazel.vercel.app/contact`, not just an absence of errors.
+
+---
+
+## Next step: custom `.com` domain
+
+Do this when the real domain is ready to attach.
+
+### 1. (Optional but recommended) a real dedicated Sheet
+
+Production has been running against the test Sheet from local dev — see
+the callout at the top of [Production rollout](#production-rollout-vercel--cloudflare-worker).
+To split them:
 
 - **Simplest option:** keep the existing Apps Script deployment and just
-  update its `SHEET_ID` Script Property to the new Sheet's ID
+  update its `SHEET_ID` Script Property to a new Sheet's ID
   (Apps Script → ⚙ Project Settings → Script Properties). The script opens
   whichever Sheet ID is configured there — it isn't hard-locked to the
-  Sheet it was originally created from. No redeploy needed for this change
-  alone (Script Properties take effect immediately).
+  Sheet it was originally created from. No redeploy needed (Script
+  Properties take effect immediately).
 - **Cleaner-separation option:** create a fresh Apps Script project bound
-  to the new Sheet (Extensions → Apps Script from within it), repeat the
-  Script Properties + deployment steps in
+  to the new Sheet, repeat the Script Properties + deployment steps in
   [`contact-form-google-sheets.md`](contact-form-google-sheets.md), and
   update the Worker's `GOOGLE_APPS_SCRIPT_URL` secret to the new `/exec`
-  URL.
+  URL (`wrangler secret put GOOGLE_APPS_SCRIPT_URL`).
 
-Either way, generate a **new** `CONTACT_FORM_SECRET` for production rather
-than reusing the test one above — set it in the new Script Properties and
-as the Worker's production secret (step 3 below) with the same value in
-both places.
+### 2. Attach the domain
 
-### 2. Real `.com` domain
-
-- **Turnstile:** add the real domain to the existing widget's domain
-  allow-list (Turnstile dashboard → your widget → Settings), or create a
-  separate production widget if you'd rather keep test/prod fully split.
+- **Vercel:** add the domain in Project Settings → Domains, and follow its
+  DNS instructions.
+- **Turnstile:** add the new domain to the widget's allowed-hostnames list
+  (Turnstile dashboard → your widget → Settings) — keep
+  `mns-hazel.vercel.app` there too unless you're retiring it, per
+  [issue 7](#issue-7--turnstile-widget-rejected-the-domain-error-110200)
+  above.
 - **`wrangler.toml`:** update `ALLOWED_ORIGIN` under `[vars]` to
-  `https://<realdomain>.com`, and uncomment + fill in the `[[routes]]`
-  block once the domain is attached to a Cloudflare zone.
-- **Frontend:** set `VITE_TURNSTILE_SITE_KEY` in whatever environment
-  config your production hosting uses (not `.env`, which is local-only and
-  gitignored) — use the **production** Turnstile widget's site key if you
-  created a separate one.
+  `https://<realdomain>.com` — see
+  [issue 4](#issue-4--allowed_origin-still-pointed-at-the-unattached-custom-domain)
+  for why this matters, then `npm run worker:deploy`. Optionally uncomment
+  and fill in the `[[routes]]` block if routing the Worker directly on the
+  domain's own Cloudflare zone instead of proxying through Vercel's
+  `rewrites` (the current `vercel.json` proxy approach works fine either
+  way and needs no change for the domain switch alone).
+- **Frontend:** `VITE_TURNSTILE_SITE_KEY` in Vercel only needs to change
+  if you created a **separate** production Turnstile widget instead of
+  reusing the current one.
 
-### 3. Cloudflare Worker secrets (production)
+### 3. Verify again
 
-```bash
-wrangler secret put GOOGLE_APPS_SCRIPT_URL     # production /exec URL
-wrangler secret put CONTACT_FORM_SECRET         # new production secret
-wrangler secret put TURNSTILE_SECRET_KEY        # production widget's secret key
-```
-
-Then:
-
-```bash
-npm run worker:deploy
-```
-
-### 4. Verify again
-
-Same as the [Verification performed](#verification-performed) section
-above, but against production: submit the live form on the real domain,
-confirm the Worker call succeeds, and confirm exactly one new row lands in
-the real Sheet. Don't consider production "done" until that row has
-actually appeared.
+Same as [Verification performed](#verification-performed) above, but
+against the new domain: submit the live form, confirm the Worker call
+succeeds, and confirm exactly one new row lands in the Sheet. Don't
+consider it "done" until that row has actually appeared — see
+[Issue 5](#issue-5--every-direct-page-load-404d-not-just-the-api) as a
+reminder that "the homepage loads" isn't the same as "every route and the
+form actually work."

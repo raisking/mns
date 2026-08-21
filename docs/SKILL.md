@@ -320,13 +320,16 @@ rather than hardcoding them in pages.
 
 ## Backend: the Contact form
 
-The only real backend integration on the site. Full detail in
+The only real backend integration on the site. **Live in production** at
+`https://mns-hazel.vercel.app/contact` (Worker deployed separately on
+Cloudflare, not part of the Vercel build). Full detail in
 [`contact-form-google-sheets.md`](contact-form-google-sheets.md) (generic
 setup reference) and [`contact-form-setup.md`](contact-form-setup.md)
-(what was actually configured for this project, issues hit, and the
-checklist for switching to the production Sheet/domain — **read that one
-before touching Contact form config**, current values there are marked
-temporary/test).
+(what was actually configured for this project, the nine-issue production
+rollout, and the checklist for the still-pending switch to a `.com`
+domain — **read that one before touching Contact form config**; it also
+flags that production currently shares the test Google Sheet rather than
+a dedicated one).
 
 Architecture: `ContactForm.tsx` → `contactService.ts` → `POST /api/contact`
 → `workers/api/contact.ts` (independent server-side validation +
@@ -335,6 +338,13 @@ spreadsheet-injection sanitization) → Google Sheet. React never talks to
 Apps Script directly and never sees a secret. `contactValidation.ts` and
 `contactSubjects.ts` are imported by both the frontend and the Worker, so
 validation rules and the subject list only exist in one place each.
+
+`vercel.json` (repo root) ties the two deployments together: it fixes
+Vite's `dist/` output directory (Vercel's zero-config default expects
+`build/`), proxies `/api/*` to the Worker's own `*.workers.dev` URL, and
+restores the SPA fallback to `index.html` — a custom `rewrites` array
+overrides Vercel's automatic one, so without that third rule every
+client-side route 404s on direct load, not just the API.
 
 Secrets: `.env` (frontend, `VITE_TURNSTILE_SITE_KEY` only) and `.dev.vars`
 (Worker local dev — `GOOGLE_APPS_SCRIPT_URL`, `CONTACT_FORM_SECRET`,
