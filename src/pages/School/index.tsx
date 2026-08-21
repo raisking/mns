@@ -18,7 +18,7 @@ const scheduleRows = [
   { label: 'Day', value: 'Every Sunday' },
   { label: 'Time', value: '10:00 AM – 12:00 PM' },
   { label: 'Location', value: 'Marietta Community Center' },
-  { label: 'Ages', value: '3-16 years' },
+  { label: 'Grades', value: 'PreK to Grade 8' },
   { label: 'Language', value: 'Nepali' },
   { label: 'Tuition', value: '$200–$250 / semester — see below' },
 ];

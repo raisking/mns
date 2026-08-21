@@ -148,7 +148,7 @@ export default function Home() {
               <div className="grid grid-cols-3 gap-3 mb-8">
                 {[
                   { value: 'Weekly', label: 'Every Sunday' },
-                  { value: '3-16', label: 'Ages Welcome' },
+                  { value: 'PreK to Grade 8', label: 'Grades Welcome' },
                   { value: '$200+', label: 'Fee Details', to: '/nepali-school#fees' },
                 ].map(stat =>
                   stat.to ? (
