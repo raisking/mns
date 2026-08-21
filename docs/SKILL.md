@@ -386,17 +386,16 @@ uses it) — remember it's the Worker's validation list too
 file), so adding a value here is sufficient; there's no separate
 Worker-side list to keep in sync.
 
-The compact (non-`featured`) `LeadershipCard` variant truncates `bio` to
-3 lines (`line-clamp-3`) and, when a `bio` exists, renders as a real
-`<button>` with `aria-expanded` — hovering (`group-hover`) *or*
-tapping/Enter/Space (a `revealed` state toggle) reveals the full bio as
-an `absolute inset-0` overlay sized to the card's own footprint, so it
-never shifts sibling cards in the grid. The always-present truncated
-`<p>` already carries the full bio text to screen readers regardless of
-its visual clipping, so the overlay itself is `aria-hidden="true"`
-unconditionally — don't remove that, or expanding will announce the bio
-twice. Members with no `bio` get the plain non-interactive card (nothing
-to disclose, so no button semantics).
+The compact (non-`featured`) `LeadershipCard` variant is a plain static
+`<div>` — no button semantics, no hover/tap state. It used to truncate
+`bio` to 3 lines and reveal the rest via a hover/tap overlay, but that
+was removed by request: for the bios actually in use, nothing was long
+enough to truncate, so the "reveal" just re-displayed the same text.
+Members with a `bio` now show it in full, always; members without one
+just don't get that paragraph. If a genuinely long bio shows up later
+and this needs truncation again, don't bring back the old hover-reveal
+pattern without checking first — it was removed on purpose, not because
+of a bug.
 
 Org-level config lives in `src/config/organization.ts` (name, tagline,
 contact info, social links, donation categories) — update values there
