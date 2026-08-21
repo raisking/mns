@@ -164,13 +164,11 @@ export default function School() {
           </div>
 
           {/* Carries the selected rate to Donate/Payment as ?amount=, and
-              purpose=tuition specifically (not 'school', used by the
-              general "Support the School" CTA below) so the purpose
-              dropdown lands on "Nepali School Tuition" rather than a
-              generic donation category. No live payment processor exists
-              yet (see Donate's own comment on handleDonate), so Submit
-              there still shows a placeholder alert rather than actually
-              charging anything. */}
+              purpose=tuition so the purpose dropdown lands on "Nepali
+              School Tuition" rather than General Fund. No live payment
+              processor exists yet (see Donate's own comment on
+              handleDonate), so Submit there still shows a placeholder
+              alert rather than actually charging anything. */}
           <div className="flex justify-center mb-6">
             <Button to={`/donate?purpose=tuition&amount=${feeAmount}`} variant="primary" size="lg">
               Enroll & Pay (${feeAmount}) →
@@ -192,7 +190,7 @@ export default function School() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button to="/contact" size="lg" variant="outlineLight">Contact to Enroll</Button>
-            <Button to="/donate?purpose=school" size="lg" variant="light">Support the School</Button>
+            <Button to="/donate?purpose=tuition" size="lg" variant="light">Support the School</Button>
           </div>
         </div>
       </div>

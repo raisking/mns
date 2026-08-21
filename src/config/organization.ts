@@ -23,12 +23,13 @@ export const socialLinks = {
 
 export const donationCategories = [
   { id: 'general', label: 'General Fund' },
-  { id: 'school', label: 'Nepali School' },
-  // Distinct from 'school' above (a general donation toward the program) —
-  // this is specifically "I'm paying my own child's tuition," which is
-  // what the School page's fee cards link to. Keep both: someone donating
-  // to support the school in general isn't the same as a parent paying
-  // what they owe.
+  // 'school' (plain "Nepali School") was removed as redundant now that
+  // this exists — every school-related donation/payment link in the app
+  // (fee payment AND general "support the school" CTAs alike) points at
+  // this one id. If a narrower "general support, not tuition" category is
+  // ever wanted back, re-add it as a distinct id rather than reusing this
+  // one, and repoint the non-tuition CTAs (Home's "Support Nepali School",
+  // School page's "Support the School") back to it.
   { id: 'tuition', label: 'Nepali School Tuition' },
   { id: 'events', label: 'Community Events' },
   { id: 'education', label: 'Education Fund' },

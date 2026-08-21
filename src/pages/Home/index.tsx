@@ -317,7 +317,7 @@ export default function Home() {
             <Button to="/donate" size="lg" variant="accent">
               Donate Now
             </Button>
-            <Button to="/donate?purpose=school" size="lg" variant="outlineLight">
+            <Button to="/donate?purpose=tuition" size="lg" variant="outlineLight">
               Support Nepali School
             </Button>
           </div>
