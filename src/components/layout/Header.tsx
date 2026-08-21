@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import logo from '../../assets/mns-logo.png';
+import logo from '../../assets/mns-v.png';
 
 interface NavItem {
   label: string;
@@ -131,7 +131,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center flex-shrink-0" onClick={() => { closeMobile(); goHome(); }}>
-            {/* mns-logo.png is a wide horizontal lockup (icon + wordmark,
+            {/* mns-v.png is a wide horizontal lockup (icon + wordmark,
                 ~4:1 aspect), not the old square emblem — sized shorter so
                 it doesn't overrun the nav next to it. */}
             <img src={logo} alt="Marietta Nepali Samaj" className="h-10 md:h-12 w-auto" />

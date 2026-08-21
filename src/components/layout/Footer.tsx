@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { organization } from '../../config/organization';
-import logo from '../../assets/mns-logo.png';
+import logo from '../../assets/mns-v.png';
 import SocialIcons from '../common/SocialIcons';
 
 export default function Footer() {
@@ -12,11 +12,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            {/* mns-logo.png has a transparent background, but its wordmark
-                text is near-black (~rgb(22,27,33)) — contrast-checked
-                against bg-ink and it computes to ~1:1, invisible. Needs a
-                light plate behind it here, unlike a logo with light/white
-                text that could sit directly on the dark footer. */}
+            {/* mns-v.png ships on an opaque white background (not
+                transparent like the old mns-logo.png) and its wordmark
+                text is near-black — same contrast problem against bg-ink
+                either way. The white plate still does the job, now simply
+                by matching the image's own background instead of adding
+                one. */}
             <div className="inline-block bg-white rounded-lg p-3 mb-4">
               <img src={logo} alt="Marietta Nepali Samaj" className="h-12 w-auto" />
             </div>
