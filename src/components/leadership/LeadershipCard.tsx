@@ -16,7 +16,8 @@ export default function LeadershipCard({ member, featured = false }: LeadershipC
           <img
             src={member.photo || '/placeholder-person.jpg'}
             alt={member.name}
-            className="w-full h-64 md:h-full object-cover"
+            // object-top — see the circular avatar below for why.
+            className="w-full h-64 md:h-full object-cover object-top"
           />
         </div>
         <div className="p-8 flex flex-col justify-center">
@@ -41,7 +42,13 @@ export default function LeadershipCard({ member, featured = false }: LeadershipC
             src={member.photo || '/placeholder-person.jpg'}
             alt={member.name}
             loading="lazy"
-            className="w-full h-full object-cover"
+            // object-top, not center: these are portrait source photos
+            // (e.g. 400x600) cropped into a 1:1 circle. Centered cover
+            // crops equally off the top and bottom, and these photos have
+            // little headroom above the hair — center cropping clips it.
+            // Anchoring to the top crops the excess from the bottom
+            // (shoulders/chest) instead, which is always safe to lose.
+            className="w-full h-full object-cover object-top"
           />
         </div>
         <h3 className="text-base text-ink">{member.name}</h3>
@@ -62,7 +69,8 @@ export default function LeadershipCard({ member, featured = false }: LeadershipC
           src={member.photo || '/placeholder-person.jpg'}
           alt={member.name}
           loading="lazy"
-          className="w-full h-full object-cover"
+          // object-top — see the no-bio branch above for why.
+          className="w-full h-full object-cover object-top"
         />
       </div>
       <h3 className="text-base text-ink">{member.name}</h3>
