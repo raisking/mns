@@ -76,8 +76,15 @@ export default function Home() {
             <Button to="/about" size="lg" variant="outlineLight">
               Explore Our Community
             </Button>
-            <Button to="/donate" size="lg" variant="accent">
-              Donate
+            {/* Donate already gets its own dedicated, always-visible marigold
+                "pill + pin" treatment in the Header (see Header.tsx) — this
+                spot fits a new visitor's more natural first move better:
+                "what's actually happening" rather than a second donate ask
+                one scroll after the header's. variant="light" (not
+                "accent"/marigold) on purpose, so this button doesn't read as
+                a second Donate button next to the Header's marigold one. */}
+            <Button to="/events" size="lg" variant="light">
+              See Upcoming Events
             </Button>
           </div>
         </div>
