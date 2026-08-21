@@ -21,6 +21,15 @@ export default function Donate() {
   const [customAmount, setCustomAmount] = useState(
     amountParam > 0 && !isPresetAmount ? String(amountParam) : ''
   );
+  // One-time vs monthly recurring. Kept separate from selectedAmount so
+  // switching frequency doesn't wipe out whatever amount the donor already
+  // picked (a preset $50 stays $50, just relabeled "/mo").
+  const [frequency, setFrequency] = useState<'once' | 'monthly'>('once');
+  // Second-lowest preset as the suggested recurring amount (mirrors how
+  // most giving platforms nudge toward a moderate, sustainable monthly
+  // gift rather than the smallest or largest option) — an honest "we
+  // suggest this" nudge, not a fabricated "X% of donors pick this" claim.
+  const suggestedMonthly = donationAmounts[1] ?? donationAmounts[0];
 
   const handleDonate = () => {
     const amount = customAmount ? parseFloat(customAmount) : selectedAmount;
@@ -28,8 +37,11 @@ export default function Donate() {
       alert('Please select or enter a valid donation amount.');
       return;
     }
-    // In production: call Cloudflare Worker → Stripe Checkout
-    alert(`Thank you! Redirecting to secure payment for $${amount} toward "${donationCategories.find(c => c.id === selectedCategory)?.label}".\n\n(Stripe Checkout will be connected in Phase 1F)`);
+    const cadence = frequency === 'monthly' ? `$${amount}/month (recurring)` : `$${amount} one-time`;
+    // In production: one-time → Cloudflare Worker → Stripe Checkout;
+    // monthly → Stripe Billing subscription (recurring charges need a
+    // Subscription object, not a one-off Checkout session).
+    alert(`Thank you! Redirecting to secure payment for ${cadence} toward "${donationCategories.find(c => c.id === selectedCategory)?.label}".\n\n(Stripe will be connected in Phase 1F)`);
   };
 
   return (
@@ -65,12 +77,51 @@ export default function Donate() {
             </select>
           </div>
 
+          {/* Frequency */}
+          <fieldset className="mb-8">
+            <legend className="text-sm font-semibold text-gray-700 mb-3">Frequency</legend>
+            <div className="grid grid-cols-2 gap-2.5">
+              {(['once', 'monthly'] as const).map(freq => (
+                <label key={freq} className="cursor-pointer">
+                  <input
+                    type="radio"
+                    name="frequency"
+                    checked={frequency === freq}
+                    onChange={() => setFrequency(freq)}
+                    className="sr-only"
+                  />
+                  <div
+                    className={`py-3 rounded-lg border-2 text-sm font-bold text-center transition-all ${
+                      frequency === freq
+                        ? 'border-saffron bg-saffron text-white shadow-sm'
+                        : 'border-gray-200 text-gray-700 hover:border-gray-300'
+                    }`}
+                  >
+                    {freq === 'once' ? 'One-Time' : 'Monthly'}
+                  </div>
+                </label>
+              ))}
+            </div>
+            {frequency === 'monthly' && (
+              <p className="text-xs text-saffron font-medium text-center mt-2">
+                A recurring gift helps us plan ahead — cancel anytime.
+              </p>
+            )}
+          </fieldset>
+
           {/* Amount */}
           <fieldset className="mb-8">
-            <legend className="text-sm font-semibold text-gray-700 mb-3">Donation Amount</legend>
+            <legend className="text-sm font-semibold text-gray-700 mb-3">
+              {frequency === 'monthly' ? 'Monthly Amount' : 'Donation Amount'}
+            </legend>
             <div className="grid grid-cols-4 gap-2.5 mb-3">
               {donationAmounts.map(amount => (
-                <label key={amount} className="cursor-pointer">
+                <label key={amount} className="relative cursor-pointer">
+                  {frequency === 'monthly' && amount === suggestedMonthly && (
+                    <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-marigold text-ink text-[10px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full shadow-sm">
+                      Suggested
+                    </span>
+                  )}
                   <input
                     type="radio"
                     name="amount"
@@ -85,7 +136,7 @@ export default function Donate() {
                         : 'border-gray-200 text-gray-700 hover:border-gray-300'
                     }`}
                   >
-                    ${amount}
+                    ${amount}{frequency === 'monthly' && <span className="font-normal">/mo</span>}
                   </div>
                 </label>
               ))}
@@ -116,9 +167,9 @@ export default function Donate() {
               <p className="font-semibold text-gray-900">{donationCategories.find(c => c.id === selectedCategory)?.label}</p>
             </div>
             <div className="text-right">
-              <p className="text-xs text-gray-500">Amount</p>
+              <p className="text-xs text-gray-500">{frequency === 'monthly' ? 'Monthly Amount' : 'Amount'}</p>
               <p className="font-bold text-xl text-saffron">
-                ${customAmount || selectedAmount || '—'}
+                ${customAmount || selectedAmount || '—'}{frequency === 'monthly' && (customAmount || selectedAmount) && <span className="text-sm font-semibold">/mo</span>}
               </p>
             </div>
           </div>
@@ -127,7 +178,7 @@ export default function Donate() {
             onClick={handleDonate}
             className="w-full py-4 bg-indigo hover:bg-indigo/85 text-white font-bold text-base rounded-full transition-colors shadow-md hover:shadow-lg"
           >
-            Submit
+            {frequency === 'monthly' ? 'Start Monthly Giving' : 'Submit'}
           </button>
 
           <p className="text-center text-xs text-gray-400 mt-4">

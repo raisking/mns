@@ -155,10 +155,21 @@ export default function Home() {
                     <Link
                       key={stat.label}
                       to={stat.to}
-                      className="bg-white rounded-xl p-3 text-center shadow-sm hover:shadow-md transition-shadow"
+                      className="group bg-white rounded-xl p-3 text-center shadow-sm ring-1 ring-transparent hover:ring-saffron/30 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron focus-visible:ring-offset-2 transition-all duration-200"
                     >
                       <p className="text-lg font-display font-bold text-saffron leading-none">{stat.value}</p>
-                      <p className="text-xs text-ink-soft mt-1 underline underline-offset-2">{stat.label}</p>
+                      <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-saffron/10 group-hover:bg-saffron text-saffron group-hover:text-white text-xs font-semibold px-2.5 py-1 transition-colors duration-200">
+                        {stat.label}
+                        <svg
+                          className="w-3 h-3 flex-shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
                     </Link>
                   ) : (
                     <div key={stat.label} className="bg-white rounded-xl p-3 text-center shadow-sm">

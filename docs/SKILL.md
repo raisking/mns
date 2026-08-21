@@ -144,8 +144,9 @@ templated" details — reuse these instead of inventing new ones):
   ContactForm's submit button, Donate page's submit button) were updated
   to match by hand — if you add another one, give it the same
   `rounded-full font-bold` treatment rather than a bespoke shape.
-  Selection/filter chips (quick-nav pills, Donate's category/amount
-  picker) are a different pattern and intentionally stayed `rounded-lg`.
+  Selection/filter chips (quick-nav pills, Donate's category/amount/
+  frequency picker) are a different pattern and intentionally stayed
+  `rounded-lg`.
   Hover is color-only, no movement: solid variants (`primary`/
   `secondary`) lighten via an opacity-lowered hover
   (`hover:bg-indigo/85`, `hover:bg-saffron/85`) rather than the earlier

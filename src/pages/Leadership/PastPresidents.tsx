@@ -21,7 +21,7 @@ export default function PastPresidents() {
           {pastPresidents.map(p => (
             <div key={p.id} className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow p-6 flex gap-5 items-start">
               <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 ring-4 ring-saffron/10">
-                <img src={p.photo} alt={p.name} loading="lazy" className="w-full h-full object-cover" />
+                <img src={p.photo} alt={p.name} loading="lazy" className="w-full h-full object-cover object-top" />
               </div>
               <div>
                 <h3 className="text-lg text-ink">{p.name}</h3>
