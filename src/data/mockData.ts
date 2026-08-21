@@ -238,7 +238,7 @@ export const schoolStaff: SchoolStaffMember[] = [
     position: 'Principal',
     category: 'Principal',
     photo: PRINCIPAL_IMG,
-    bio: 'Leads the Nepali School with a focus on making language learning joyful for every child, regardless of how much Nepali they speak at home.',
+    bio: 'Prakash brings years of teaching experience from Nepal, where he taught in both public and private schools before moving to Marietta. He leads the Nepali School with a focus on making language learning joyful for every child, regardless of how much Nepali they speak at home — and believes every class should leave students a little prouder of where their family comes from.',
   },
   {
     id: '2',
