@@ -74,22 +74,22 @@ async function verifyTurnstile(token: string, secret: string, remoteIp: string |
       body,
     });
     if (!res.ok) {
-      // TEMP DIAGNOSTIC — Cloudflare's own rejection body (error-codes only,
-      // e.g. "missing-input-secret"/"invalid-input-secret") — never our
-      // secret material, which never appears in siteverify's response.
-      // Remove once the production 400 is root-caused.
-      console.error('contact form: siteverify HTTP error', res.status, await res.text());
+      // Operational signal only. A non-2xx here (as opposed to a 200 with
+      // success:false) almost always means TURNSTILE_SECRET_KEY itself is
+      // missing or malformed — see docs/contact-form-setup.md's
+      // troubleshooting section for how this was diagnosed in production.
+      console.error('contact form: siteverify HTTP error', res.status);
       return false;
     }
     const data = (await res.json()) as { success?: boolean; 'error-codes'?: string[] };
     if (data.success !== true) {
-      // TEMP DIAGNOSTIC — Cloudflare's own rejection reason, never secret
-      // material. Remove once the production 400 is root-caused.
+      // Cloudflare's own public error-codes taxonomy (e.g.
+      // "invalid-input-response", "timeout-or-duplicate") — never our
+      // secret, which never appears in siteverify's response body.
       console.error('contact form: siteverify rejected', data['error-codes']);
     }
     return data.success === true;
   } catch (err) {
-    // TEMP DIAGNOSTIC — remove once the production 400 is root-caused.
     console.error('contact form: siteverify fetch threw', err instanceof Error ? err.message : String(err));
     return false;
   }
@@ -121,29 +121,30 @@ async function forwardToAppsScript(env: Env, payload: AppsScriptForwardInput): P
       }),
     });
     if (!res.ok) {
-      // TEMP DIAGNOSTIC — Apps Script's own HTTP status + response body.
-      // Never includes our secret (that's request-side, not in any
-      // response). Remove once the production 502 is root-caused.
-      console.error('contact form: apps script HTTP error', res.status, (await res.text()).slice(0, 500));
+      // Operational signal only.
+      console.error('contact form: apps script HTTP error', res.status);
       return false;
     }
     const rawBody = await res.text();
-    let data: { success?: boolean };
+    let data: { success?: boolean; error?: string };
     try {
-      data = JSON.parse(rawBody) as { success?: boolean };
+      data = JSON.parse(rawBody) as { success?: boolean; error?: string };
     } catch {
-      // TEMP DIAGNOSTIC — Apps Script returned non-JSON (e.g. an HTML
-      // sign-in/error page). Remove once the production 502 is root-caused.
-      console.error('contact form: apps script returned non-JSON', rawBody.slice(0, 500));
+      // Apps Script returned non-JSON — typically an HTML sign-in/error
+      // page, which usually means the deployment's access setting reverted
+      // away from "Anyone" (see docs/contact-form-setup.md).
+      console.error('contact form: apps script returned non-JSON response');
       return false;
     }
     if (data.success !== true) {
-      // TEMP DIAGNOSTIC — remove once the production 502 is root-caused.
-      console.error('contact form: apps script reported failure', JSON.stringify(data).slice(0, 500));
+      // Apps Script's own rejection reason (e.g. "Unauthorized." on a
+      // CONTACT_FORM_SECRET mismatch between here and its Script
+      // Properties) — never message content. See
+      // docs/contact-form-setup.md's troubleshooting section.
+      console.error('contact form: apps script reported failure', data.error ?? '(no reason given)');
     }
     return data.success === true;
   } catch (err) {
-    // TEMP DIAGNOSTIC — remove once the production 502 is root-caused.
     console.error('contact form: apps script fetch threw', err instanceof Error ? err.message : String(err));
     return false;
   }
@@ -208,11 +209,8 @@ export async function handleContactRequest(request: Request, env: Env): Promise<
   const sourcePage = asString(body.sourcePage).slice(0, 2048);
   const turnstileToken = asString(body.turnstileToken);
 
-  const { valid, errors: fieldErrors } = validateContactForm({ fullName, email, phone, subject, message });
+  const { valid } = validateContactForm({ fullName, email, phone, subject, message });
   if (!valid) {
-    // TEMP DIAGNOSTIC — field names only, never values. Remove once the
-    // production 400 is root-caused.
-    console.error('contact form: field validation failed', Object.keys(fieldErrors));
     return jsonResponse({ success: false }, 400, origin);
   }
 
@@ -221,8 +219,6 @@ export async function handleContactRequest(request: Request, env: Env): Promise<
   const remoteIp = request.headers.get('CF-Connecting-IP');
   const turnstileOk = await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY, remoteIp);
   if (!turnstileOk) {
-    // TEMP DIAGNOSTIC — remove once the production 400 is root-caused.
-    console.error('contact form: turnstile verification failed', { hadToken: turnstileToken.length > 0 });
     return jsonResponse({ success: false }, 400, origin);
   }
 
@@ -249,26 +245,6 @@ export async function handleContactRequest(request: Request, env: Env): Promise<
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    // TEMP DIAGNOSTIC — isolates whether TURNSTILE_SECRET_KEY itself is
-    // valid, independent of any real widget token, by sending Cloudflare's
-    // siteverify a deliberately bogus response. "invalid-input-secret"
-    // means the secret is still wrong; "invalid-input-response" or
-    // "timeout-or-duplicate" means the secret is fine. Reveals secret
-    // *length* only, never the value. Remove this branch once root-caused.
-    if (new URL(request.url).pathname === '/api/debug-turnstile-secret') {
-      const body = new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: 'debug-probe-token' });
-      const res = await fetch(TURNSTILE_VERIFY_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body,
-      });
-      const text = await res.text();
-      return new Response(
-        JSON.stringify({ status: res.status, body: text, secretLength: env.TURNSTILE_SECRET_KEY?.length ?? 0 }),
-        { headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-
     return handleContactRequest(request, env);
   },
 };
