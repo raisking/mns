@@ -105,19 +105,42 @@ export default function School() {
             scroll-mt so the sticky header doesn't cover the heading when
             landing here via that anchor. */}
         <section id="fees" className="scroll-mt-24 mb-20">
-          <h3 className="text-xl font-bold text-ink mb-6 text-center">Tuition & Fees</h3>
-          <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-4">
+          <h3 className="text-xl font-bold text-ink mb-8 text-center">Tuition & Fees</h3>
+          <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-8">
             <div className="bg-white rounded-xl shadow-sm p-6 text-center border border-gray-100">
               <p className="text-sm font-semibold text-ink-soft uppercase tracking-wide mb-2">Non-Member</p>
               <p className="text-3xl font-display font-bold text-ink">$250</p>
               <p className="text-sm text-ink-soft mt-1">per semester</p>
             </div>
-            <div className="bg-white rounded-xl shadow-sm p-6 text-center ring-2 ring-saffron">
+            {/* relative + the absolute badge is the one deliberately bold
+                touch here — everything else on this card matches its
+                Non-Member sibling exactly, so the badge (not a heavier
+                shadow or a bigger price) is what reads as "the one to
+                pick." */}
+            <div className="relative bg-white rounded-xl shadow-sm p-6 text-center ring-2 ring-saffron">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-saffron text-white text-[11px] font-bold uppercase tracking-wide px-3 py-1 rounded-full shadow-sm">
+                Best Value
+              </span>
               <p className="text-sm font-semibold text-saffron uppercase tracking-wide mb-2">MNS Member</p>
               <p className="text-3xl font-display font-bold text-ink">$200</p>
               <p className="text-sm text-ink-soft mt-1">per semester</p>
             </div>
           </div>
+
+          {/* Pre-fills the Contact form's Subject + Message (see
+              ContactForm.tsx) — payment is arranged directly with MNS, not
+              an automated checkout, so the honest "next step" is a
+              message that already says what it's for, not a blank form. */}
+          <div className="flex justify-center mb-6">
+            <Button
+              to={`/contact?subject=school&message=${encodeURIComponent("I'd like to enroll my child in the Nepali School and arrange tuition payment.")}`}
+              variant="primary"
+              size="lg"
+            >
+              Enroll & Pay →
+            </Button>
+          </div>
+
           <p className="text-sm text-ink-soft leading-relaxed text-center max-w-2xl mx-auto">
             Enrolling more than one child? Families get a discounted rate for each additional
             child enrolled — <Link to="/contact" className="text-saffron hover:underline font-semibold">contact us</Link> for details.

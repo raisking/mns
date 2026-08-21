@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
-import { contactSubjects } from '../../config/contactSubjects';
+import { useSearchParams } from 'react-router-dom';
+import { contactSubjects, isValidContactSubject } from '../../config/contactSubjects';
 import { validateContactForm } from '../../utils/contactValidation';
 import { submitContactForm } from '../../services/contactService';
 import type { ContactFormErrors } from '../../types/Contact';
@@ -15,12 +16,26 @@ interface FormData {
   website: string;
 }
 
-const initialForm: FormData = { name: '', email: '', phone: '', subject: '', message: '', website: '' };
+const blankForm: FormData = { name: '', email: '', phone: '', subject: '', message: '', website: '' };
 
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
 
 export default function ContactForm() {
-  const [form, setForm] = useState<FormData>(initialForm);
+  // Pre-fills Subject/Message from a link like /contact?subject=school —
+  // e.g. the Tuition & Fees "Enroll & Pay" CTA. useState's lazy initializer
+  // runs exactly once, on mount, which is exactly what's wanted here — it
+  // seeds the starting values without re-running (and fighting whatever
+  // the visitor has since typed) on every later re-render.
+  const [searchParams] = useSearchParams();
+  const [form, setForm] = useState<FormData>(() => {
+    const subjectParam = searchParams.get('subject') ?? '';
+    const messageParam = searchParams.get('message') ?? '';
+    return {
+      ...blankForm,
+      subject: isValidContactSubject(subjectParam) ? subjectParam : '',
+      message: messageParam,
+    };
+  });
   const [errors, setErrors] = useState<ContactFormErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -45,7 +60,7 @@ export default function ContactForm() {
     // hitting the network, rather than tipping off whatever filled it.
     if (form.website.trim() !== '') {
       setSubmitted(true);
-      setForm(initialForm);
+      setForm(blankForm);
       return;
     }
 
@@ -81,7 +96,7 @@ export default function ContactForm() {
         website: form.website,
       });
       setSubmitted(true);
-      setForm(initialForm);
+      setForm(blankForm);
     } catch {
       // Never surface err.message — it may carry internal/server detail.
       setSubmitFailed(true);
