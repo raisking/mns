@@ -330,10 +330,7 @@ export default function Home() {
           <p className="text-lg text-white/85 mb-10 max-w-2xl mx-auto leading-relaxed">
             Your generosity helps us continue our cultural programs, educational initiatives, and community events. Every contribution makes a difference.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button to="/donate" size="lg" variant="accent">
-              Donate Now
-            </Button>
+          <div className="flex justify-center">
             <Button to="/donate?purpose=tuition" size="lg" variant="outlineLight">
               Support Nepali School
             </Button>
