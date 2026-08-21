@@ -167,7 +167,7 @@ export const executiveCommittee: LeadershipMember[] = [
   { id: '3', name: 'Bikram Adhikari', position: 'Secretary', photo: PERSON_IMG },
   { id: '4', name: 'Anita Gurung', position: 'Joint Secretary', photo: PERSON_IMG },
   { id: '5', name: 'Pramod Karki', position: 'Treasurer', photo: PERSON_IMG },
-  { id: '6', name: 'Sita Rai', position: 'Executive Member', photo: PERSON_IMG },
+  { id: '6', name: 'Sita Sherpa', position: 'Executive Member', photo: PERSON_IMG },
   { id: '7', name: 'Dinesh Poudel', position: 'Executive Member', photo: PERSON_IMG },
   { id: '8', name: 'Maya Shrestha', position: 'Executive Member', photo: PERSON_IMG },
 ];
