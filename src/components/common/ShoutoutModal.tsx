@@ -117,7 +117,11 @@ export default function ShoutoutModal({ open, onClose, shoutouts, month }: Shout
                 <img
                   src={person.photo}
                   alt=""
-                  className="w-14 h-14 rounded-full object-cover flex-shrink-0 ring-2 ring-white"
+                  // object-top, not center — same fix as PastPresidents'
+                  // avatars: these are portrait source photos with little
+                  // headroom above the hair, and center-anchored
+                  // object-cover was cropping into the top of the head.
+                  className="w-14 h-14 rounded-full object-cover object-top flex-shrink-0 ring-2 ring-white"
                 />
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
