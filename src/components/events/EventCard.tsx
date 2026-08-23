@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom';
 import type { Event } from '../../types/Event';
+import { parseLocalDate } from '../../utils/date';
 
 interface EventCardProps {
   event: Event;
 }
 
 function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-US', {
+  return parseLocalDate(dateStr).toLocaleDateString('en-US', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
   });
 }
 
 export default function EventCard({ event }: EventCardProps) {
-  const date = new Date(event.date);
+  const date = parseLocalDate(event.date);
   const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
   const day = date.getDate();
 

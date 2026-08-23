@@ -5,6 +5,7 @@ import type { Shoutout } from '../types/Shoutout';
 import type { SchoolStaffMember } from '../types/SchoolStaff';
 import heroBanner from '../assets/nepali-school-banner.png';
 import dashain2026Img from '../assets/dashain2026.png';
+import parentsDayImg from '../assets/parents-day.jpg';
 import prakashKhattriImg from '../assets/prakash_khattri.jpg';
 import languageCultureImg from '../assets/slide/language_culture.jpeg';
 import kidsDancingImg from '../assets/slide/kids_dancing.jpeg';
@@ -23,6 +24,7 @@ const EVENT1_IMG = 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819
 const EVENT2_IMG = 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80';
 const EVENT3_IMG = 'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=800&q=80';
 const DASHAIN_2026_IMG = dashain2026Img;
+const PARENTS_DAY_2026_IMG = parentsDayImg; // real flyer — not a placeholder
 const PERSON_IMG = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80';
 const PERSON_IMG2 = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80';
 const PERSON_IMG3 = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80';
@@ -60,6 +62,25 @@ export const schoolCarouselSlides = [
 ];
 
 export const mockEvents: Event[] = [
+  {
+    id: '5',
+    slug: 'parents-day-graduation-2026',
+    title: '1st Parents Day & Graduation Ceremony 2026',
+    // Copy follows the official flyer (src/assets/parents-day.jpg) closely:
+    // its "Join Us For" list and closing message, condensed into prose
+    // since Event.description renders as a single paragraph, not a list.
+    description: 'Nepali School Marietta\'s first-ever Parents Day & Graduation Ceremony! Join us for student presentations, the graduation ceremony, awards and recognitions, and refreshments and fellowship. Your presence means a lot — let\'s come together to encourage our children and celebrate their hard work and bright future. We look forward to celebrating this memorable day with you!',
+    date: '2026-08-30',
+    startTime: '6:00 PM',
+    endTime: '8:00 PM',
+    location: 'Taj Mahal Grill',
+    // Address matches the flyer exactly — no city given there, and 30144
+    // is actually Kennesaw's zip, not Marietta's, so guessing "Marietta"
+    // into the string would risk adding a wrong city rather than a helpful one.
+    address: '1200 Ernest Barrett Pkwy, GA 30144',
+    coverImage: PARENTS_DAY_2026_IMG,
+    status: 'published',
+  },
   {
     id: '1',
     slug: 'nepali-new-year-2082',

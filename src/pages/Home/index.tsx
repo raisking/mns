@@ -209,39 +209,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Preview */}
+      {/* Upcoming Events — moved right after the Nepali School section so
+          "what's happening" follows MNS's most active program immediately,
+          rather than waiting behind the About Preview block. bg-white here
+          (was bg-paper-deep) and bg-paper-deep on About Preview below (was
+          bg-white) keeps the alternating background rhythm intact now that
+          the two sections have swapped places. */}
       <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-3">हाम्रो समुदाय · Who We Are</p>
-              <h2 className="text-3xl md:text-4xl text-ink mb-6">
-                A Home Away From Home for the Nepali Community
-              </h2>
-              <p className="text-ink-soft text-lg leading-relaxed mb-4">
-                Marietta Nepali Samaj is a nonprofit community organization dedicated to uniting Nepali families, students, and professionals in the Marietta, Georgia area.
-              </p>
-              <p className="text-ink-soft leading-relaxed mb-8">
-                We celebrate our rich cultural heritage through festivals, educational programs, and community service. Whether you are a longtime resident or newly arrived, MNS is your community.
-              </p>
-              <Button to="/about" variant="primary">Learn More About Us</Button>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {objectives.map(obj => (
-                <div key={obj.title} className="card-lift bg-paper-deep rounded-2xl p-5">
-                  <h3 className="text-ink mb-1">
-                    {obj.title} <span className="text-ink-soft/60 font-normal">· {obj.titleNp}</span>
-                  </h3>
-                  <p className="text-sm text-ink-soft leading-relaxed">{obj.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Upcoming Events */}
-      <section className="py-16 md:py-20 bg-paper-deep">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="कार्यक्रमहरू"
@@ -261,6 +235,37 @@ export default function Home() {
           )}
           <div className="text-center">
             <Button to="/events" variant="outline">View All Events</Button>
+          </div>
+        </div>
+      </section>
+
+      {/* About Preview */}
+      <section className="py-16 md:py-20 bg-paper-deep">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-3">हाम्रो समुदाय · Who We Are</p>
+              <h2 className="text-3xl md:text-4xl text-ink mb-6">
+                A Home Away From Home for the Nepali Community
+              </h2>
+              <p className="text-ink-soft text-lg leading-relaxed mb-4">
+                Marietta Nepali Samaj is a nonprofit community organization dedicated to uniting Nepali families, students, and professionals in the Marietta, Georgia area.
+              </p>
+              <p className="text-ink-soft leading-relaxed mb-8">
+                We celebrate our rich cultural heritage through festivals, educational programs, and community service. Whether you are a longtime resident or newly arrived, MNS is your community.
+              </p>
+              <Button to="/about" variant="primary">Learn More About Us</Button>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {objectives.map(obj => (
+                <div key={obj.title} className="card-lift bg-white rounded-2xl p-5">
+                  <h3 className="text-ink mb-1">
+                    {obj.title} <span className="text-ink-soft/60 font-normal">· {obj.titleNp}</span>
+                  </h3>
+                  <p className="text-sm text-ink-soft leading-relaxed">{obj.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { mockAlbums, galleryPreviewPhotos } from '../../data/mockData';
 import Button from '../../components/common/Button';
+import { parseLocalDate } from '../../utils/date';
 
 export default function AlbumDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -33,7 +34,7 @@ export default function AlbumDetail() {
           <h1 className="text-3xl md:text-4xl font-bold mb-2">{album.title}</h1>
           <div className="flex flex-wrap items-center gap-3 text-sm text-gray-400">
             {album.eventDate && (
-              <span>{new Date(album.eventDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              <span>{parseLocalDate(album.eventDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
             )}
             <span>•</span>
             <span>{album.photoCount} photos</span>

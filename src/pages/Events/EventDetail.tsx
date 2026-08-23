@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { mockEvents } from '../../data/mockData';
 import Button from '../../components/common/Button';
+import { parseLocalDate } from '../../utils/date';
 
 function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString('en-US', {
+  return parseLocalDate(dateStr).toLocaleDateString('en-US', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
   });
 }
@@ -22,6 +24,7 @@ function EventLinkButton({ url, ...props }: { url: string } & Omit<React.Compone
 export default function EventDetail() {
   const { slug } = useParams<{ slug: string }>();
   const event = mockEvents.find(e => e.slug === slug);
+  const [posterOpen, setPosterOpen] = useState(false);
 
   if (!event) {
     return (
@@ -70,6 +73,33 @@ export default function EventDetail() {
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
               <h2 className="font-bold text-gray-900 text-lg mb-4">About This Event</h2>
               <p className="text-gray-600 leading-relaxed">{event.description}</p>
+
+              {/* Poster — a separate thumbnail from the header's cropped
+                  cover-image banner above, since a portrait flyer (like this
+                  one) loses most of its text to that banner's landscape
+                  h-72/h-96 object-cover crop. Click to zoom to full size. */}
+              {event.coverImage && (
+                <div className="mt-6">
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Event Poster</p>
+                  <button
+                    type="button"
+                    onClick={() => setPosterOpen(true)}
+                    className="group relative block w-40 sm:w-48 overflow-hidden rounded-xl shadow-sm ring-1 ring-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron"
+                    aria-label={`View full-size poster for ${event.title}`}
+                  >
+                    <img
+                      src={event.coverImage}
+                      alt={`${event.title} event poster`}
+                      className="w-full h-auto group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                      <svg className="w-7 h-7 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+              )}
             </div>
 
             {event.donationUrl && (
@@ -147,6 +177,35 @@ export default function EventDetail() {
           </aside>
         </div>
       </div>
+
+      {/* Poster zoom lightbox — same pattern as AlbumDetail's photo viewer
+          (backdrop click or the close button dismiss it); just one image
+          here, so no prev/next controls. */}
+      {posterOpen && event.coverImage && (
+        <div
+          className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
+          onClick={() => setPosterOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${event.title} poster, full size`}
+        >
+          <button
+            className="absolute top-4 right-4 text-white/80 hover:text-white p-2"
+            onClick={() => setPosterOpen(false)}
+            aria-label="Close poster viewer"
+          >
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <img
+            src={event.coverImage}
+            alt={`${event.title} event poster`}
+            className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl"
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
     </>
   );
 }

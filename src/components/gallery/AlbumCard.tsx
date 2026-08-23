@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Album } from '../../types/Album';
+import { parseLocalDate } from '../../utils/date';
 
 interface AlbumCardProps {
   album: Album;
@@ -7,7 +8,7 @@ interface AlbumCardProps {
 
 export default function AlbumCard({ album }: AlbumCardProps) {
   const date = album.eventDate
-    ? new Date(album.eventDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+    ? parseLocalDate(album.eventDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
     : null;
 
   return (
