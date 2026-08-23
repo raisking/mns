@@ -189,25 +189,32 @@ export const galleryPreviewPhotos = [
   GALLERY1, GALLERY2, GALLERY3, GALLERY4, GALLERY5, GALLERY6,
 ];
 
+// Every name below except the current President (real person, real photo —
+// see PRESIDENT_IMG above) is placeholder: swapped to Joe Doe/Mary Jane at
+// the site owner's request, alternating in file order. The same real person
+// appearing in more than one list (e.g. a past President who also appears
+// in executiveCommitteeArchive) keeps one consistent replacement name
+// across every list they're in, matching the "don't contradict each other"
+// invariant executiveCommitteeArchive's comment already documents.
 export const executiveCommittee: LeadershipMember[] = [
   { id: '1', name: 'Bhabindra Basnet', position: 'President', photo: PRESIDENT_IMG, bio: 'Leading our community with vision and dedication.' },
-  { id: '2', name: 'Sunita Thapa', position: 'Vice President', photo: PERSON_IMG },
-  { id: '3', name: 'Bikram Adhikari', position: 'Secretary', photo: PERSON_IMG },
-  { id: '4', name: 'Anita Gurung', position: 'Joint Secretary', photo: PERSON_IMG },
-  { id: '5', name: 'Pramod Karki', position: 'Treasurer', photo: PERSON_IMG },
-  { id: '6', name: 'Sita Sherpa', position: 'Executive Member', photo: PERSON_IMG },
-  { id: '7', name: 'Dinesh Poudel', position: 'Executive Member', photo: PERSON_IMG },
-  { id: '8', name: 'Maya Shrestha', position: 'Executive Member', photo: PERSON_IMG },
+  { id: '2', name: 'Joe Doe', position: 'Vice President', photo: PERSON_IMG },
+  { id: '3', name: 'Mary Jane', position: 'Secretary', photo: PERSON_IMG },
+  { id: '4', name: 'Joe Doe', position: 'Joint Secretary', photo: PERSON_IMG },
+  { id: '5', name: 'Mary Jane', position: 'Treasurer', photo: PERSON_IMG },
+  { id: '6', name: 'Joe Doe', position: 'Executive Member', photo: PERSON_IMG },
+  { id: '7', name: 'Mary Jane', position: 'Executive Member', photo: PERSON_IMG },
+  { id: '8', name: 'Joe Doe', position: 'Executive Member', photo: PERSON_IMG },
 ];
 
 export const president = executiveCommittee[0];
 
 export const pastPresidents: PastPresident[] = [
-  { id: '1', name: 'Binod Bhattarai', photo: PERSON_IMG, term: '2022–2024', description: 'Led the organization through significant growth.' },
-  { id: '2', name: 'Kamal Regmi', photo: PERSON_IMG, term: '2020–2022', description: 'Established the Nepali School program.' },
-  { id: '3', name: 'Hira Tamang', photo: PERSON_IMG, term: '2018–2020', description: 'Founded key community partnerships.' },
-  { id: '4', name: 'Gopal Acharya', photo: PERSON_IMG, term: '2016–2018' },
-  { id: '5', name: 'Laxmi Devi KC', photo: PERSON_IMG, term: '2014–2016' },
+  { id: '1', name: 'Mary Jane', photo: PERSON_IMG, term: '2022–2024', description: 'Led the organization through significant growth.' },
+  { id: '2', name: 'Joe Doe', photo: PERSON_IMG, term: '2020–2022', description: 'Established the Nepali School program.' },
+  { id: '3', name: 'Mary Jane', photo: PERSON_IMG, term: '2018–2020', description: 'Founded key community partnerships.' },
+  { id: '4', name: 'Joe Doe', photo: PERSON_IMG, term: '2016–2018' },
+  { id: '5', name: 'Mary Jane', photo: PERSON_IMG, term: '2014–2016' },
 ];
 
 // Invented placeholder names, like every other roster in this file —
@@ -217,10 +224,10 @@ export const pastPresidents: PastPresident[] = [
 // overlapping/contradicting it. Replace with the real founders' names
 // once available.
 export const founders: LeadershipMember[] = [
-  { id: '1', name: 'Ramesh Sharma', position: 'Founding President', photo: PERSON_IMG2, bio: 'Helped bring the first informal gatherings together in 2010.' },
-  { id: '2', name: 'Kabita Rai', position: 'Founding Secretary', photo: PERSON_IMG3 },
-  { id: '3', name: 'Dipendra Shrestha', position: 'Founding Treasurer', photo: PERSON_IMG4 },
-  { id: '4', name: 'Nirmala Gurung', position: 'Founding Member', photo: PERSON_IMG5 },
+  { id: '1', name: 'Joe Doe', position: 'Founding President', photo: PERSON_IMG2, bio: 'Helped bring the first informal gatherings together in 2010.' },
+  { id: '2', name: 'Mary Jane', position: 'Founding Secretary', photo: PERSON_IMG3 },
+  { id: '3', name: 'Joe Doe', position: 'Founding Treasurer', photo: PERSON_IMG4 },
+  { id: '4', name: 'Mary Jane', position: 'Founding Member', photo: PERSON_IMG5 },
 ];
 
 // Yearly Executive Committee rosters — each term's President matches the
@@ -231,28 +238,28 @@ export const executiveCommitteeArchive: { term: string; members: LeadershipMembe
   {
     term: '2022–2024',
     members: [
-      { id: '1', name: 'Binod Bhattarai', position: 'President', photo: PERSON_IMG },
-      { id: '2', name: 'Sarita Basnet', position: 'Vice President', photo: PERSON_IMG2 },
-      { id: '3', name: 'Rajan Thapa', position: 'Secretary', photo: PERSON_IMG3 },
-      { id: '4', name: 'Puja Karki', position: 'Treasurer', photo: PERSON_IMG4 },
+      { id: '1', name: 'Mary Jane', position: 'President', photo: PERSON_IMG },
+      { id: '2', name: 'Joe Doe', position: 'Vice President', photo: PERSON_IMG2 },
+      { id: '3', name: 'Mary Jane', position: 'Secretary', photo: PERSON_IMG3 },
+      { id: '4', name: 'Joe Doe', position: 'Treasurer', photo: PERSON_IMG4 },
     ],
   },
   {
     term: '2020–2022',
     members: [
-      { id: '1', name: 'Kamal Regmi', position: 'President', photo: PERSON_IMG },
-      { id: '2', name: 'Nabin Adhikari', position: 'Vice President', photo: PERSON_IMG2 },
-      { id: '3', name: 'Sabina Poudel', position: 'Secretary', photo: PERSON_IMG3 },
-      { id: '4', name: 'Deepak Magar', position: 'Treasurer', photo: PERSON_IMG4 },
+      { id: '1', name: 'Joe Doe', position: 'President', photo: PERSON_IMG },
+      { id: '2', name: 'Mary Jane', position: 'Vice President', photo: PERSON_IMG2 },
+      { id: '3', name: 'Joe Doe', position: 'Secretary', photo: PERSON_IMG3 },
+      { id: '4', name: 'Mary Jane', position: 'Treasurer', photo: PERSON_IMG4 },
     ],
   },
   {
     term: '2018–2020',
     members: [
-      { id: '1', name: 'Hira Tamang', position: 'President', photo: PERSON_IMG },
-      { id: '2', name: 'Manisha Rana', position: 'Vice President', photo: PERSON_IMG2 },
-      { id: '3', name: 'Suresh Bista', position: 'Secretary', photo: PERSON_IMG3 },
-      { id: '4', name: 'Kalpana Neupane', position: 'Treasurer', photo: PERSON_IMG4 },
+      { id: '1', name: 'Mary Jane', position: 'President', photo: PERSON_IMG },
+      { id: '2', name: 'Joe Doe', position: 'Vice President', photo: PERSON_IMG2 },
+      { id: '3', name: 'Mary Jane', position: 'Secretary', photo: PERSON_IMG3 },
+      { id: '4', name: 'Joe Doe', position: 'Treasurer', photo: PERSON_IMG4 },
     ],
   },
 ];
@@ -285,21 +292,21 @@ export const shoutoutMonth = 'August 2026';
 export const monthlyShoutouts: Shoutout[] = [
   {
     id: '1',
-    name: 'Sabina Koirala',
+    name: 'Mary Jane',
     category: 'Member',
     photo: PERSON_IMG,
     highlight: "Organized this month's community potluck and personally welcomed three new families to MNS.",
   },
   {
     id: '2',
-    name: 'Aarav Gurung',
+    name: 'Joe Doe',
     category: 'Student',
     photo: PERSON_IMG2,
     highlight: "Perfect attendance at Nepali School this month — and always first to help younger students with their alphabet.",
   },
   {
     id: '3',
-    name: 'Suman Rai',
+    name: 'Mary Jane',
     category: 'Volunteer',
     photo: PERSON_IMG3,
     highlight: 'Showed up early and stayed late for setup and cleanup at every single event this month, rain or shine.',
@@ -317,7 +324,7 @@ export const schoolStaff: SchoolStaffMember[] = [
   },
   {
     id: '2',
-    name: 'Radha Poudel',
+    name: 'Joe Doe',
     position: 'Nepali Language Teacher',
     category: 'Teacher',
     photo: PERSON_IMG5,
@@ -325,7 +332,7 @@ export const schoolStaff: SchoolStaffMember[] = [
   },
   {
     id: '3',
-    name: 'Nirmala Bhattarai',
+    name: 'Mary Jane',
     position: 'Cultural Arts & Dance Teacher',
     category: 'Teacher',
     photo: PERSON_IMG2,
@@ -333,7 +340,7 @@ export const schoolStaff: SchoolStaffMember[] = [
   },
   {
     id: '4',
-    name: 'Ramesh Koirala',
+    name: 'Joe Doe',
     position: 'Music Teacher',
     category: 'Teacher',
     photo: PERSON_IMG,
@@ -341,7 +348,7 @@ export const schoolStaff: SchoolStaffMember[] = [
   },
   {
     id: '5',
-    name: 'Sarita Karki',
+    name: 'Mary Jane',
     position: 'Volunteer Coordinator',
     category: 'Volunteer',
     photo: PERSON_IMG3,
@@ -349,7 +356,7 @@ export const schoolStaff: SchoolStaffMember[] = [
   },
   {
     id: '6',
-    name: 'Deepak Thapa',
+    name: 'Joe Doe',
     position: 'Classroom Volunteer',
     category: 'Volunteer',
     photo: PERSON_IMG4,
