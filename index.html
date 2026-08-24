@@ -4,14 +4,73 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Marietta Nepali Samaj — Connecting the Nepali community in Marietta, Georgia. Cultural programs, Nepali School, events, and community services." />
+    <meta name="theme-color" content="#b45309" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Baseline title/description/social tags — this is what crawlers and
+         link-unfurlers see if they don't execute JS (most social-share
+         bots don't). Every route overrides these once React mounts, via
+         src/hooks/usePageMeta.ts — see that file's own comment for why
+         it's plain DOM mutation rather than relying on framework magic. -->
     <title>Marietta Nepali Samaj</title>
+    <meta name="description" content="Marietta Nepali Samaj — Connecting the Nepali community in Marietta, Georgia. Cultural programs, Nepali School, events, and community services." />
+    <!-- NOTE: mariettanepalisamaj.org is the eventual custom domain, not
+         live yet (see wrangler.toml's own comment) — this canonical/OG URL
+         must be updated to match the moment that domain is attached. -->
+    <link rel="canonical" href="https://mns-hazel.vercel.app/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Marietta Nepali Samaj" />
+    <meta property="og:title" content="Marietta Nepali Samaj" />
+    <meta property="og:description" content="Connecting the Nepali community in Marietta, Georgia. Cultural programs, Nepali School, events, and community services." />
+    <meta property="og:url" content="https://mns-hazel.vercel.app/" />
+    <meta property="og:image" content="https://mns-hazel.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Marietta Nepali Samaj" />
+    <meta name="twitter:description" content="Connecting the Nepali community in Marietta, Georgia. Cultural programs, Nepali School, events, and community services." />
+    <meta name="twitter:image" content="https://mns-hazel.vercel.app/og-image.jpg" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=IBM+Plex+Sans+Devanagari:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Organization structured data — real facts only (src/config/
+         organization.ts). youtube/instagram are excluded from sameAs on
+         purpose: youtube is still a placeholder link to the generic
+         YouTube homepage (not a real MNS channel), and instagram is empty
+         — neither is a real, verifiable MNS profile yet. Update this the
+         same day either becomes real. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "Marietta Nepali Samaj",
+        "alternateName": "MNS",
+        "url": "https://mns-hazel.vercel.app/",
+        "logo": "https://mns-hazel.vercel.app/logo.png",
+        "image": "https://mns-hazel.vercel.app/og-image.jpg",
+        "description": "Marietta Nepali Samaj is a nonprofit community organization connecting Nepali families, students, and professionals in Marietta, Georgia through cultural programs, a weekly Nepali School, and community events.",
+        "email": "info@mariettanepalisamaj.org",
+        "foundingDate": "2010",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "2727 Canton Road",
+          "addressLocality": "Marietta",
+          "addressRegion": "GA",
+          "postalCode": "30066",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/profile.php?id=61584445633390"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

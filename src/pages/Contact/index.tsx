@@ -2,8 +2,14 @@ import { organization } from '../../config/organization';
 import PageHero from '../../components/common/PageHero';
 import ContactForm from '../../components/contact/ContactForm';
 import SocialIcons from '../../components/common/SocialIcons';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 export default function Contact() {
+  usePageMeta({
+    title: 'Contact Us',
+    description: 'Get in touch with Marietta Nepali Samaj — questions, volunteering, membership, and more.',
+    path: '/contact',
+  });
   return (
     <>
       <PageHero title="Contact Us" subtitle="We'd love to hear from you. Reach out with questions, ideas, or to get involved." />

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PageHero from '../../components/common/PageHero';
 import Button from '../../components/common/Button';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 // Placeholder pricing, per explicit request — same "invent it now, swap
 // real numbers in later" approach used for Membership's tiers. Routed to
@@ -36,6 +37,12 @@ const sponsorshipMessage = "My business is interested in sponsoring Marietta Nep
 export default function Sponsorship() {
   const [selectedTier, setSelectedTier] = useState<TierId>('festival');
   const tier = tiers.find(t => t.id === selectedTier)!;
+
+  usePageMeta({
+    title: 'Sponsorship',
+    description: 'Sponsor Marietta Nepali Samaj — put your business in front of Nepali families across Marietta.',
+    path: '/sponsorship',
+  });
 
   return (
     <>

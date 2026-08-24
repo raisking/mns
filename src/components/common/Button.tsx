@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-type Variant = 'primary' | 'secondary' | 'accent' | 'light' | 'outline' | 'outlineLight' | 'ghost';
+type Variant = 'primary' | 'secondary' | 'accent' | 'trust' | 'light' | 'outline' | 'outlineLight' | 'ghost';
 type Size = 'sm' | 'md' | 'lg';
 
 interface ButtonProps {
@@ -28,6 +28,11 @@ const variantClasses: Record<Variant, string> = {
   primary: 'bg-indigo hover:bg-indigo/85 text-white shadow-sm',
   secondary: 'bg-saffron hover:bg-saffron/85 text-white shadow-sm',
   accent: 'bg-marigold hover:bg-marigold-light text-ink shadow-sm',
+  // New "trust" anchor (see index.css) — for institutional-credibility
+  // moments specifically, not a general-purpose swap for `primary`. Reach
+  // for this on About/Leadership/Donate-style CTAs; leave school/festival
+  // CTAs on saffron/marigold, where they already read warm and welcoming.
+  trust: 'bg-himal hover:bg-himal-dark text-white shadow-sm',
   // Solid white — for a high-contrast button ON a saturated color
   // background (e.g. a saffron CTA banner). Don't try to get this look by
   // overriding primary/secondary/accent's className instead: those set
@@ -69,7 +74,9 @@ export default function Button({
   className = '',
   fullWidth = false,
 }: ButtonProps) {
-  const base = `inline-flex items-center justify-center font-body font-bold rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 ${variantClasses[variant]} ${sizeClasses[size]} ${fullWidth ? 'w-full' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`;
+  // active:scale simulates a physical press on click/tap — real feedback for
+  // a real action, not decoration. Skipped when disabled (nothing to press).
+  const base = `inline-flex items-center justify-center font-body font-bold rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo focus-visible:ring-offset-2 ${variantClasses[variant]} ${sizeClasses[size]} ${fullWidth ? 'w-full' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : 'active:scale-[0.98]'} ${className}`;
 
   if (to) return <Link to={to} className={base} onClick={onClick}>{children}</Link>;
   if (href) return <a href={href} className={base} target="_blank" rel="noopener noreferrer" onClick={onClick}>{children}</a>;

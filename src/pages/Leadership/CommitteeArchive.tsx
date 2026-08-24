@@ -3,8 +3,14 @@ import { executiveCommitteeArchive } from '../../data/mockData';
 import SectionHeader from '../../components/common/SectionHeader';
 import PageHero from '../../components/common/PageHero';
 import LeadershipCard from '../../components/leadership/LeadershipCard';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 export default function CommitteeArchive() {
+  usePageMeta({
+    title: 'Committee Archive',
+    description: 'Full Executive Committee rosters from past terms of Marietta Nepali Samaj.',
+    path: '/leadership/committee-archive',
+  });
   return (
     <>
       <PageHero title="Committee Archive" subtitle="Full Executive Committee rosters from past terms, not just the President." />

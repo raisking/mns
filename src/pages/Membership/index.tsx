@@ -2,6 +2,7 @@ import { useState } from 'react';
 import SectionHeader from '../../components/common/SectionHeader';
 import PageHero from '../../components/common/PageHero';
 import Button from '../../components/common/Button';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 // Only benefits that are already real/verifiable elsewhere in the app —
 // the $200 member vs. $250 non-member tuition split lives in the School
@@ -52,6 +53,12 @@ export default function Membership() {
   const [selectedTier, setSelectedTier] = useState<TierId>('family-life');
   const tier = tiers.find(t => t.id === selectedTier)!;
 
+  usePageMeta({
+    title: 'Membership',
+    description: 'Join Marietta Nepali Samaj — membership tiers, benefits, and discounted Nepali School tuition.',
+    path: '/membership',
+  });
+
   return (
     <>
       <PageHero
@@ -68,10 +75,11 @@ export default function Membership() {
         </section>
 
         {/* Membership Options — same select-a-rate-then-continue-to-payment
-            pattern as the School page's Tuition & Fees section. No live
-            payment processor exists yet (see Donate's own comment on
-            handleDonate), so continuing still shows a placeholder alert
-            rather than actually charging anything. */}
+            pattern as the School page's Tuition & Fees section. Donate
+            (src/pages/Donate/index.tsx) has no live "charge this amount"
+            flow — it shows the selected tier/amount as read-only context
+            above the org's real Zelle QR code, since Zelle is the only
+            payment method MNS uses. */}
         <section className="mb-20">
           <h3 className="text-xl font-bold text-ink mb-2 text-center">Membership Options</h3>
           <p className="text-sm text-ink-soft text-center mb-8">Select a membership type to continue to payment.</p>

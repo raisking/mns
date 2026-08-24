@@ -1,6 +1,13 @@
 import Button from '../../components/common/Button';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 export default function DonationSuccess() {
+  usePageMeta({
+    title: 'Thank You',
+    description: 'Thank you for supporting Marietta Nepali Samaj.',
+    path: '/donation-success',
+    noindex: true,
+  });
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">
       <div className="text-center max-w-md">

@@ -20,6 +20,17 @@
   --color-ink-soft: #5c4a3d;     /* secondary text */
   --color-paper: #fbf6ec;        /* handmade lokta-paper cream */
   --color-paper-deep: #f1e4c9;   /* deeper cream for section banding */
+  /* "Trust" anchor, added deliberately (not part of the original flag/
+     festival set above) — a deep teal-blue evoking Nepal's own Himalayan
+     haze, for the specific moments where the site needs to read as a
+     credible institution rather than a warm festival (leadership/authority,
+     header/footer framing) rather than a return to the flag's literal
+     border blue (#003893, explicitly removed once already — see `indigo`
+     below). Scoped narrowly on purpose: saffron/marigold keep every spot
+     where they already carry festival/school warmth. Contrast-checked at
+     ~7:1 against white/paper, safe for solid fills and body-sized text alike. */
+  --color-himal: #1d5f73;
+  --color-himal-dark: #154957;   /* hover/pressed */
 
   --font-display: "Baloo 2", "Noto Sans Devanagari", sans-serif;
   --font-body: "IBM Plex Sans Devanagari", "Noto Sans", sans-serif;
@@ -50,8 +61,12 @@
     @apply bg-paper text-ink antialiased font-body;
   }
 
+  /* Tighter tracking/leading reads more confident and considered than the
+     browser default — cheapest, highest-leverage typography lift available
+     (cascades to every heading on every page from one rule), and Baloo 2's
+     naturally wide, rounded letterforms specifically benefit from it. */
   h1, h2, h3, h4 {
-    @apply font-display font-bold;
+    @apply font-display font-bold leading-tight tracking-tight;
   }
 
   @media (prefers-reduced-motion: reduce) {

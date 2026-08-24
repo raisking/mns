@@ -3,11 +3,20 @@ import { useParams, Link } from 'react-router-dom';
 import { mockAlbums, galleryPreviewPhotos } from '../../data/mockData';
 import Button from '../../components/common/Button';
 import { parseLocalDate } from '../../utils/date';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 export default function AlbumDetail() {
   const { slug } = useParams<{ slug: string }>();
   const album = mockAlbums.find(a => a.slug === slug);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  usePageMeta({
+    title: album?.title ?? 'Album Not Found',
+    description: album?.description ?? 'This photo album could not be found.',
+    path: `/gallery/${slug ?? ''}`,
+    image: album?.coverPhoto,
+    noindex: !album,
+  });
 
   if (!album) {
     return (

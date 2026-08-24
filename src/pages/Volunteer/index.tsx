@@ -1,6 +1,7 @@
 import SectionHeader from '../../components/common/SectionHeader';
 import PageHero from '../../components/common/PageHero';
 import Button from '../../components/common/Button';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 // Grounded in what the rest of the site already documents MNS as doing
 // (Sunday classes, festivals, the Gallery, community outreach, an
@@ -36,6 +37,11 @@ const opportunities = [
 const volunteerMessage = "I'd like to volunteer with MNS. Here's a bit about myself and how I'd like to help:";
 
 export default function Volunteer() {
+  usePageMeta({
+    title: 'Volunteer',
+    description: 'Volunteer with Marietta Nepali Samaj — help with Sunday classes, festivals, and community events.',
+    path: '/volunteer',
+  });
   return (
     <>
       <PageHero

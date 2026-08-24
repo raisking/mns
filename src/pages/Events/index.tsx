@@ -3,6 +3,7 @@ import { mockEvents } from '../../data/mockData';
 import EventCard from '../../components/events/EventCard';
 import EmptyState from '../../components/common/EmptyState';
 import PageHero from '../../components/common/PageHero';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 type Tab = 'upcoming' | 'past';
 
@@ -12,6 +13,12 @@ export default function Events() {
   const upcoming = mockEvents.filter(e => e.status === 'published');
   const past = mockEvents.filter(e => e.status === 'completed');
   const events = activeTab === 'upcoming' ? upcoming : past;
+
+  usePageMeta({
+    title: 'Events',
+    description: 'Upcoming and past events from Marietta Nepali Samaj — festivals, cultural programs, and community gatherings.',
+    path: '/events',
+  });
 
   return (
     <>
@@ -45,7 +52,11 @@ export default function Events() {
             }
           />
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            className={`grid gap-6 ${
+              events.length === 1 ? 'max-w-sm mx-auto' : 'sm:grid-cols-2 lg:grid-cols-3'
+            }`}
+          >
             {events.map(event => (
               <EventCard key={event.id} event={event} />
             ))}

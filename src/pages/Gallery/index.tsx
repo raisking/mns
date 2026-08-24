@@ -3,9 +3,16 @@ import SectionHeader from '../../components/common/SectionHeader';
 import PageHero from '../../components/common/PageHero';
 import AlbumCard from '../../components/gallery/AlbumCard';
 import EmptyState from '../../components/common/EmptyState';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 export default function Gallery() {
   const publicAlbums = mockAlbums.filter(a => a.status === 'public');
+
+  usePageMeta({
+    title: 'Photo Gallery',
+    description: "Photos from Marietta Nepali Samaj's celebrations, cultural programs, and community events.",
+    path: '/gallery',
+  });
 
   return (
     <>

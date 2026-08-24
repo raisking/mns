@@ -1,48 +1,30 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { donationCategories, donationAmounts } from '../../config/organization';
+import { donationCategories } from '../../config/organization';
 import SectionHeader from '../../components/common/SectionHeader';
+import zelleQrImg from '../../assets/qr-zelle.png';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
+// Zelle is the org's only payment/donation method for now — no Stripe (or
+// any other processor) is connected. Previously this page had a full
+// category/frequency/amount picker ending in a "Submit" button that just
+// alerted "Stripe will be connected in Phase 1F"; removed rather than left
+// pointing at a payment flow that doesn't exist. Other pages still deep-link
+// here with `?purpose=` and `?amount=` (School's "Enroll & Pay", Home and
+// School's "Support the School", Membership's tier picker) — those are
+// preserved as read-only context shown above the QR code instead of feeding
+// a live form.
 export default function Donate() {
   const [searchParams] = useSearchParams();
-  const initialPurpose = searchParams.get('purpose') || 'general';
-  // Fee amounts (e.g. the School page's $200/$250 tiers) won't always match
-  // one of the suggested donationAmounts presets below — fall back to the
-  // custom-amount field for anything that isn't an exact preset match,
-  // rather than hardcoding tuition-specific dollar values into what's
-  // otherwise a general "suggested donation amounts" list.
-  const amountParam = Number(searchParams.get('amount'));
-  const isPresetAmount = donationAmounts.includes(amountParam);
+  const purposeLabel = donationCategories.find(c => c.id === searchParams.get('purpose'))?.label;
+  const amountParam = searchParams.get('amount');
+  const [qrZoomOpen, setQrZoomOpen] = useState(false);
 
-  const [selectedCategory, setSelectedCategory] = useState(initialPurpose);
-  const [selectedAmount, setSelectedAmount] = useState<number | null>(
-    amountParam > 0 && isPresetAmount ? amountParam : 50
-  );
-  const [customAmount, setCustomAmount] = useState(
-    amountParam > 0 && !isPresetAmount ? String(amountParam) : ''
-  );
-  // One-time vs monthly recurring. Kept separate from selectedAmount so
-  // switching frequency doesn't wipe out whatever amount the donor already
-  // picked (a preset $50 stays $50, just relabeled "/mo").
-  const [frequency, setFrequency] = useState<'once' | 'monthly'>('once');
-  // Second-lowest preset as the suggested recurring amount (mirrors how
-  // most giving platforms nudge toward a moderate, sustainable monthly
-  // gift rather than the smallest or largest option) — an honest "we
-  // suggest this" nudge, not a fabricated "X% of donors pick this" claim.
-  const suggestedMonthly = donationAmounts[1] ?? donationAmounts[0];
-
-  const handleDonate = () => {
-    const amount = customAmount ? parseFloat(customAmount) : selectedAmount;
-    if (!amount || amount < 1) {
-      alert('Please select or enter a valid donation amount.');
-      return;
-    }
-    const cadence = frequency === 'monthly' ? `$${amount}/month (recurring)` : `$${amount} one-time`;
-    // In production: one-time → Cloudflare Worker → Stripe Checkout;
-    // monthly → Stripe Billing subscription (recurring charges need a
-    // Subscription object, not a one-off Checkout session).
-    alert(`Thank you! Redirecting to secure payment for ${cadence} toward "${donationCategories.find(c => c.id === selectedCategory)?.label}".\n\n(Stripe will be connected in Phase 1F)`);
-  };
+  usePageMeta({
+    title: 'Donate',
+    description: "Support Marietta Nepali Samaj's cultural programs and Nepali School via Zelle.",
+    path: '/donate',
+  });
 
   return (
     <>
@@ -56,133 +38,63 @@ export default function Donate() {
       </div>
 
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10">
-          <SectionHeader title="Make a Donation or Payment" subtitle="Choose your purpose and amount." />
+        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 text-center">
+          <SectionHeader
+            title="Donate via Zelle"
+            subtitle="We accept payments and donations through Zelle — no fees, nothing to sign up for."
+          />
 
-          {/* Category */}
-          <div className="mb-8">
-            <label htmlFor="category" className="block text-sm font-semibold text-gray-700 mb-3">
-              Select payment/donation purpose
-            </label>
-            <select
-              id="category"
-              name="category"
-              value={selectedCategory}
-              onChange={e => setSelectedCategory(e.target.value)}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-sm font-medium text-gray-700 focus:outline-none focus:border-saffron transition-colors bg-white"
-            >
-              {donationCategories.map(cat => (
-                <option key={cat.id} value={cat.id}>{cat.label}</option>
-              ))}
-            </select>
-          </div>
+          {(purposeLabel || amountParam) && (
+            <div className="bg-gray-50 rounded-xl p-4 mb-6 flex items-center justify-center gap-8 text-left">
+              {purposeLabel && (
+                <div>
+                  <p className="text-xs text-gray-500">Purpose</p>
+                  <p className="font-semibold text-gray-900">{purposeLabel}</p>
+                </div>
+              )}
+              {amountParam && (
+                <div>
+                  <p className="text-xs text-gray-500">Suggested Amount</p>
+                  <p className="font-bold text-xl text-saffron">${amountParam}</p>
+                </div>
+              )}
+            </div>
+          )}
 
-          {/* Frequency */}
-          <fieldset className="mb-8">
-            <legend className="text-sm font-semibold text-gray-700 mb-3">Frequency</legend>
-            <div className="grid grid-cols-2 gap-2.5">
-              {(['once', 'monthly'] as const).map(freq => (
-                <label key={freq} className="cursor-pointer">
-                  <input
-                    type="radio"
-                    name="frequency"
-                    checked={frequency === freq}
-                    onChange={() => setFrequency(freq)}
-                    className="sr-only"
-                  />
-                  <div
-                    className={`py-3 rounded-lg border-2 text-sm font-bold text-center transition-all ${
-                      frequency === freq
-                        ? 'border-saffron bg-saffron text-white shadow-sm'
-                        : 'border-gray-200 text-gray-700 hover:border-gray-300'
-                    }`}
-                  >
-                    {freq === 'once' ? 'One-Time' : 'Monthly'}
-                  </div>
-                </label>
-              ))}
-            </div>
-            {frequency === 'monthly' && (
-              <p className="text-xs text-saffron font-medium text-center mt-2">
-                A recurring gift helps us plan ahead — cancel anytime.
-              </p>
-            )}
-          </fieldset>
-
-          {/* Amount */}
-          <fieldset className="mb-8">
-            <legend className="text-sm font-semibold text-gray-700 mb-3">
-              {frequency === 'monthly' ? 'Monthly Amount' : 'Donation Amount'}
-            </legend>
-            <div className="grid grid-cols-4 gap-2.5 mb-3">
-              {donationAmounts.map(amount => (
-                <label key={amount} className="relative cursor-pointer">
-                  {frequency === 'monthly' && amount === suggestedMonthly && (
-                    <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-marigold text-ink text-[10px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full shadow-sm">
-                      Suggested
-                    </span>
-                  )}
-                  <input
-                    type="radio"
-                    name="amount"
-                    checked={selectedAmount === amount && !customAmount}
-                    onChange={() => { setSelectedAmount(amount); setCustomAmount(''); }}
-                    className="sr-only"
-                  />
-                  <div
-                    className={`py-3 rounded-lg border-2 text-sm font-bold text-center transition-all ${
-                      selectedAmount === amount && !customAmount
-                        ? 'border-saffron bg-amber-50 text-saffron'
-                        : 'border-gray-200 text-gray-700 hover:border-gray-300'
-                    }`}
-                  >
-                    ${amount}{frequency === 'monthly' && <span className="font-normal">/mo</span>}
-                  </div>
-                </label>
-              ))}
-            </div>
-            <div>
-              <label htmlFor="custom-amount" className="text-sm text-gray-500 font-medium">
-                Other Amount
-              </label>
-              <div className="relative mt-1">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-semibold">$</span>
-                <input
-                  id="custom-amount"
-                  type="number"
-                  min="1"
-                  placeholder="Enter amount"
-                  value={customAmount}
-                  onChange={e => { setCustomAmount(e.target.value); setSelectedAmount(null); }}
-                  className="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-saffron transition-colors"
-                />
-              </div>
-            </div>
-          </fieldset>
-
-          {/* Summary */}
-          <div className="bg-gray-50 rounded-xl p-4 mb-6 flex items-center justify-between">
-            <div>
-              <p className="text-xs text-gray-500">Donating to</p>
-              <p className="font-semibold text-gray-900">{donationCategories.find(c => c.id === selectedCategory)?.label}</p>
-            </div>
-            <div className="text-right">
-              <p className="text-xs text-gray-500">{frequency === 'monthly' ? 'Monthly Amount' : 'Amount'}</p>
-              <p className="font-bold text-xl text-saffron">
-                ${customAmount || selectedAmount || '—'}{frequency === 'monthly' && (customAmount || selectedAmount) && <span className="text-sm font-semibold">/mo</span>}
-              </p>
-            </div>
-          </div>
-
+          {/* Click to zoom — same lightbox pattern as an event poster
+              (EventDetail.tsx): a QR code this small is hard to scan
+              straight off a laptop screen, so let it open full-size. */}
           <button
-            onClick={handleDonate}
-            className="w-full py-4 bg-indigo hover:bg-indigo/85 text-white font-bold text-base rounded-full transition-colors shadow-md hover:shadow-lg"
+            type="button"
+            onClick={() => setQrZoomOpen(true)}
+            className="group relative block w-56 mx-auto rounded-xl border border-gray-200 shadow-sm overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron"
+            aria-label="View Zelle QR code full size"
           >
-            {frequency === 'monthly' ? 'Start Monthly Giving' : 'Submit'}
+            <img src={zelleQrImg} alt="Zelle QR code for Nepali Samaj Marietta Inc." className="w-full" />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+              <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+              </svg>
+            </div>
           </button>
 
-          <p className="text-center text-xs text-gray-400 mt-4">
-            Secured by Stripe. We never store your card information.
+          {/* A real download of a real file on a real page — not an
+              Artifact preview, so a plain download link works fine. */}
+          <a
+            href={zelleQrImg}
+            download="mns-zelle-qr.png"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-saffron hover:underline mt-3"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+            </svg>
+            Download QR Code
+          </a>
+
+          <p className="text-sm text-gray-600 max-w-sm mx-auto mt-5">
+            Open Zelle in your banking app and scan (or upload the downloaded code) to send
+            {amountParam ? ` your $${amountParam} payment` : ' your payment'} directly to <strong>Nepali Samaj Marietta Inc.</strong>
+            {purposeLabel && ` Please include "${purposeLabel}" in the memo so we know what it's for.`}
           </p>
         </div>
 
@@ -205,6 +117,33 @@ export default function Donate() {
           </div>
         </div>
       </div>
+
+      {/* QR zoom lightbox — same structure as EventDetail's poster viewer. */}
+      {qrZoomOpen && (
+        <div
+          className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
+          onClick={() => setQrZoomOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Zelle QR code, full size"
+        >
+          <button
+            className="absolute top-4 right-4 text-white/80 hover:text-white p-2"
+            onClick={() => setQrZoomOpen(false)}
+            aria-label="Close QR code viewer"
+          >
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <img
+            src={zelleQrImg}
+            alt="Zelle QR code for Nepali Samaj Marietta Inc."
+            className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg shadow-2xl bg-white p-4"
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
     </>
   );
 }
