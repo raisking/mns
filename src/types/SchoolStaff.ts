@@ -3,7 +3,7 @@ export interface SchoolStaffMember {
   name: string;
   /** Specific title shown on the card, e.g. "Nepali Language Teacher". */
   position: string;
-  category: 'Principal' | 'Teacher' | 'Volunteer';
+  category: 'Chairman' | 'Principal' | 'Teacher' | 'Volunteer';
   photo: string;
   bio?: string;
 }

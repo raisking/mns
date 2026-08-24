@@ -2,8 +2,14 @@ import { Link } from 'react-router-dom';
 import { pastPresidents } from '../../data/mockData';
 import SectionHeader from '../../components/common/SectionHeader';
 import PageHero from '../../components/common/PageHero';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 export default function PastPresidents() {
+  usePageMeta({
+    title: 'Past Presidents',
+    description: 'Honoring the past presidents who have led Marietta Nepali Samaj.',
+    path: '/leadership/past-presidents',
+  });
   return (
     <>
       <PageHero title="Past Presidents" subtitle="Honoring the leaders who built and shaped our community." />

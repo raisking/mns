@@ -2,8 +2,14 @@ import { Link } from 'react-router-dom';
 import { president } from '../../data/mockData';
 import Button from '../../components/common/Button';
 import PageHero from '../../components/common/PageHero';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 export default function President() {
+  usePageMeta({
+    title: 'Message from the President',
+    description: `A message from ${president.name}, President of Marietta Nepali Samaj.`,
+    path: '/leadership/president',
+  });
   return (
     <>
       <PageHero eyebrow="Leadership" title="Message from the President" />

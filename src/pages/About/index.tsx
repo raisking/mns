@@ -3,8 +3,14 @@ import PageHero from '../../components/common/PageHero';
 import Button from '../../components/common/Button';
 import { organization } from '../../config/organization';
 import { communityImage, founders } from '../../data/mockData';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 export default function About() {
+  usePageMeta({
+    title: 'About Us',
+    description: "Learn about Marietta Nepali Samaj's mission, vision, history, and founding members — a nonprofit uniting Nepali families in Marietta, Georgia.",
+    path: '/about',
+  });
   return (
     <>
       <PageHero title="About Us" subtitle="Learn about our community, history, mission, and vision." />
@@ -14,14 +20,14 @@ export default function About() {
         <section className="grid md:grid-cols-2 gap-12 items-center mb-20">
           <div>
             <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-3">Who We Are</p>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">A Vibrant Nepali Community in Marietta, Georgia</h2>
-            <p className="text-gray-600 leading-relaxed mb-4">
+            <h2 className="text-3xl text-ink mb-6">A Vibrant Nepali Community in Marietta, Georgia</h2>
+            <p className="text-ink-soft leading-relaxed mb-4">
               {organization.name} is a nonprofit community organization that brings together Nepali families, professionals, and students living in the Marietta and greater Atlanta area of Georgia.
             </p>
-            <p className="text-gray-600 leading-relaxed mb-4">
+            <p className="text-ink-soft leading-relaxed mb-4">
               Founded with the goal of preserving Nepali culture and building a strong sense of community, we organize festivals, educational programs, social gatherings, and volunteer initiatives throughout the year.
             </p>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-ink-soft leading-relaxed">
               We welcome all Nepali-speaking individuals and anyone who appreciates Nepali culture to join our growing community.
             </p>
           </div>
@@ -40,7 +46,7 @@ export default function About() {
                 To unite and empower the Nepali community in Marietta, Georgia by preserving our cultural heritage, promoting Nepali language education, supporting community members, and fostering strong bonds among families and individuals.
               </p>
             </div>
-            <div className="bg-indigo text-white rounded-2xl p-8">
+            <div className="bg-himal text-white rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
               <p className="text-blue-100 leading-relaxed">
                 A thriving, connected Nepali community where every member feels at home, where our culture is celebrated and passed to future generations, and where we contribute positively to the broader Marietta community.
@@ -70,8 +76,8 @@ export default function About() {
                   </div>
                   <div className="pb-8">
                     <p className="text-sm text-saffron font-semibold mb-1">{item.year}</p>
-                    <h3 className="font-bold text-gray-900 text-lg mb-2">{item.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                    <h3 className="text-ink text-lg mb-2">{item.title}</h3>
+                    <p className="text-ink-soft leading-relaxed">{item.description}</p>
                   </div>
                 </div>
               ))}
@@ -82,11 +88,11 @@ export default function About() {
               as every other roster in mockData.ts (see the comment above
               the `founders` export). Swap for the real names once known. */}
           <div className="max-w-5xl mx-auto mt-16">
-            <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Our Founding Members</h3>
-            <p className="text-sm text-gray-500 text-center mb-8">The community members who brought MNS together in 2010.</p>
+            <h3 className="text-xl text-ink mb-2 text-center">Our Founding Members</h3>
+            <p className="text-sm text-ink-soft text-center mb-8">The community members who brought MNS together in 2010.</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {founders.map(founder => (
-                <div key={founder.id} className="bg-gray-50 rounded-2xl p-6 text-center">
+                <div key={founder.id} className="card-lift bg-paper-deep rounded-2xl p-6 text-center">
                   {founder.photo && (
                     <img
                       src={founder.photo}
@@ -95,9 +101,9 @@ export default function About() {
                       className="w-20 h-20 rounded-full object-cover object-top mx-auto mb-4 ring-4 ring-saffron/10"
                     />
                   )}
-                  <h4 className="font-bold text-gray-900">{founder.name}</h4>
+                  <h4 className="text-ink">{founder.name}</h4>
                   <p className="text-sm text-saffron font-semibold mt-0.5">{founder.position}</p>
-                  {founder.bio && <p className="text-xs text-gray-500 mt-2 leading-relaxed">{founder.bio}</p>}
+                  {founder.bio && <p className="text-xs text-ink-soft mt-2 leading-relaxed">{founder.bio}</p>}
                 </div>
               ))}
             </div>
@@ -116,9 +122,9 @@ export default function About() {
               { title: 'Volunteer Programs', desc: 'Community service initiatives, helping those in need, and giving back to Marietta.' },
               { title: 'Family Support', desc: 'New member welcome programs, community networking, and family support services.' },
             ].map(item => (
-              <div key={item.title} className="bg-gray-50 rounded-2xl p-6">
-                <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+              <div key={item.title} className="card-lift bg-paper-deep rounded-2xl p-6">
+                <h3 className="text-ink mb-2">{item.title}</h3>
+                <p className="text-sm text-ink-soft leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>

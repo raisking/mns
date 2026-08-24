@@ -33,3 +33,12 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Project reference docs — not part of the deployed site
+docs/
+
+# Skill installs — not part of this project's own source; .claude/hooks,
+# .claude/launch.json, and .claude/settings.json stay tracked, just the
+# bulky third-party skill definitions under .claude/skills are excluded
+.claude/skills/
+.agents/

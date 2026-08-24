@@ -41,17 +41,16 @@ const navItems: NavItem[] = [
   // involved and reaching out are the same intent) — brings 8 top-level
   // items down to 6 without losing any destination, just nesting two of
   // them one click deeper.
+  //
+  // This dropdown used to also pin a flagship "Dashain 2026" link straight
+  // at its event-detail page — removed along with the Dashain and Nepali
+  // New Year events themselves (see mockData.ts) since that route no
+  // longer exists. Re-add a pinned link here if a new flagship event needs
+  // the same promoted nav slot later.
   {
     label: 'Events',
     children: [
       { label: 'Upcoming Events', to: '/events' },
-      // Pinned flagship event — MNS's biggest annual festival, given its
-      // own promoted nav slot rather than only reachable by browsing the
-      // full Events list, mirroring how peer org sites pin their headline
-      // event. Points straight at its real event-detail page (which now
-      // carries RSVP/donate CTAs — see mockData.ts) instead of a separate
-      // duplicate landing page.
-      { label: 'Dashain 2026', to: '/events/dashain-celebration-2026' },
       { label: 'Photo Gallery', to: '/gallery' },
     ],
   },
@@ -126,7 +125,7 @@ export default function Header() {
   }, [openDropdown]);
 
   return (
-    <header ref={headerRef} className="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
+    <header ref={headerRef} className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
@@ -265,9 +264,20 @@ export default function Header() {
         </div>
       </div>
 
+      {/* Two-tone accent hairline, in place of a plain gray border. Uses
+          the new himal "trust" blue as its second color instead of the
+          dropdown panels'/ShoutoutModal's indigo — this is the one spot
+          on every page where that trust anchor shows up site-wide, without
+          touching the shared saffron/indigo motif those other components
+          still use. */}
+      <div className="h-0.5 flex" aria-hidden="true">
+        <span className="w-2/3 bg-saffron" />
+        <span className="w-1/3 bg-himal" />
+      </div>
+
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg font-nav" role="navigation" aria-label="Mobile navigation">
+        <div className="lg:hidden bg-white border-t border-ink-soft/10 shadow-lg font-nav" role="navigation" aria-label="Mobile navigation">
           <div className="px-4 py-3 space-y-1 max-h-[80vh] overflow-y-auto">
             {navItems.map(item =>
               item.children ? (
