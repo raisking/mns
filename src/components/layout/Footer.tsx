@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { organization } from '../../config/organization';
-import logo from '../../assets/mns-v.png';
+import logo from '../../assets/mns_f.png';
 import SocialIcons from '../common/SocialIcons';
 
 export default function Footer() {
@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            {/* mns-v.png ships on an opaque white background (not
+            {/* mns_f.png ships on an opaque white background (not
                 transparent like the old mns-logo.png) and its wordmark
                 text is near-black — same contrast problem against bg-ink
                 either way. The white plate still does the job, now simply
