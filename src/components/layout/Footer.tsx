@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { organization } from '../../config/organization';
-import logo from '../../assets/mns_f.png';
 import SocialIcons from '../common/SocialIcons';
 
 export default function Footer() {
@@ -12,13 +11,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            {/* mns_f.png ships on an opaque white background, and its wordmark
-                text is near-black — same contrast problem against bg-ink
-                either way. The white plate still does the job, now simply
-                by matching the image's own background instead of adding
-                one. */}
             <div className="inline-block bg-white rounded-lg p-3 mb-4">
-              <img src={logo} alt="Marietta Nepali Samaj" className="h-12 w-auto" />
+              <img src="/logo.png" alt="Marietta Nepali Samaj" className="h-12 w-auto" />
             </div>
             <p className="text-sm text-white/60 leading-relaxed mb-4">
               Connecting the Nepali community in Marietta, Georgia. Preserving our culture, celebrating our heritage.

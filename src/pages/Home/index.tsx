@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { mockEvents, galleryPreviewPhotos, objectives, heroImage, heroVideo, schoolCarouselSlides, monthlyShoutouts, shoutoutMonth } from '../../data/mockData';
 import { organization } from '../../config/organization';
 import SectionHeader from '../../components/common/SectionHeader';
@@ -18,7 +18,7 @@ const SHOUTOUT_STORAGE_KEY = 'mns-shoutout-seen';
 export default function Home() {
   const upcomingEvents = mockEvents.filter(e => e.status === 'published').slice(0, 3);
   const [shoutoutOpen, setShoutoutOpen] = useState(false);
-  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const [heroVideoFallback, setHeroVideoFallback] = useState(false);
 
   usePageMeta({
     title: 'Marietta Nepali Samaj',
@@ -38,20 +38,18 @@ export default function Home() {
     sessionStorage.setItem(SHOUTOUT_STORAGE_KEY, '1');
   };
 
-  const restartHeroVideo = () => {
-    const video = heroVideoRef.current;
-    if (!video) return;
-
+  const restartHeroVideo = (video: HTMLVideoElement) => {
     video.currentTime = 0;
-    void video.play();
+    void video.play().catch(() => {
+      setHeroVideoFallback(true);
+    });
   };
 
-  const loopHeroVideoBeforeBlackFrame = () => {
-    const video = heroVideoRef.current;
-    if (!video || !video.duration || video.duration === Infinity) return;
+  const loopHeroVideoBeforeBlackFrame = (video: HTMLVideoElement) => {
+    if (!video.duration || video.duration === Infinity) return;
 
     if (video.duration - video.currentTime <= 0.12) {
-      restartHeroVideo();
+      restartHeroVideo(video);
     }
   };
 
@@ -73,21 +71,30 @@ export default function Home() {
         className="relative min-h-[85vh] flex items-center justify-center text-white overflow-hidden"
         aria-label="Hero section"
       >
-        <video
-          ref={heroVideoRef}
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={heroImage}
-          aria-hidden="true"
-          onEnded={restartHeroVideo}
-          onTimeUpdate={loopHeroVideoBeforeBlackFrame}
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+        {heroVideoFallback ? (
+          <img
+            src={heroImage}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={heroImage}
+            aria-hidden="true"
+            onEnded={event => restartHeroVideo(event.currentTarget)}
+            onError={() => setHeroVideoFallback(true)}
+            onTimeUpdate={event => loopHeroVideoBeforeBlackFrame(event.currentTarget)}
+          >
+            <source src={heroVideo} type="video/mp4" />
+          </video>
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/40 to-ink/85" />
         {/* Extra vignette behind the text block, so headline contrast holds
             regardless of what's underneath in the photo. */}
@@ -364,10 +371,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sponsor & Advertise CTA — moved to close the page (was between
-          the Watch Our Story and Gallery Preview sections). indigo, the
-          flag's border color, giving this CTA its own identity apart from
-          the saffron donation CTA above it. */}
+      {/* Sponsor & Advertise CTA */}
       <section className="py-14 md:py-16 bg-indigo text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सहयोग · Sponsorship</p>
