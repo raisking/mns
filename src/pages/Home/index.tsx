@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { mockEvents, galleryPreviewPhotos, objectives, heroImage, heroVideo, schoolCarouselSlides, monthlyShoutouts, shoutoutMonth } from '../../data/mockData';
 import { organization } from '../../config/organization';
 import SectionHeader from '../../components/common/SectionHeader';
@@ -18,6 +18,7 @@ const SHOUTOUT_STORAGE_KEY = 'mns-shoutout-seen';
 export default function Home() {
   const upcomingEvents = mockEvents.filter(e => e.status === 'published').slice(0, 3);
   const [shoutoutOpen, setShoutoutOpen] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   usePageMeta({
     title: 'Marietta Nepali Samaj',
@@ -35,6 +36,23 @@ export default function Home() {
   const closeShoutout = () => {
     setShoutoutOpen(false);
     sessionStorage.setItem(SHOUTOUT_STORAGE_KEY, '1');
+  };
+
+  const restartHeroVideo = () => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    video.currentTime = 0;
+    void video.play();
+  };
+
+  const loopHeroVideoBeforeBlackFrame = () => {
+    const video = heroVideoRef.current;
+    if (!video || !video.duration || video.duration === Infinity) return;
+
+    if (video.duration - video.currentTime <= 0.12) {
+      restartHeroVideo();
+    }
   };
 
   return (
@@ -56,6 +74,7 @@ export default function Home() {
         aria-label="Hero section"
       >
         <video
+          ref={heroVideoRef}
           className="absolute inset-0 h-full w-full object-cover"
           autoPlay
           muted
@@ -64,6 +83,8 @@ export default function Home() {
           preload="metadata"
           poster={heroImage}
           aria-hidden="true"
+          onEnded={restartHeroVideo}
+          onTimeUpdate={loopHeroVideoBeforeBlackFrame}
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
