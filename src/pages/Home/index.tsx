@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { mockEvents, galleryPreviewPhotos, objectives, heroImage, heroVideo, schoolCarouselSlides, monthlyShoutouts, shoutoutMonth } from '../../data/mockData';
 import { organization } from '../../config/organization';
 import SectionHeader from '../../components/common/SectionHeader';
@@ -14,11 +14,13 @@ import { usePageMeta } from '../../hooks/usePageMeta';
 // restart, or clearing site data/cache all reset it, since that's exactly
 // what clears sessionStorage too.
 const SHOUTOUT_STORAGE_KEY = 'mns-shoutout-seen';
+const HERO_LOOP_RESTART_WINDOW_SECONDS = 3;
 
 export default function Home() {
   const upcomingEvents = mockEvents.filter(e => e.status === 'published').slice(0, 3);
   const [shoutoutOpen, setShoutoutOpen] = useState(false);
   const [heroVideoFallback, setHeroVideoFallback] = useState(false);
+  const heroLoopFrameRef = useRef<number | null>(null);
 
   usePageMeta({
     title: 'Marietta Nepali Samaj',
@@ -33,6 +35,14 @@ export default function Home() {
     }
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (heroLoopFrameRef.current !== null) {
+        window.cancelAnimationFrame(heroLoopFrameRef.current);
+      }
+    };
+  }, []);
+
   const closeShoutout = () => {
     setShoutoutOpen(false);
     sessionStorage.setItem(SHOUTOUT_STORAGE_KEY, '1');
@@ -40,17 +50,31 @@ export default function Home() {
 
   const restartHeroVideo = (video: HTMLVideoElement) => {
     video.currentTime = 0;
-    void video.play().catch(() => {
-      setHeroVideoFallback(true);
-    });
+    void video.play().catch(() => setHeroVideoFallback(true));
   };
 
   const loopHeroVideoBeforeBlackFrame = (video: HTMLVideoElement) => {
     if (!video.duration || video.duration === Infinity) return;
 
-    if (video.duration - video.currentTime <= 0.12) {
+    if (video.duration - video.currentTime <= HERO_LOOP_RESTART_WINDOW_SECONDS) {
       restartHeroVideo(video);
     }
+  };
+
+  const watchHeroVideoLoop = (video: HTMLVideoElement) => {
+    if (heroLoopFrameRef.current !== null) return;
+
+    const tick = () => {
+      if (!video.isConnected) {
+        heroLoopFrameRef.current = null;
+        return;
+      }
+
+      loopHeroVideoBeforeBlackFrame(video);
+      heroLoopFrameRef.current = window.requestAnimationFrame(tick);
+    };
+
+    heroLoopFrameRef.current = window.requestAnimationFrame(tick);
   };
 
   return (
@@ -71,13 +95,14 @@ export default function Home() {
         className="relative min-h-[85vh] flex items-center justify-center text-white overflow-hidden"
         aria-label="Hero section"
       >
+        <img
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
         {heroVideoFallback ? (
-          <img
-            src={heroImage}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+          null
         ) : (
           <video
             className="absolute inset-0 h-full w-full object-cover"
@@ -88,8 +113,15 @@ export default function Home() {
             preload="metadata"
             poster={heroImage}
             aria-hidden="true"
+            onCanPlay={event => {
+              const video = event.currentTarget;
+              void video.play()
+                .then(() => watchHeroVideoLoop(video))
+                .catch(() => setHeroVideoFallback(true));
+            }}
             onEnded={event => restartHeroVideo(event.currentTarget)}
             onError={() => setHeroVideoFallback(true)}
+            onPlay={event => watchHeroVideoLoop(event.currentTarget)}
             onTimeUpdate={event => loopHeroVideoBeforeBlackFrame(event.currentTarget)}
           >
             <source src={heroVideo} type="video/mp4" />
