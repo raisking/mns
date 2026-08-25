@@ -13,6 +13,7 @@ import kidsLaughingImg from '../assets/slide/kids_laughing.jpeg';
 import kidsSchoolImg from '../assets/slide/kids_school.jpeg';
 import kidsSlideImg from '../assets/slide/kids_slide.jpeg';
 import bhabindraBasnetImg from '../assets/slide/Bhabindra_Basnet.jpg';
+import heroVideoSrc from '../assets/mns-video.mp4';
 
 // Unsplash placeholder images — these will be replaced with real R2 URLs
 const HERO_IMG = heroBanner;
@@ -43,6 +44,7 @@ const GALLERY5 = 'https://images.unsplash.com/photo-1648298470994-7065f521375c?w
 const GALLERY6 = 'https://images.unsplash.com/photo-1507743617593-0a422c9bb7f5?w=600&q=80'; // Kathmandu Durbar Square temple at dusk
 
 export const heroImage = HERO_IMG;
+export const heroVideo = heroVideoSrc;
 export const communityImage = COMMUNITY_IMG;
 export const schoolImage = SCHOOL_IMG;
 

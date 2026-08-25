@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { mockEvents, galleryPreviewPhotos, objectives, heroImage, schoolCarouselSlides, monthlyShoutouts, shoutoutMonth } from '../../data/mockData';
+import { mockEvents, galleryPreviewPhotos, objectives, heroImage, heroVideo, schoolCarouselSlides, monthlyShoutouts, shoutoutMonth } from '../../data/mockData';
 import { organization } from '../../config/organization';
 import SectionHeader from '../../components/common/SectionHeader';
 import EventCard from '../../components/events/EventCard';
@@ -47,12 +47,18 @@ export default function Home() {
         className="relative min-h-[85vh] flex items-center justify-center text-white overflow-hidden"
         aria-label="Hero section"
       >
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroImage})` }}
-          role="img"
-          aria-label="Community celebration"
-        />
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={heroImage}
+          aria-hidden="true"
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/40 to-ink/85" />
         {/* Extra vignette behind the text block, so headline contrast holds
             regardless of what's underneath in the photo. */}
@@ -88,13 +94,6 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </div>
-
         {/* Twin-peak divider — filled with the next section's exact
             bg-paper-deep color, so it reads as one smooth shape flowing
             into the content below rather than a hard-edged cutout. */}
