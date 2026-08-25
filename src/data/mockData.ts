@@ -16,7 +16,7 @@ import kidsLaughingImg from '../assets/slide/kids_laughing.jpeg';
 import kidsSchoolImg from '../assets/slide/kids_school.jpeg';
 import kidsSlideImg from '../assets/slide/kids_slide.jpeg';
 import bhabindraBasnetImg from '../assets/slide/Bhabindra_Basnet.jpg';
-import heroVideoSrc from '../assets/mns-video.mp4';
+import heroVideoSrc from '../assets/videos/promo_mns.mp4';
 
 // Unsplash placeholder images — these will be replaced with real R2 URLs
 const HERO_IMG = heroBanner;

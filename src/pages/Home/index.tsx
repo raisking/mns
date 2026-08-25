@@ -8,8 +8,6 @@ import Button from '../../components/common/Button';
 import ShoutoutModal from '../../components/common/ShoutoutModal';
 import ImageCarousel from '../../components/common/ImageCarousel';
 import { usePageMeta } from '../../hooks/usePageMeta';
-import mnsVideo from '../../assets/videos/mns_video.mp4';
-import kidsDancingImg from '../../assets/slide/kids_dancing.jpeg';
 
 // sessionStorage (not localStorage): shows once for as long as this tab/
 // session stays open, but comes back on a fresh visit — new tab, browser
@@ -20,9 +18,6 @@ const SHOUTOUT_STORAGE_KEY = 'mns-shoutout-seen';
 export default function Home() {
   const upcomingEvents = mockEvents.filter(e => e.status === 'published').slice(0, 3);
   const [shoutoutOpen, setShoutoutOpen] = useState(false);
-  // The <video> element (and its ~17MB source) only mounts after a real
-  // click — nothing video-related loads on page load, not even metadata.
-  const [videoPlaying, setVideoPlaying] = useState(false);
 
   usePageMeta({
     title: 'Marietta Nepali Samaj',
@@ -289,51 +284,6 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Watch Our Story — real community video. Deferred-load: shows a
-          poster card (a real MNS photo + play button) first; the actual
-          <video> only mounts on click, so the ~17MB file never loads
-          unless a visitor actually chooses to watch. bg-white keeps the
-          paper-deep → white → indigo alternation intact between the
-          About Preview section above and the Sponsor CTA below. */}
-      <section className="py-20 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            eyebrow="हाम्रो कथा · Our Story"
-            title="Watch Our Community in Action"
-            subtitle="A short look at the moments, festivals, and people that make MNS what it is."
-          />
-          <div className="card-lift relative aspect-video rounded-2xl overflow-hidden shadow-xl bg-ink">
-            {videoPlaying ? (
-              <video
-                src={mnsVideo}
-                controls
-                autoPlay
-                className="w-full h-full object-cover"
-              >
-                Your browser doesn't support embedded video.
-              </video>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setVideoPlaying(true)}
-                className="group relative block w-full h-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-saffron"
-                aria-label="Play video: Marietta Nepali Samaj community"
-              >
-                <img src={kidsDancingImg} alt="" aria-hidden="true" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-ink/40 group-hover:bg-ink/25 transition-colors duration-300" />
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <span className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 group-hover:bg-white group-hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-lg">
-                    <svg className="w-7 h-7 sm:w-8 sm:h-8 text-saffron ml-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-                </span>
-              </button>
-            )}
           </div>
         </div>
       </section>
