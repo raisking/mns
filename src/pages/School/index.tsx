@@ -4,6 +4,7 @@ import Button from '../../components/common/Button';
 import SectionHeader from '../../components/common/SectionHeader';
 import PageHero from '../../components/common/PageHero';
 import { schoolImage } from '../../data/mockData';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 const subjects = [
   { title: 'Nepali Language', desc: 'Reading, writing, and speaking Nepali — from the alphabet to full sentences.' },
@@ -29,6 +30,12 @@ export default function School() {
   // that's already the one badged "Best Value".
   const [selectedTier, setSelectedTier] = useState<'member' | 'nonmember'>('member');
   const feeAmount = selectedTier === 'member' ? 200 : 250;
+
+  usePageMeta({
+    title: 'Nepali School',
+    description: 'Nepali School Marietta meets every Sunday, teaching Nepali language, culture, and values to children PreK through Grade 8.',
+    path: '/nepali-school',
+  });
 
   return (
     <>
@@ -164,11 +171,11 @@ export default function School() {
           </div>
 
           {/* Carries the selected rate to Donate/Payment as ?amount=, and
-              purpose=tuition so the purpose dropdown lands on "Nepali
-              School Tuition" rather than General Fund. No live payment
-              processor exists yet (see Donate's own comment on
-              handleDonate), so Submit there still shows a placeholder
-              alert rather than actually charging anything. */}
+              purpose=tuition so Donate shows "Nepali School Tuition" as the
+              purpose. Donate (src/pages/Donate/index.tsx) has no live
+              "charge this amount" flow — it shows the amount/purpose as
+              read-only context above the org's real Zelle QR code, since
+              Zelle is the only payment method MNS uses. */}
           <div className="flex justify-center mb-6">
             <Button to={`/donate?purpose=tuition&amount=${feeAmount}`} variant="primary" size="lg">
               Enroll & Pay (${feeAmount}) →

@@ -7,6 +7,9 @@ import EventCard from '../../components/events/EventCard';
 import Button from '../../components/common/Button';
 import ShoutoutModal from '../../components/common/ShoutoutModal';
 import ImageCarousel from '../../components/common/ImageCarousel';
+import { usePageMeta } from '../../hooks/usePageMeta';
+import mnsVideo from '../../assets/videos/mns_video.mp4';
+import kidsDancingImg from '../../assets/slide/kids_dancing.jpeg';
 
 // sessionStorage (not localStorage): shows once for as long as this tab/
 // session stays open, but comes back on a fresh visit — new tab, browser
@@ -17,6 +20,16 @@ const SHOUTOUT_STORAGE_KEY = 'mns-shoutout-seen';
 export default function Home() {
   const upcomingEvents = mockEvents.filter(e => e.status === 'published').slice(0, 3);
   const [shoutoutOpen, setShoutoutOpen] = useState(false);
+  // The <video> element (and its ~17MB source) only mounts after a real
+  // click — nothing video-related loads on page load, not even metadata.
+  const [videoPlaying, setVideoPlaying] = useState(false);
+
+  usePageMeta({
+    title: 'Marietta Nepali Samaj',
+    description: 'Connecting the Nepali community in Marietta, Georgia through cultural programs, a weekly Nepali School, and community events.',
+    path: '/',
+    appendSiteName: false,
+  });
 
   useEffect(() => {
     if (!sessionStorage.getItem(SHOUTOUT_STORAGE_KEY)) {
@@ -72,15 +85,22 @@ export default function Home() {
             स्वागत छ।
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight mb-6 drop-shadow-lg">
-            Welcome to<br />
-            <span className="text-marigold">{organization.name}</span>
+            Where Nepali Families in Marietta<br />
+            <span className="text-marigold">Belong</span>
           </h1>
           <p className="text-lg sm:text-xl text-white/85 max-w-2xl mx-auto mb-10 leading-relaxed">
             {organization.tagline}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            {/* "Meet Our Community" (was "Explore Our Community") — both
+                still point to /about, but "meet" pairs with the hero's
+                belonging-focused headline better than the more passive
+                "explore." Deliberately worded differently from the "Who We
+                Are" section's own /about CTA below (was also "Learn More
+                About Us" until this pass) so the same destination doesn't
+                get advertised with duplicate copy twice on one page. */}
             <Button to="/about" size="lg" variant="outlineLight">
-              Explore Our Community
+              Meet Our Community
             </Button>
             {/* Donate already gets its own dedicated, always-visible marigold
                 "pill + pin" treatment in the Header (see Header.tsx) — this
@@ -113,7 +133,7 @@ export default function Home() {
 
       {/* Nepali School — MNS's most active program, given top billing right
           after the hero instead of buried mid-page. */}
-      <section className="py-16 md:py-20 bg-paper-deep overflow-hidden">
+      <section className="py-20 md:py-24 bg-paper-deep overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
@@ -214,7 +234,7 @@ export default function Home() {
           (was bg-paper-deep) and bg-paper-deep on About Preview below (was
           bg-white) keeps the alternating background rhythm intact now that
           the two sections have swapped places. */}
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-20 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="कार्यक्रमहरू"
@@ -222,7 +242,11 @@ export default function Home() {
             subtitle="Join us for our community celebrations, cultural programs, and activities."
           />
           {upcomingEvents.length > 0 ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            <div
+              className={`grid gap-6 mb-10 ${
+                upcomingEvents.length === 1 ? 'max-w-sm mx-auto' : 'sm:grid-cols-2 lg:grid-cols-3'
+              }`}
+            >
               {upcomingEvents.map(event => (
                 <EventCard key={event.id} event={event} />
               ))}
@@ -239,7 +263,7 @@ export default function Home() {
       </section>
 
       {/* About Preview */}
-      <section className="py-16 md:py-20 bg-paper-deep">
+      <section className="py-20 md:py-24 bg-paper-deep">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -253,7 +277,7 @@ export default function Home() {
               <p className="text-ink-soft leading-relaxed mb-8">
                 We celebrate our rich cultural heritage through festivals, educational programs, and community service. Whether you are a longtime resident or newly arrived, MNS is your community.
               </p>
-              <Button to="/about" variant="primary">Learn More About Us</Button>
+              <Button to="/about" variant="primary">Read Our Full Story</Button>
             </div>
             <div className="grid grid-cols-2 gap-4">
               {objectives.map(obj => (
@@ -269,26 +293,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sponsor & Advertise CTA — indigo, the flag's border color, giving
-          this CTA its own identity apart from the saffron donation CTA. */}
-      <section className="py-14 md:py-16 bg-indigo text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सहयोग · Sponsorship</p>
-          <h2 className="text-2xl md:text-3xl mb-5">Sponsor & Advertise With Us</h2>
-          <p className="text-white/80 leading-relaxed max-w-2xl mx-auto mb-2">
-            Showcase your name or business to the Marietta Nepali community while supporting the programs that bring us together.
-          </p>
-          <p className="text-white/80 leading-relaxed max-w-2xl mx-auto mb-8">
-            Flexible sponsorship packages are available on a quarterly, semi-annual, or annual basis. Contact us to learn more about visibility and rates.
-          </p>
-          <Button to="/contact" variant="outlineLight">
-            Contact Us
-          </Button>
+      {/* Watch Our Story — real community video. Deferred-load: shows a
+          poster card (a real MNS photo + play button) first; the actual
+          <video> only mounts on click, so the ~17MB file never loads
+          unless a visitor actually chooses to watch. bg-white keeps the
+          paper-deep → white → indigo alternation intact between the
+          About Preview section above and the Sponsor CTA below. */}
+      <section className="py-20 md:py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="हाम्रो कथा · Our Story"
+            title="Watch Our Community in Action"
+            subtitle="A short look at the moments, festivals, and people that make MNS what it is."
+          />
+          <div className="card-lift relative aspect-video rounded-2xl overflow-hidden shadow-xl bg-ink">
+            {videoPlaying ? (
+              <video
+                src={mnsVideo}
+                controls
+                autoPlay
+                className="w-full h-full object-cover"
+              >
+                Your browser doesn't support embedded video.
+              </video>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setVideoPlaying(true)}
+                className="group relative block w-full h-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-saffron"
+                aria-label="Play video: Marietta Nepali Samaj community"
+              >
+                <img src={kidsDancingImg} alt="" aria-hidden="true" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-ink/40 group-hover:bg-ink/25 transition-colors duration-300" />
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <span className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 group-hover:bg-white group-hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-lg">
+                    <svg className="w-7 h-7 sm:w-8 sm:h-8 text-saffron ml-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </span>
+                </span>
+              </button>
+            )}
+          </div>
         </div>
       </section>
 
       {/* Gallery Preview */}
-      <section className="py-16 md:py-20 bg-ink">
+      <section className="py-20 md:py-24 bg-ink">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="सम्झनाहरू"
@@ -327,7 +378,7 @@ export default function Home() {
       </section>
 
       {/* Donation CTA */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-saffron to-saffron-dark text-white">
+      <section className="py-20 md:py-24 bg-gradient-to-br from-saffron to-saffron-dark text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">धन्यवाद · Thank You</p>
           <h2 className="text-3xl md:text-4xl mb-4">Support Our Community</h2>
@@ -339,6 +390,26 @@ export default function Home() {
               Support Nepali School
             </Button>
           </div>
+        </div>
+      </section>
+
+      {/* Sponsor & Advertise CTA — moved to close the page (was between
+          the Watch Our Story and Gallery Preview sections). indigo, the
+          flag's border color, giving this CTA its own identity apart from
+          the saffron donation CTA above it. */}
+      <section className="py-14 md:py-16 bg-indigo text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सहयोग · Sponsorship</p>
+          <h2 className="text-2xl md:text-3xl mb-5">Sponsor & Advertise With Us</h2>
+          <p className="text-white/80 leading-relaxed max-w-2xl mx-auto mb-2">
+            Showcase your name or business to the Marietta Nepali community while supporting the programs that bring us together.
+          </p>
+          <p className="text-white/80 leading-relaxed max-w-2xl mx-auto mb-8">
+            Flexible sponsorship packages are available on a quarterly, semi-annual, or annual basis. Contact us to learn more about visibility and rates.
+          </p>
+          <Button to="/contact" variant="outlineLight">
+            Contact Us
+          </Button>
         </div>
       </section>
     </>

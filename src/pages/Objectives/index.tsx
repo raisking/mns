@@ -1,5 +1,6 @@
 import SectionHeader from '../../components/common/SectionHeader';
 import PageHero from '../../components/common/PageHero';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 const objectives = [
   { title: 'Preserve Culture & Traditions', description: 'Preserve and promote Nepali culture, traditions, customs, and values for current and future generations in the Marietta community.' },
@@ -15,6 +16,11 @@ const objectives = [
 ];
 
 export default function Objectives() {
+  usePageMeta({
+    title: 'Our Objectives',
+    description: 'The guiding principles behind Marietta Nepali Samaj — community, culture, education, and service for the Nepali diaspora in Marietta, Georgia.',
+    path: '/objectives',
+  });
   return (
     <>
       <PageHero title="Our Objectives" subtitle="The guiding principles and goals that shape everything we do as a community." />

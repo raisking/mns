@@ -4,9 +4,12 @@ import type { LeadershipMember, PastPresident } from '../types/Leadership';
 import type { Shoutout } from '../types/Shoutout';
 import type { SchoolStaffMember } from '../types/SchoolStaff';
 import heroBanner from '../assets/nepali-school-banner.png';
-import dashain2026Img from '../assets/dashain2026.png';
-import parentsDayImg from '../assets/parents-day.jpg';
-import prakashKhattriImg from '../assets/prakash_khattri.jpg';
+import parentsDayImg from '../assets/events/parents-day.jpg';
+import summerPicnic2026Img from '../assets/events/summar.jpg';
+import holi2026Img from '../assets/events/holi.jpg';
+import parentTeacher2026Img from '../assets/events/parent-teacher.jpg';
+import prakashKhattriImg from '../assets/profile/prakash_khattri.jpg';
+import rajChairmanImg from '../assets/profile/raj_chairman_mns.jpg';
 import languageCultureImg from '../assets/slide/language_culture.jpeg';
 import kidsDancingImg from '../assets/slide/kids_dancing.jpeg';
 import kidsLaughingImg from '../assets/slide/kids_laughing.jpeg';
@@ -18,14 +21,14 @@ import heroVideoSrc from '../assets/mns-video.mp4';
 // Unsplash placeholder images — these will be replaced with real R2 URLs
 const HERO_IMG = heroBanner;
 const PRINCIPAL_IMG = prakashKhattriImg; // real photo — not a placeholder
+const CHAIRMAN_IMG = rajChairmanImg; // real photo — not a placeholder
 const PRESIDENT_IMG = bhabindraBasnetImg; // real photo — not a placeholder
 const COMMUNITY_IMG = 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80';
 const SCHOOL_IMG = languageCultureImg; // real photo — not a placeholder
-const EVENT1_IMG = 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80';
-const EVENT2_IMG = 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80';
-const EVENT3_IMG = 'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=800&q=80';
-const DASHAIN_2026_IMG = dashain2026Img;
 const PARENTS_DAY_2026_IMG = parentsDayImg; // real flyer — not a placeholder
+const SUMMER_PICNIC_2026_IMG = summerPicnic2026Img; // real flyer — not a placeholder
+const HOLI_2026_IMG = holi2026Img; // real flyer — not a placeholder
+const PARENT_TEACHER_2026_IMG = parentTeacher2026Img; // real flyer — not a placeholder
 const PERSON_IMG = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80';
 const PERSON_IMG2 = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80';
 const PERSON_IMG3 = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80';
@@ -84,62 +87,47 @@ export const mockEvents: Event[] = [
     status: 'published',
   },
   {
-    id: '1',
-    slug: 'nepali-new-year-2082',
-    title: 'Nepali New Year 2082 (Nava Barsha)',
-    description: 'Join us to celebrate the Nepali New Year 2082 with cultural programs, traditional music, dance performances, and delicious Nepali food. Come and enjoy the festivities with the entire Nepali community of Marietta.',
-    date: '2026-04-13',
-    startTime: '11:00 AM',
-    endTime: '6:00 PM',
-    location: 'Marietta Community Center',
-    address: '123 Community Dr, Marietta, GA 30060',
-    coverImage: EVENT1_IMG,
-    status: 'published',
-  },
-  {
     id: '2',
     slug: 'summer-picnic-2026',
-    title: 'Annual Summer Picnic 2026',
-    description: 'Our beloved annual summer picnic returns! Bring your family for a day of fun, games, great food, and wonderful community bonding at one of Marietta\'s beautiful parks.',
-    date: '2026-07-04',
-    startTime: '10:00 AM',
-    endTime: '5:00 PM',
-    location: 'Kennesaw Mountain National Park',
-    address: '900 Kennesaw Mountain Dr, Kennesaw, GA 30152',
-    coverImage: EVENT2_IMG,
-    status: 'published',
+    title: 'Summer Picnic 2026',
+    // Real flyer details (organized by Marietta Nepali Samaj, together with
+    // Nepali School Marietta) supersede the earlier placeholder date/venue.
+    // Status flipped to completed — June 14, 2026 already passed by the
+    // time this was added (today: Aug 23, 2026).
+    description: 'Marietta Nepali Samaj, together with Nepali School Marietta, hosted a summer picnic at Swift Cantrell Park — potluck dishes, fun games for all ages, and live music and folk dance performances. Free entry for all; families brought picnic blankets, chairs, and a dish to share.',
+    date: '2026-06-14',
+    startTime: '2:00 PM',
+    endTime: '8:00 PM',
+    location: 'Swift Cantrell Park',
+    address: '7650 Central Park Dr, Marietta, GA 30062',
+    coverImage: SUMMER_PICNIC_2026_IMG,
+    status: 'completed',
   },
   {
-    id: '3',
-    slug: 'dashain-celebration-2026',
-    title: 'Dashain Celebration 2026',
-    description: 'Celebrate Dashain, the greatest festival of Nepal, with the Marietta Nepali community. Traditional rituals, Tika ceremony, cultural performances, and festive meals.',
-    date: '2026-10-10',
-    startTime: '4:00 PM',
-    endTime: '10:00 PM',
-    location: 'Marietta Event Hall',
-    address: '456 Celebration Ave, Marietta, GA 30060',
-    coverImage: DASHAIN_2026_IMG,
-    status: 'published',
-    // MNS's biggest annual festival — pinned as its own item in the
-    // Events nav dropdown (see Header.tsx) rather than only reachable by
-    // browsing the Events list, and given the registration/donation CTAs
-    // most events here don't set. Internal paths (EventDetail.tsx resolves
-    // these via <Link>, not an external <a>, when they start with "/").
-    registrationUrl: '/contact?subject=events',
-    donationUrl: '/donate?purpose=dashain&amount=50',
+    id: '6',
+    slug: 'holi-celebration-2026',
+    title: 'Holi Celebration 2026',
+    // Per the official flyer: this was Atlanta Nepali School's event —
+    // Nepali School Marietta's students/families joined as guests, not as
+    // the organizing body. Worded to keep that distinction accurate rather
+    // than implying MNS organized it.
+    description: "Nepali School Marietta's students, guardians, and teachers joined Atlanta Nepali School's Holi Celebration — the joyful festival of colors, celebrating happiness, unity, and togetherness with the wider Atlanta Nepali community.",
+    date: '2026-03-01',
+    startTime: '10:30 AM',
+    location: 'NCC',
+    address: '1249 Jennie Lane, Lilburn, GA',
+    coverImage: HOLI_2026_IMG,
+    status: 'completed',
   },
   {
-    id: '4',
-    slug: 'dashain-2025',
-    title: 'Dashain Celebration 2025',
-    description: 'A wonderful evening of celebration, culture, and community for Dashain 2025.',
-    date: '2025-10-02',
-    startTime: '4:00 PM',
-    endTime: '10:00 PM',
-    location: 'Marietta Event Hall',
-    address: '456 Celebration Ave, Marietta, GA 30060',
-    coverImage: EVENT3_IMG,
+    id: '7',
+    slug: 'parent-teacher-interaction-june-2026',
+    title: 'Parents-Teachers Interaction Program',
+    description: "Nepali School Marietta invited parents and guardians to a Parents-Teachers Interaction Program: a review of the school's teaching and learning activities so far, a discussion of the school's Annual Day Celebration, feedback collection from guardians, and a look at plans for the graduation ceremony for the school's senior students. Guardians were asked to arrive on time, 10:45 AM sharp.",
+    date: '2026-06-28',
+    startTime: '10:45 AM',
+    location: 'Nepali School Marietta',
+    coverImage: PARENT_TEACHER_2026_IMG,
     status: 'completed',
   },
 ];
@@ -191,25 +179,32 @@ export const galleryPreviewPhotos = [
   GALLERY1, GALLERY2, GALLERY3, GALLERY4, GALLERY5, GALLERY6,
 ];
 
+// Every name below except the current President (real person, real photo —
+// see PRESIDENT_IMG above) is placeholder: swapped to Joe Doe/Mary Jane at
+// the site owner's request, alternating in file order. The same real person
+// appearing in more than one list (e.g. a past President who also appears
+// in executiveCommitteeArchive) keeps one consistent replacement name
+// across every list they're in, matching the "don't contradict each other"
+// invariant executiveCommitteeArchive's comment already documents.
 export const executiveCommittee: LeadershipMember[] = [
   { id: '1', name: 'Bhabindra Basnet', position: 'President', photo: PRESIDENT_IMG, bio: 'Leading our community with vision and dedication.' },
-  { id: '2', name: 'Sunita Thapa', position: 'Vice President', photo: PERSON_IMG },
-  { id: '3', name: 'Bikram Adhikari', position: 'Secretary', photo: PERSON_IMG },
-  { id: '4', name: 'Anita Gurung', position: 'Joint Secretary', photo: PERSON_IMG },
-  { id: '5', name: 'Pramod Karki', position: 'Treasurer', photo: PERSON_IMG },
-  { id: '6', name: 'Sita Sherpa', position: 'Executive Member', photo: PERSON_IMG },
-  { id: '7', name: 'Dinesh Poudel', position: 'Executive Member', photo: PERSON_IMG },
-  { id: '8', name: 'Maya Shrestha', position: 'Executive Member', photo: PERSON_IMG },
+  { id: '2', name: 'Joe Doe', position: 'Vice President', photo: PERSON_IMG },
+  { id: '3', name: 'Mary Jane', position: 'Secretary', photo: PERSON_IMG },
+  { id: '4', name: 'Joe Doe', position: 'Joint Secretary', photo: PERSON_IMG },
+  { id: '5', name: 'Mary Jane', position: 'Treasurer', photo: PERSON_IMG },
+  { id: '6', name: 'Joe Doe', position: 'Executive Member', photo: PERSON_IMG },
+  { id: '7', name: 'Mary Jane', position: 'Executive Member', photo: PERSON_IMG },
+  { id: '8', name: 'Joe Doe', position: 'Executive Member', photo: PERSON_IMG },
 ];
 
 export const president = executiveCommittee[0];
 
 export const pastPresidents: PastPresident[] = [
-  { id: '1', name: 'Binod Bhattarai', photo: PERSON_IMG, term: '2022–2024', description: 'Led the organization through significant growth.' },
-  { id: '2', name: 'Kamal Regmi', photo: PERSON_IMG, term: '2020–2022', description: 'Established the Nepali School program.' },
-  { id: '3', name: 'Hira Tamang', photo: PERSON_IMG, term: '2018–2020', description: 'Founded key community partnerships.' },
-  { id: '4', name: 'Gopal Acharya', photo: PERSON_IMG, term: '2016–2018' },
-  { id: '5', name: 'Laxmi Devi KC', photo: PERSON_IMG, term: '2014–2016' },
+  { id: '1', name: 'Mary Jane', photo: PERSON_IMG, term: '2022–2024', description: 'Led the organization through significant growth.' },
+  { id: '2', name: 'Joe Doe', photo: PERSON_IMG, term: '2020–2022', description: 'Established the Nepali School program.' },
+  { id: '3', name: 'Mary Jane', photo: PERSON_IMG, term: '2018–2020', description: 'Founded key community partnerships.' },
+  { id: '4', name: 'Joe Doe', photo: PERSON_IMG, term: '2016–2018' },
+  { id: '5', name: 'Mary Jane', photo: PERSON_IMG, term: '2014–2016' },
 ];
 
 // Invented placeholder names, like every other roster in this file —
@@ -219,10 +214,10 @@ export const pastPresidents: PastPresident[] = [
 // overlapping/contradicting it. Replace with the real founders' names
 // once available.
 export const founders: LeadershipMember[] = [
-  { id: '1', name: 'Ramesh Sharma', position: 'Founding President', photo: PERSON_IMG2, bio: 'Helped bring the first informal gatherings together in 2010.' },
-  { id: '2', name: 'Kabita Rai', position: 'Founding Secretary', photo: PERSON_IMG3 },
-  { id: '3', name: 'Dipendra Shrestha', position: 'Founding Treasurer', photo: PERSON_IMG4 },
-  { id: '4', name: 'Nirmala Gurung', position: 'Founding Member', photo: PERSON_IMG5 },
+  { id: '1', name: 'Joe Doe', position: 'Founding President', photo: PERSON_IMG2, bio: 'Helped bring the first informal gatherings together in 2010.' },
+  { id: '2', name: 'Mary Jane', position: 'Founding Secretary', photo: PERSON_IMG3 },
+  { id: '3', name: 'Joe Doe', position: 'Founding Treasurer', photo: PERSON_IMG4 },
+  { id: '4', name: 'Mary Jane', position: 'Founding Member', photo: PERSON_IMG5 },
 ];
 
 // Yearly Executive Committee rosters — each term's President matches the
@@ -233,28 +228,28 @@ export const executiveCommitteeArchive: { term: string; members: LeadershipMembe
   {
     term: '2022–2024',
     members: [
-      { id: '1', name: 'Binod Bhattarai', position: 'President', photo: PERSON_IMG },
-      { id: '2', name: 'Sarita Basnet', position: 'Vice President', photo: PERSON_IMG2 },
-      { id: '3', name: 'Rajan Thapa', position: 'Secretary', photo: PERSON_IMG3 },
-      { id: '4', name: 'Puja Karki', position: 'Treasurer', photo: PERSON_IMG4 },
+      { id: '1', name: 'Mary Jane', position: 'President', photo: PERSON_IMG },
+      { id: '2', name: 'Joe Doe', position: 'Vice President', photo: PERSON_IMG2 },
+      { id: '3', name: 'Mary Jane', position: 'Secretary', photo: PERSON_IMG3 },
+      { id: '4', name: 'Joe Doe', position: 'Treasurer', photo: PERSON_IMG4 },
     ],
   },
   {
     term: '2020–2022',
     members: [
-      { id: '1', name: 'Kamal Regmi', position: 'President', photo: PERSON_IMG },
-      { id: '2', name: 'Nabin Adhikari', position: 'Vice President', photo: PERSON_IMG2 },
-      { id: '3', name: 'Sabina Poudel', position: 'Secretary', photo: PERSON_IMG3 },
-      { id: '4', name: 'Deepak Magar', position: 'Treasurer', photo: PERSON_IMG4 },
+      { id: '1', name: 'Joe Doe', position: 'President', photo: PERSON_IMG },
+      { id: '2', name: 'Mary Jane', position: 'Vice President', photo: PERSON_IMG2 },
+      { id: '3', name: 'Joe Doe', position: 'Secretary', photo: PERSON_IMG3 },
+      { id: '4', name: 'Mary Jane', position: 'Treasurer', photo: PERSON_IMG4 },
     ],
   },
   {
     term: '2018–2020',
     members: [
-      { id: '1', name: 'Hira Tamang', position: 'President', photo: PERSON_IMG },
-      { id: '2', name: 'Manisha Rana', position: 'Vice President', photo: PERSON_IMG2 },
-      { id: '3', name: 'Suresh Bista', position: 'Secretary', photo: PERSON_IMG3 },
-      { id: '4', name: 'Kalpana Neupane', position: 'Treasurer', photo: PERSON_IMG4 },
+      { id: '1', name: 'Mary Jane', position: 'President', photo: PERSON_IMG },
+      { id: '2', name: 'Joe Doe', position: 'Vice President', photo: PERSON_IMG2 },
+      { id: '3', name: 'Mary Jane', position: 'Secretary', photo: PERSON_IMG3 },
+      { id: '4', name: 'Joe Doe', position: 'Treasurer', photo: PERSON_IMG4 },
     ],
   },
 ];
@@ -287,21 +282,21 @@ export const shoutoutMonth = 'August 2026';
 export const monthlyShoutouts: Shoutout[] = [
   {
     id: '1',
-    name: 'Sabina Koirala',
+    name: 'Mary Jane',
     category: 'Member',
     photo: PERSON_IMG,
     highlight: "Organized this month's community potluck and personally welcomed three new families to MNS.",
   },
   {
     id: '2',
-    name: 'Aarav Gurung',
+    name: 'Joe Doe',
     category: 'Student',
     photo: PERSON_IMG2,
     highlight: "Perfect attendance at Nepali School this month — and always first to help younger students with their alphabet.",
   },
   {
     id: '3',
-    name: 'Suman Rai',
+    name: 'Mary Jane',
     category: 'Volunteer',
     photo: PERSON_IMG3,
     highlight: 'Showed up early and stayed late for setup and cleanup at every single event this month, rain or shine.',
@@ -309,6 +304,14 @@ export const monthlyShoutouts: Shoutout[] = [
 ];
 
 export const schoolStaff: SchoolStaffMember[] = [
+  {
+    id: '0',
+    name: 'Rajkumar Bohora',
+    position: 'Chairman',
+    category: 'Chairman',
+    photo: CHAIRMAN_IMG,
+    bio: 'Rajkumar has lived in and served the Marietta community for many years, bringing that same long-standing commitment to his role as Chairman — helping guide Nepali School Marietta and support the community it serves. He is also a local restaurant business owner.',
+  },
   {
     id: '1',
     name: 'Prakash Khatri',
@@ -319,7 +322,7 @@ export const schoolStaff: SchoolStaffMember[] = [
   },
   {
     id: '2',
-    name: 'Radha Poudel',
+    name: 'Joe Doe',
     position: 'Nepali Language Teacher',
     category: 'Teacher',
     photo: PERSON_IMG5,
@@ -327,7 +330,7 @@ export const schoolStaff: SchoolStaffMember[] = [
   },
   {
     id: '3',
-    name: 'Nirmala Bhattarai',
+    name: 'Mary Jane',
     position: 'Cultural Arts & Dance Teacher',
     category: 'Teacher',
     photo: PERSON_IMG2,
@@ -335,7 +338,7 @@ export const schoolStaff: SchoolStaffMember[] = [
   },
   {
     id: '4',
-    name: 'Ramesh Koirala',
+    name: 'Joe Doe',
     position: 'Music Teacher',
     category: 'Teacher',
     photo: PERSON_IMG,
@@ -343,7 +346,7 @@ export const schoolStaff: SchoolStaffMember[] = [
   },
   {
     id: '5',
-    name: 'Sarita Karki',
+    name: 'Mary Jane',
     position: 'Volunteer Coordinator',
     category: 'Volunteer',
     photo: PERSON_IMG3,
@@ -351,7 +354,7 @@ export const schoolStaff: SchoolStaffMember[] = [
   },
   {
     id: '6',
-    name: 'Deepak Thapa',
+    name: 'Joe Doe',
     position: 'Classroom Volunteer',
     category: 'Volunteer',
     photo: PERSON_IMG4,

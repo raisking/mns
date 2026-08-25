@@ -43,5 +43,3 @@ export const donationCategories = [
   { id: 'cultural', label: 'Cultural Programs' },
   { id: 'other', label: 'Other' },
 ];
-
-export const donationAmounts = [25, 50, 100, 250];

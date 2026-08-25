@@ -1,15 +1,21 @@
 import { organization } from '../../config/organization';
 import PageHero from '../../components/common/PageHero';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 // Plain-language draft reflecting what the site actually does today (see
 // ContactForm.tsx + workers/api/contact.ts for the real data flow) rather
 // than boilerplate legal text — no analytics/tracking claims, no
-// tax-exempt/EIN claims, and donations are described as "planned" since
-// Stripe isn't wired up yet (Donate/index.tsx's handleDonate is still a
-// placeholder pending Phase 1F). This is not legal advice — a real
-// lawyer's review is worth getting before treating this as final,
-// especially once online payments go live.
+// tax-exempt/EIN claims. Donations/payments are described as going through
+// Zelle (see Donate/index.tsx) — MNS decided against a card processor
+// (Stripe) entirely, so this section describes Zelle as the actual and
+// only method, not a placeholder. This is not legal advice — a real
+// lawyer's review is worth getting before treating this as final.
 export default function Privacy() {
+  usePageMeta({
+    title: 'Privacy Policy',
+    description: 'How Marietta Nepali Samaj collects, uses, and protects the information you share with us.',
+    path: '/privacy',
+  });
   return (
     <>
       <PageHero
@@ -18,7 +24,7 @@ export default function Privacy() {
       />
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <p className="text-sm text-ink-soft mb-10">Last updated: August 21, 2026</p>
+        <p className="text-sm text-ink-soft mb-10">Last updated: August 23, 2026</p>
 
         <div className="space-y-10">
           <section>
@@ -72,10 +78,10 @@ export default function Privacy() {
           <section>
             <h2 className="text-xl text-ink mb-3">Donations & Payments</h2>
             <p className="text-ink-soft leading-relaxed">
-              MNS is preparing to accept online donations through Stripe, a
-              PCI-compliant payment processor. Once that is live, MNS will not
-              directly collect or store your card details — Stripe handles that
-              on our behalf.
+              MNS accepts donations and payments through Zelle. A Zelle payment
+              goes directly from your bank to ours — MNS does not collect or
+              store your bank account or card details, and neither does this
+              website.
             </p>
           </section>
 

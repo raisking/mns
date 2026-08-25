@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { mockEvents } from '../../data/mockData';
 import Button from '../../components/common/Button';
 import { parseLocalDate } from '../../utils/date';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 function formatDate(dateStr: string) {
   return parseLocalDate(dateStr).toLocaleDateString('en-US', {
@@ -25,6 +26,14 @@ export default function EventDetail() {
   const { slug } = useParams<{ slug: string }>();
   const event = mockEvents.find(e => e.slug === slug);
   const [posterOpen, setPosterOpen] = useState(false);
+
+  usePageMeta({
+    title: event?.title ?? 'Event Not Found',
+    description: event?.description ?? 'This event could not be found.',
+    path: `/events/${slug ?? ''}`,
+    image: event?.coverImage,
+    noindex: !event,
+  });
 
   if (!event) {
     return (

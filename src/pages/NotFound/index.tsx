@@ -1,6 +1,13 @@
 import Button from '../../components/common/Button';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 export default function NotFound() {
+  usePageMeta({
+    title: 'Page Not Found',
+    description: 'The page you are looking for doesn\'t exist or has been moved.',
+    path: '/404',
+    noindex: true,
+  });
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">
       <div className="text-center max-w-md">

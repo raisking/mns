@@ -2,6 +2,7 @@ import { organization } from '../../config/organization';
 import SectionHeader from '../../components/common/SectionHeader';
 import PageHero from '../../components/common/PageHero';
 import Button from '../../components/common/Button';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 // Deliberately does NOT invent specific bylaws provisions (term lengths,
 // quorum numbers, voting thresholds, amendment procedures) — those are
@@ -21,6 +22,11 @@ const topics = [
 ];
 
 export default function Bylaws() {
+  usePageMeta({
+    title: 'Bylaws',
+    description: 'An overview of the bylaws that govern how Marietta Nepali Samaj is structured and run.',
+    path: '/bylaws',
+  });
   return (
     <>
       <PageHero title="Our Bylaws" subtitle="The rules that govern how Marietta Nepali Samaj is structured and run." />

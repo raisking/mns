@@ -2,12 +2,19 @@ import { Link } from 'react-router-dom';
 import PageHero from '../../components/common/PageHero';
 import LeadershipCard from '../../components/leadership/LeadershipCard';
 import { schoolImage, schoolStaff } from '../../data/mockData';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
+const chairman = schoolStaff.find(s => s.category === 'Chairman');
 const principal = schoolStaff.find(s => s.category === 'Principal');
 const teachers = schoolStaff.filter(s => s.category === 'Teacher');
 const volunteers = schoolStaff.filter(s => s.category === 'Volunteer');
 
 export default function SchoolTeam() {
+  usePageMeta({
+    title: 'Meet Our Team',
+    description: 'Meet the chairman, principal, teachers, and volunteers of Nepali School Marietta.',
+    path: '/nepali-school/team',
+  });
   return (
     <>
       <PageHero
@@ -23,6 +30,12 @@ export default function SchoolTeam() {
           <Link to="/nepali-school" className="px-5 py-2.5 bg-white border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:border-saffron hover:text-saffron transition-colors">Nepali School</Link>
           <span className="px-5 py-2.5 bg-ink text-white text-sm font-semibold rounded-lg cursor-default">Meet Our Team</span>
         </div>
+
+        {chairman && (
+          <div className="mb-12">
+            <LeadershipCard member={chairman} featured />
+          </div>
+        )}
 
         {principal && (
           <div className="mb-12">

@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom';
 import { organization } from '../../config/organization';
-import logo from '../../assets/mns-v.png';
+import logo from '../../assets/mns_f.png';
 import SocialIcons from '../common/SocialIcons';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-ink text-white/70">
+    <footer className="bg-ink text-white/70 border-t-2 border-himal">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            {/* mns-v.png ships on an opaque white background (not
+            {/* mns_f.png ships on an opaque white background (not
                 transparent like the old mns-logo.png) and its wordmark
                 text is near-black — same contrast problem against bg-ink
                 either way. The white plate still does the job, now simply
