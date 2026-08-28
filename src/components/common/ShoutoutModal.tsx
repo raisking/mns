@@ -1,11 +1,13 @@
 import { useEffect, useRef } from 'react';
 import type { Shoutout } from '../../types/Shoutout';
+import prayNepalImage from '../../assets/gallery/pray_nepal.png';
 
 interface ShoutoutModalProps {
   open: boolean;
   onClose: () => void;
   shoutouts: Shoutout[];
   month: string;
+  variant?: 'shoutouts' | 'prayNepal';
 }
 
 const categoryStyles: Record<Shoutout['category'], string> = {
@@ -14,10 +16,11 @@ const categoryStyles: Record<Shoutout['category'], string> = {
   Volunteer: 'bg-marigold/25 text-ink',
 };
 
-export default function ShoutoutModal({ open, onClose, shoutouts, month }: ShoutoutModalProps) {
+export default function ShoutoutModal({ open, onClose, shoutouts, month, variant = 'shoutouts' }: ShoutoutModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
+  const titleId = variant === 'prayNepal' ? 'pray-nepal-modal-title' : 'shoutout-modal-title';
 
   useEffect(() => {
     if (!open) return;
@@ -79,8 +82,10 @@ export default function ShoutoutModal({ open, onClose, shoutouts, month }: Shout
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="shoutout-modal-title"
-        className="animate-modal-in relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
+        aria-labelledby={titleId}
+        className={`animate-modal-in relative bg-white rounded-2xl shadow-2xl w-full max-h-[90vh] overflow-y-auto ${
+          variant === 'prayNepal' ? 'max-w-2xl' : 'max-w-lg'
+        }`}
       >
         {/* Two-tone accent bar — the same saffron/indigo signature used
             throughout the site's section headers. */}
@@ -100,6 +105,16 @@ export default function ShoutoutModal({ open, onClose, shoutouts, month }: Shout
           </svg>
         </button>
 
+        {variant === 'prayNepal' ? (
+          <div className="p-3 sm:p-4">
+            <h2 id={titleId} className="sr-only">Pray for Nepal</h2>
+            <img
+              src={prayNepalImage}
+              alt="Pray for Nepal. Together in prayer, united in hope. Our hearts are with all those affected by the recent floods in Nepal."
+              className="w-full rounded-xl"
+            />
+          </div>
+        ) : (
         <div className="p-6 sm:p-8">
           <div className="text-center mb-6">
             <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-2">{month} · शाबास</p>
@@ -136,6 +151,7 @@ export default function ShoutoutModal({ open, onClose, shoutouts, month }: Shout
             ))}
           </div>
         </div>
+        )}
       </div>
     </div>
   );

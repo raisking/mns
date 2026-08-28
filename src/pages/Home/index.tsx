@@ -14,11 +14,15 @@ import { usePageMeta } from '../../hooks/usePageMeta';
 // restart, or clearing site data/cache all reset it, since that's exactly
 // what clears sessionStorage too.
 const SHOUTOUT_STORAGE_KEY = 'mns-shoutout-seen';
+const PRAY_NEPAL_STORAGE_KEY = 'mns-pray-nepal-seen';
+const PRAY_NEPAL_POPUP_END = new Date('2026-09-07T00:00:00-04:00');
 
 export default function Home() {
   const upcomingEvents = mockEvents.filter(e => e.status === 'published').slice(0, 3);
   const [shoutoutOpen, setShoutoutOpen] = useState(false);
   const [heroVideoFallback, setHeroVideoFallback] = useState(false);
+  const prayNepalPopupActive = Date.now() < PRAY_NEPAL_POPUP_END.getTime();
+  const popupStorageKey = prayNepalPopupActive ? PRAY_NEPAL_STORAGE_KEY : SHOUTOUT_STORAGE_KEY;
 
   usePageMeta({
     title: 'Marietta Nepali Samaj',
@@ -28,14 +32,14 @@ export default function Home() {
   });
 
   useEffect(() => {
-    if (!sessionStorage.getItem(SHOUTOUT_STORAGE_KEY)) {
+    if (!sessionStorage.getItem(popupStorageKey)) {
       setShoutoutOpen(true);
     }
-  }, []);
+  }, [popupStorageKey]);
 
   const closeShoutout = () => {
     setShoutoutOpen(false);
-    sessionStorage.setItem(SHOUTOUT_STORAGE_KEY, '1');
+    sessionStorage.setItem(popupStorageKey, '1');
   };
 
   const showHeroBannerFallback = () => {
@@ -54,6 +58,7 @@ export default function Home() {
         onClose={closeShoutout}
         shoutouts={monthlyShoutouts}
         month={shoutoutMonth}
+        variant={prayNepalPopupActive ? 'prayNepal' : 'shoutouts'}
       />
 
       {/* Hero — a soft twin-peak curve at the bottom edge echoes Nepal's
