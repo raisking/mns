@@ -18,7 +18,6 @@ export default function SchoolTeam() {
   return (
     <>
       <PageHero
-        eyebrow="Education & Culture"
         title="Meet Our Team"
         subtitle="The principal, teachers, and volunteers who make Nepali School possible every Sunday."
         image={schoolImage}

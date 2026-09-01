@@ -32,8 +32,8 @@
   --color-himal: #1d5f73;
   --color-himal-dark: #154957;   /* hover/pressed */
 
-  --font-display: "Baloo 2", "Noto Sans Devanagari", sans-serif;
-  --font-body: "IBM Plex Sans Devanagari", "Noto Sans", sans-serif;
+  --font-display: "Baloo 2", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-nav: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 

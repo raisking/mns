@@ -12,7 +12,7 @@ export default function President() {
   });
   return (
     <>
-      <PageHero eyebrow="Leadership" title="Message from the President" />
+      <PageHero title="Message from the President" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex flex-wrap gap-3 mb-10">

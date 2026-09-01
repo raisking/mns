@@ -105,9 +105,6 @@ export default function Home() {
           aria-hidden="true"
         />
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="text-white text-base sm:text-lg font-semibold tracking-wide mb-6 drop-shadow-lg">
-            स्वागत छ।
-          </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight mb-6 drop-shadow-lg">
             Where Nepali Families in Marietta<br />
             <span className="text-marigold">Belong</span>
@@ -182,7 +179,6 @@ export default function Home() {
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-3">नेपाली पाठशाला · Nepali School</p>
               <h2 className="text-3xl md:text-4xl text-ink mb-4">
                 Where Our Community Shows Up Every Week
               </h2>
@@ -261,7 +257,6 @@ export default function Home() {
       <section className="py-20 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            eyebrow="कार्यक्रमहरू"
             title="Upcoming Events"
             subtitle="Join us for our community celebrations, cultural programs, and activities."
           />
@@ -291,7 +286,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-3">हाम्रो समुदाय · Who We Are</p>
               <h2 className="text-3xl md:text-4xl text-ink mb-6">
                 A Home Away From Home for the Nepali Community
               </h2>
@@ -307,7 +301,7 @@ export default function Home() {
               {objectives.map(obj => (
                 <div key={obj.title} className="card-lift bg-white rounded-2xl p-5">
                   <h3 className="text-ink mb-1">
-                    {obj.title} <span className="text-ink-soft/60 font-normal">· {obj.titleNp}</span>
+                    {obj.title}
                   </h3>
                   <p className="text-sm text-ink-soft leading-relaxed">{obj.description}</p>
                 </div>
@@ -321,7 +315,6 @@ export default function Home() {
       <section className="py-20 md:py-24 bg-ink">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            eyebrow="सम्झनाहरू"
             title="Community Gallery"
             subtitle="Moments from our celebrations, programs, and community life."
             light
@@ -359,7 +352,6 @@ export default function Home() {
       {/* Donation CTA */}
       <section className="py-20 md:py-24 bg-gradient-to-br from-saffron to-saffron-dark text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">धन्यवाद · Thank You</p>
           <h2 className="text-3xl md:text-4xl mb-4">Support Our Community</h2>
           <p className="text-lg text-white/85 mb-10 max-w-2xl mx-auto leading-relaxed">
             Your generosity helps us continue our cultural programs, educational initiatives, and community events. Every contribution makes a difference.
@@ -375,7 +367,6 @@ export default function Home() {
       {/* Sponsor & Advertise CTA */}
       <section className="py-14 md:py-16 bg-indigo text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सहयोग · Sponsorship</p>
           <h2 className="text-2xl md:text-3xl mb-5">Sponsor & Advertise With Us</h2>
           <p className="text-white/80 leading-relaxed max-w-2xl mx-auto mb-2">
             Showcase your name or business to the Marietta Nepali community while supporting the programs that bring us together.
@@ -391,3 +382,4 @@ export default function Home() {
     </>
   );
 }
+

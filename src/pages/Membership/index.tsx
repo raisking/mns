@@ -62,7 +62,6 @@ export default function Membership() {
   return (
     <>
       <PageHero
-        eyebrow="सदस्यता · Membership"
         title="Become a Member"
         subtitle="Membership is about identity, connection, and strength — join a community preserving Nepali culture and supporting families across Marietta."
       />
@@ -135,7 +134,6 @@ export default function Membership() {
 
         {/* CTA — same saffron-gradient banner pattern as School's closing CTA */}
         <div className="text-center bg-gradient-to-br from-saffron to-saffron-dark rounded-2xl p-10 md:p-14 text-white">
-          <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सदस्यता · Join Us</p>
           <h2 className="text-2xl md:text-3xl mb-4">Have Questions About Membership?</h2>
           <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed">
             Reach out and we'll walk you through the details before you commit to anything.

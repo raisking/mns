@@ -47,7 +47,6 @@ export default function Sponsorship() {
   return (
     <>
       <PageHero
-        eyebrow="प्रायोजक · Sponsorship"
         title="Become a Sponsor"
         subtitle="Put your business in front of hundreds of Nepali families across Marietta while supporting the events that bring our community together."
       />
@@ -115,7 +114,6 @@ export default function Sponsorship() {
 
         {/* CTA — same saffron-gradient banner pattern as School/Membership/Volunteer's closing CTA */}
         <div className="text-center bg-gradient-to-br from-saffron to-saffron-dark rounded-2xl p-10 md:p-14 text-white">
-          <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">प्रायोजक · Partner With Us</p>
           <h2 className="text-2xl md:text-3xl mb-4">Not Sure What Fits?</h2>
           <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed">
             Every business is different — reach out and we'll build a sponsorship that works for you.

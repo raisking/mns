@@ -257,22 +257,18 @@ export const executiveCommitteeArchive: { term: string; members: LeadershipMembe
 export const objectives = [
   {
     title: 'Community',
-    titleNp: 'समुदाय',
     description: 'Strengthen relationships within the Nepali community and support families in Marietta and surrounding areas.',
   },
   {
     title: 'Culture',
-    titleNp: 'संस्कृति',
     description: 'Preserve and celebrate Nepali culture, traditions, festivals, music, and arts for future generations.',
   },
   {
     title: 'Education',
-    titleNp: 'शिक्षा',
     description: 'Promote Nepali language education through our Nepali School and support academic excellence among our youth.',
   },
   {
     title: 'Service',
-    titleNp: 'सेवा',
     description: 'Organize volunteer programs and provide community assistance to those in need.',
   },
 ];

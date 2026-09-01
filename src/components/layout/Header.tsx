@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import logoImg from '../../assets/nepali_samaj_marietta_logo_v.png';
 
 interface NavItem {
   label: string;
@@ -129,7 +130,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center flex-shrink-0" onClick={() => { closeMobile(); goHome(); }}>
-            <img src="/logo.png" alt="Marietta Nepali Samaj" className="h-10 md:h-12 w-auto" />
+            <img src={logoImg} alt="Marietta Nepali Samaj" className="h-10 md:h-12 w-auto" />
           </Link>
 
           {/* Desktop Nav */}

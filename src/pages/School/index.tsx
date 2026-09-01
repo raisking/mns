@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import SectionHeader from '../../components/common/SectionHeader';
-import PageHero from '../../components/common/PageHero';
 import { schoolImage } from '../../data/mockData';
 import { usePageMeta } from '../../hooks/usePageMeta';
+import nsmLogo from '../../assets/nsm_logo.png';
 
 const subjects = [
   { title: 'Nepali Language', desc: 'Reading, writing, and speaking Nepali — from the alphabet to full sentences.' },
@@ -39,12 +39,26 @@ export default function School() {
 
   return (
     <>
-      <PageHero
-        eyebrow="Education & Culture"
-        title="Nepali School"
-        subtitle="Building a bridge between two worlds — teaching the language, culture, and values of Nepal to the next generation."
-        image={schoolImage}
-      />
+      {/* Custom School Hero with Logo on Top */}
+      <div className="relative bg-ink text-white py-6 md:py-10 overflow-hidden">
+        {schoolImage && (
+          <img src={schoolImage} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-25" />
+        )}
+        {/* Quiet radial glow of warm saffron, grounding the ink background */}
+        <div
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse at 20% 15%, rgba(180,83,9,0.35), transparent 60%)' }}
+          aria-hidden="true"
+        />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Logo with curved edges on top */}
+          <div className="mb-6 flex justify-center">
+            <img src={nsmLogo} alt="NSM Nepali School Logo" className="h-28 w-auto rounded-3xl" />
+          </div>
+          <h1 className="text-4xl md:text-5xl mb-4">Nepali School</h1>
+          <p className="text-white/75 text-lg max-w-2xl mx-auto">Building a bridge between two worlds — teaching the language, culture, and values of Nepal to the next generation.</p>
+        </div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Quick nav */}
@@ -56,7 +70,6 @@ export default function School() {
         {/* About / narrative */}
         <section className="grid md:grid-cols-2 gap-12 items-center mb-20">
           <div>
-            <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-3">नेपाली पाठशाला · About the School</p>
             <h2 className="text-3xl md:text-4xl text-ink mb-6">Building a Bridge Between Two Worlds</h2>
             <p className="text-ink-soft leading-relaxed mb-4">
               The Marietta Nepali School, operated by Marietta Nepali Samaj, provides Nepali language education and cultural programs to children of Nepali families living in Marietta and surrounding areas.
@@ -190,7 +203,6 @@ export default function School() {
 
         {/* CTA */}
         <div className="text-center bg-gradient-to-br from-saffron to-saffron-dark rounded-2xl p-10 md:p-14 text-white">
-          <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सहयोग · Support</p>
           <h2 className="text-2xl md:text-3xl mb-4">Give Your Child the Gift of Their Heritage</h2>
           <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed">
             Enroll your child in the Marietta Nepali School today and help them stay connected to the beautiful culture and language of Nepal.
@@ -204,3 +216,4 @@ export default function School() {
     </>
   );
 }
+

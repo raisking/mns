@@ -45,7 +45,6 @@ export default function Volunteer() {
   return (
     <>
       <PageHero
-        eyebrow="स्वयंसेवा · Get Involved"
         title="Volunteer With Us"
         subtitle="Marietta Nepali Samaj runs entirely on volunteer effort — from Sunday classes to festival stages. There's a place here for your time and skills."
       />
@@ -69,7 +68,6 @@ export default function Volunteer() {
 
         {/* CTA — same saffron-gradient banner pattern as School's closing CTA */}
         <div className="text-center bg-gradient-to-br from-saffron to-saffron-dark rounded-2xl p-10 md:p-14 text-white">
-          <p className="text-marigold text-sm font-semibold uppercase tracking-wider mb-3">सहभागिता · Join In</p>
           <h2 className="text-2xl md:text-3xl mb-4">Ready to Get Involved?</h2>
           <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed">
             Tell us a bit about yourself and how you'd like to help — we'll follow up and find the right fit.

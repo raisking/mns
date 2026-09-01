@@ -16,7 +16,7 @@ const categoryStyles: Record<Shoutout['category'], string> = {
   Volunteer: 'bg-marigold/25 text-ink',
 };
 
-export default function ShoutoutModal({ open, onClose, shoutouts, month, variant = 'shoutouts' }: ShoutoutModalProps) {
+export default function ShoutoutModal({ open, onClose, shoutouts, variant = 'shoutouts' }: ShoutoutModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
@@ -117,7 +117,6 @@ export default function ShoutoutModal({ open, onClose, shoutouts, month, variant
         ) : (
         <div className="p-6 sm:p-8">
           <div className="text-center mb-6">
-            <p className="text-sm font-semibold text-saffron uppercase tracking-wider mb-2">{month} · शाबास</p>
             <h2 id="shoutout-modal-title" className="text-2xl sm:text-3xl text-ink">
               Community Shoutouts
             </h2>
@@ -156,3 +155,4 @@ export default function ShoutoutModal({ open, onClose, shoutouts, month, variant
     </div>
   );
 }
+

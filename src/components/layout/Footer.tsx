@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import nsmLogo from '../../assets/nepali_samaj_marietta_logo_v.png';
 import { organization } from '../../config/organization';
 import SocialIcons from '../common/SocialIcons';
 
@@ -11,8 +12,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="inline-block bg-white rounded-lg p-3 mb-4">
-              <img src="/logo.png" alt="Marietta Nepali Samaj" className="h-12 w-auto" />
+            <div className="inline-block mb-4">
+              <img src={nsmLogo} alt="Marietta Nepali Samaj" className="h-12 w-auto" />
             </div>
             <p className="text-sm text-white/60 leading-relaxed mb-4">
               Connecting the Nepali community in Marietta, Georgia. Preserving our culture, celebrating our heritage.
