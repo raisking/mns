@@ -1,36 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette drawn from Nepal's flag and festival materials — not arbitrary. */
-  --color-saffron: #b45309;      /* warm sindoor/tika-powder accent — swapped in
-                                     for the flag's literal crimson field, which
-                                     read as cold "stop/danger" red rather than
-                                     festive warmth. Contrast-checked at ~5:1
-                                     against white/paper, so it still carries
-                                     body-sized text and solid button fills. */
-  --color-saffron-dark: #92400e; /* hover/pressed */
-  --color-indigo: #222222;       /* set by explicit request — was #003893,
-                                     the flag's border color; now a flat
-                                     dark gray instead */
-  --color-indigo-dark: #111111;  /* hover/pressed — one step darker than
-                                     the new #222222 base, not the old navy */
-  --color-marigold: #e7a33e;     /* tika & garland gold — dark-surface accent only */
-  --color-marigold-light: #f2c374;
-  --color-ink: #241712;          /* warm near-black body text */
-  --color-ink-soft: #5c4a3d;     /* secondary text */
-  --color-paper: #fbf6ec;        /* handmade lokta-paper cream */
-  --color-paper-deep: #f1e4c9;   /* deeper cream for section banding */
-  /* "Trust" anchor, added deliberately (not part of the original flag/
-     festival set above) — a deep teal-blue evoking Nepal's own Himalayan
-     haze, for the specific moments where the site needs to read as a
-     credible institution rather than a warm festival (leadership/authority,
-     header/footer framing) rather than a return to the flag's literal
-     border blue (#003893, explicitly removed once already — see `indigo`
-     below). Scoped narrowly on purpose: saffron/marigold keep every spot
-     where they already carry festival/school warmth. Contrast-checked at
-     ~7:1 against white/paper, safe for solid fills and body-sized text alike. */
-  --color-himal: #1d5f73;
-  --color-himal-dark: #154957;   /* hover/pressed */
+  /* Brand palette aligned to the main logo: deep blue + red with warm white/cream support. */
+  --color-saffron: #c6282f;      /* logo red / festival signal */
+  --color-saffron-dark: #9f1d24; /* hover/pressed */
+  --color-indigo: #0f2d5b;       /* logo navy blue */
+  --color-indigo-dark: #0a2244;  /* hover/pressed */
+  --color-marigold: #e3b45f;     /* warm gold accent, lighter than the red/blue core */
+  --color-marigold-light: #f1d199;
+  --color-ink: #1d2430;          /* strong dark body text */
+  --color-ink-soft: #4f5d75;     /* secondary text */
+  --color-paper: #f7f5f1;        /* warm white paper */
+  --color-paper-deep: #efe9df;   /* deeper paper */
+  --color-himal: #1a4d7a;         /* deep blue accent for authority/structure */
+  --color-himal-dark: #123b61;    /* hover/pressed */
 
   --font-display: "Baloo 2", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
